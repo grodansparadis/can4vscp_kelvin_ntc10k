@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=kelvin_ntc_debug_2580.X
+PROJECTNAME=kelvin_ntc.X
 
 # Active Configuration
 DEFAULTCONF=Relocated
