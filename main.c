@@ -132,7 +132,6 @@ double sh_coefficients[6*3]; // 6 sensors each with 3 32-bit constants
 
 void interrupt low_priority interrupt_at_low_vector(void)
 {
-
 	// Check timer
 	if (INTCONbits.TMR0IF) { // If A Timer0 Interrupt, Then
 
@@ -384,12 +383,12 @@ void main()
 
 
 		// do a meaurement if needed
-		if (measurement_clock > 1000) {
+		if ( measurement_clock > 1000 ) {
 
 			measurement_clock = 0;
 			doOneSecondWork();
 			seconds++;
-            sendTimer++;
+                        sendTimer++;
 
 			// Temperature report timers are only updated if in active
 			// state
@@ -590,7 +589,8 @@ void doWork(void)
                             if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNON_INVERT) {
                                 vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
                                 vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
-                            } else {
+                            }
+                            else {
                                 vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
                                 vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
                             }
@@ -614,7 +614,7 @@ void doWork(void)
             }
 
             // Check high alarm
-            if (high_alarm & (1 << i)) {
+            if ( high_alarm & (1 << i ) ) {
 
                 // We have an alarm condition already
 
@@ -710,7 +710,7 @@ void doOneSecondWork(void)
             if (tmp && (seconds_temp[i] > tmp)) {
 
                 // Send event
-                if (sendTempEvent(i)) {
+                if ( sendTempEvent( i ) ) {
                     seconds_temp[i] = 0;
                 }
 
@@ -818,10 +818,11 @@ int8_t sendTempEvent(uint8_t i)
     vscp_omsg.data[ 0 ] = 0x80 | // Normalized integer
             ((0x03 & readEEPROM(i + EEPROM_CONTROLREG0)) << 3) | // Unit
             i; // Sensor
-    // Exponent
-    vscp_omsg.data[ 1 ] = 0x02;
+    // Exponent 
+    vscp_omsg.data[ 1 ] = 0x82;
 
-    setEventData(current_temp[i], (0x03 & readEEPROM(i + EEPROM_CONTROLREG0)));
+    setEventData( current_temp[i],
+            ( 0x03 & readEEPROM(i + EEPROM_CONTROLREG0 ) ) );
 
     // Send event
     if (!vscp_sendEvent()) {
