@@ -1,6 +1,6 @@
 /*
  * Author: AKHE <akhe@grodansparadis.com>
- * Copyright (C) Grodans Paradis AB
+ * Copyright (C) 1995-2015 Ake Hedman, Grodans Paradis AB
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages

@@ -90,31 +90,28 @@
 void isr_low(void);
 
 // The device URL (max 32 characters including null termination)
-const uint8_t vscp_deviceURL[] = "www.eurosource.se/ntc10KA_2.xml";
-
-// Calibration index
-uint8_t calibration_index = 0;
+const uint8_t vscp_deviceURL[] = "www.eurosource.se/ntc10KA_3.xml";
 
 // Global Variable Declarations
 int16_t current_temp[6]; // Current temperature
 
-uint8_t adc[NUMBER_OF_TEMP_SERIES * 12]; // Current ADC values
+uint8_t adc[NUMBER_OF_TEMP_SERIES * 12];// Current ADC values
 uint8_t adc_conversion_flags;   // Bits to flag new adc values
 uint8_t adc_series_counter;     // Series counter
 
-uint32_t measurement_clock; // Clock for measurments
-uint32_t timeout_clock;     // Clock used ofr timeouts
-uint8_t sendTimer;          // Timer for CAN send
-uint8_t seconds;            // counter for seconds
+uint32_t measurement_clock;     // Clock for measurments
+uint32_t timeout_clock;         // Clock used ofr timeouts
+uint8_t sendTimer;              // Timer for CAN send
+uint8_t seconds;                // counter for seconds
 
-uint8_t seconds_temp[6];    // timers for temp event
+uint8_t seconds_temp[6];        // timers for temp event
 
 // Alarm flag bits
 uint8_t low_alarm;
 uint8_t high_alarm;
 
 // Thermistor coefficients
-double sh_coefficients[6*3]; // 6 sensors each with 3 32-bit constants
+double sh_coefficients[6*3];    // 6 sensors each with 3 32-bit constants
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -132,160 +129,162 @@ double sh_coefficients[6*3]; // 6 sensors each with 3 32-bit constants
 
 void interrupt low_priority interrupt_at_low_vector(void)
 {
-	// Check timer
-	if (INTCONbits.TMR0IF) { // If A Timer0 Interrupt, Then
+    // Check timer
+    if (INTCONbits.TMR0IF) { // If A Timer0 Interrupt, Then
 
-		// Reload value for 1 ms reolution
-		WriteTimer0(TIMER0_RELOAD_VALUE);
+        // Reload value for 1 ms reolution
+        WriteTimer0(TIMER0_RELOAD_VALUE);
 
-		vscp_timer++;
-		measurement_clock++;
-		timeout_clock++;
+        vscp_timer++;
+        measurement_clock++;
+        timeout_clock++;
 
-		// Check for init button
-		if (!(PORTC & 0x01)) {
-                    // Active
-                    vscp_initbtncnt++;
-		}
+        // Check for init button
+        if (!(PORTC & 0x01)) {
+            // Active
+            vscp_initbtncnt++;
+        }
         else {
-                    vscp_initbtncnt = 0;
-		}
+            vscp_initbtncnt = 0;
+        }
 
-		// Status LED
-		vscp_statuscnt++;
-		if ((VSCP_LED_BLINK1 == vscp_initledfunc) && (vscp_statuscnt > 100)) {
-			if (PORTC & 0x02) {
-				PORTC &= ~0x02;
-			}
+        // Status LED
+        vscp_statuscnt++;
+        if ( ( VSCP_LED_BLINK1 ==
+                 vscp_initledfunc) && (vscp_statuscnt > 100)) {
+            if ( PORTC & 0x02 ) {
+                PORTC &= ~0x02;
+            }
             else {
-				PORTC |= 0x02;
-			}
-			vscp_statuscnt = 0;
-		}
+                PORTC |= 0x02;
+            }
+            vscp_statuscnt = 0;
+        }
         else if (VSCP_LED_ON == vscp_initledfunc) {
-			PORTC |= 0x02;
-			vscp_statuscnt = 0;
-		}
+            PORTC |= 0x02;
+            vscp_statuscnt = 0;
+        }
         else if (VSCP_LED_OFF == vscp_initledfunc) {
-			PORTC &= ~0x02;
-			vscp_statuscnt = 0;
-		}
+            PORTC &= ~0x02;
+            vscp_statuscnt = 0;
+        }
 
-		INTCONbits.TMR0IF = 0; // Clear Timer0 Interrupt Flag
+        INTCONbits.TMR0IF = 0; // Clear Timer0 Interrupt Flag
 
-	}
+    } // Timer & button
 
-	// Check ADC
-	if (PIR1bits.ADIF) {
+    // Check ADC
+    if ( PIR1bits.ADIF ) {
 
-		switch (0x3C & ADCON0) {
+        switch (0x3C & ADCON0) {
 
-		case SELECT_ADC_TEMP0:
-			// Read conversion
-			adc[(12 * adc_series_counter) + 0] = ADRESH;
-			adc[(12 * adc_series_counter) + 1] = ADRESL;
-			// Start new nonversion
-			ADCON0 = SELECT_ADC_TEMP1 + 1;
+            case SELECT_ADC_TEMP0:
+                // Read conversion
+                adc[(12 * adc_series_counter) + 0] = ADRESH;
+                adc[(12 * adc_series_counter) + 1] = ADRESL;
+                // Start new nonversion
+                ADCON0 = SELECT_ADC_TEMP1 + 1;
 
-			// Mark that a new adc value is available if a full series
-			// has been completed.
-			if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
-				adc_conversion_flags |= 1;
-			}
-			break;
+                // Mark that a new adc value is available if a full series
+                // has been completed.
+                if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
+                    adc_conversion_flags |= 1;
+                }
+                break;
 
-		case SELECT_ADC_TEMP1:
-			// Read conversion
-			adc[(12 * adc_series_counter) + 2] = ADRESH;
-			adc[(12 * adc_series_counter) + 3] = ADRESL;
+            case SELECT_ADC_TEMP1:
+                // Read conversion
+                adc[(12 * adc_series_counter) + 2] = ADRESH;
+                adc[(12 * adc_series_counter) + 3] = ADRESL;
 
-			// Start new nonversion
-			ADCON0 = SELECT_ADC_TEMP2 + 1;
+                // Start new nonversion
+                ADCON0 = SELECT_ADC_TEMP2 + 1;
 
-			// Mark that a new adc value is available if a full series
-			// has been completed.
-			if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
-				adc_conversion_flags |= 1 << 1;
-			}
-			break;
+                // Mark that a new adc value is available if a full series
+                // has been completed.
+                if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
+                    adc_conversion_flags |= 1 << 1;
+                }
+                break;
 
-		case SELECT_ADC_TEMP2:
-			// Read conversion
-			adc[(12 * adc_series_counter) + 4] = ADRESH;
-			adc[(12 * adc_series_counter) + 5] = ADRESL;
-			// Start new nonversion
-			ADCON0 = SELECT_ADC_TEMP3 + 1;
+            case SELECT_ADC_TEMP2:
+                // Read conversion
+                adc[(12 * adc_series_counter) + 4] = ADRESH;
+                adc[(12 * adc_series_counter) + 5] = ADRESL;
 
-			// Mark that a new adc value is available if a full series
-			// has been completed.
-			if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
-				adc_conversion_flags |= 1 << 2;
-			}
-			break;
+                // Start new nonversion
+                ADCON0 = SELECT_ADC_TEMP3 + 1;
 
-		case SELECT_ADC_TEMP3:
-			// Read conversion
-			adc[(12 * adc_series_counter) + 6] = ADRESH;
-			adc[(12 * adc_series_counter) + 7] = ADRESL;
-			// Start new nonversion
-			ADCON0 = SELECT_ADC_TEMP4 + 1;
+                // Mark that a new adc value is available if a full series
+                // has been completed.
+                if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
+                    adc_conversion_flags |= 1 << 2;
+                }
+                break;
 
-			// Mark that a new adc value is available if a full series
-			// has been completed.
-			if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
-				adc_conversion_flags |= 1 << 3;
-			}
-			break;
+            case SELECT_ADC_TEMP3:
+                // Read conversion
+                adc[(12 * adc_series_counter) + 6] = ADRESH;
+                adc[(12 * adc_series_counter) + 7] = ADRESL;
+                // Start new nonversion
+                ADCON0 = SELECT_ADC_TEMP4 + 1;
 
-		case SELECT_ADC_TEMP4:
-			// Read conversion
-			adc[(12 * adc_series_counter) + 8] = ADRESH;
-			adc[(12 * adc_series_counter) + 9] = ADRESL;
-			// Start new nonversion
-			ADCON0 = SELECT_ADC_TEMP5 + 1;
+                // Mark that a new adc value is available if a full series
+                // has been completed.
+                if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
+                    adc_conversion_flags |= 1 << 3;
+                }
+                break;
 
-			// Mark that a new adc value is available if a full series
-			// has been completed.
-			if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
-				adc_conversion_flags |= 1 << 4;
-			}
-			break;
+            case SELECT_ADC_TEMP4:
+                // Read conversion
+                adc[(12 * adc_series_counter) + 8] = ADRESH;
+                adc[(12 * adc_series_counter) + 9] = ADRESL;
+                // Start new nonversion
+                ADCON0 = SELECT_ADC_TEMP5 + 1;
 
-		case SELECT_ADC_TEMP5:
-			// Read conversion
-			adc[(12 * adc_series_counter) + 10] = ADRESH;
-			adc[(12 * adc_series_counter) + 11] = ADRESL;
-			// Start new nonversion
-			ADCON0 = SELECT_ADC_TEMP0 + 1;
+                // Mark that a new adc value is available if a full series
+                // has been completed.
+                if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
+                    adc_conversion_flags |= 1 << 4;
+                }
+                break;
 
-			// Mark that a new adc value is available if a full series
-			// has been completed.
-			if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
-				adc_conversion_flags |= 1 << 5;
-			}
+            case SELECT_ADC_TEMP5:
+                // Read conversion
+                adc[(12 * adc_series_counter) + 10] = ADRESH;
+                adc[(12 * adc_series_counter) + 11] = ADRESL;
+                // Start new nonversion
+                ADCON0 = SELECT_ADC_TEMP0 + 1;
 
-			// Fill next series
-			adc_series_counter++;
-			if (adc_series_counter >= NUMBER_OF_TEMP_SERIES) {
-				adc_series_counter = 0;
-			}
-			break;
+                // Mark that a new adc value is available if a full series
+                // has been completed.
+                if ((NUMBER_OF_TEMP_SERIES - 1) == adc_series_counter) {
+                    adc_conversion_flags |= 1 << 5;
+                }
 
-		default:
-			// Start new nonversion
-			ADCON0 = SELECT_ADC_TEMP0 + 1;
-			adc_series_counter = 0;
-			break;
-		}
+                // Fill next series
+                adc_series_counter++;
+                if (adc_series_counter >= NUMBER_OF_TEMP_SERIES) {
+                    adc_series_counter = 0;
+                }
+                break;
 
-		// Start conversion
-		ConvertADC();
+            default:
+                // Start new nonversion
+                ADCON0 = SELECT_ADC_TEMP0 + 1;
+                adc_series_counter = 0;
+                break;
+        }
 
-		PIR1bits.ADIF = 0; // Reset interrupt flag
+        // Start conversion
+        ConvertADC();
 
-	}
+        PIR1bits.ADIF = 0; // Reset interrupt flag
 
-	return;
+    } // ADC
+
+    return;
 }
 
 
@@ -1842,17 +1841,27 @@ uint8_t vscp_readAppReg(unsigned char reg)
                 rv = 0;
                 break;
         }
-	}
-        else if (1 == vscp_page_select) {
-            // SH Coeffecients
-            if (reg < 0x48) {
-                rv = readEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg ) ;
-            }// Raw A/D values
-        else if (reg < 0x54) {
+    }
+    else if (1 == vscp_page_select) {
+        // SH Coeffecients
+        if (reg < 0x72) {
+            rv = readEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg ) ;
+        }
+        // Raw A/D values
+        else if (reg < 0x84) {
             // The byte order is differenet in registers
-            uint8_t pos = reg - 0x48;
-            if (0 == pos) pos = 11;
-            rv = adc[reg - 0x48];
+            uint8_t pos = reg - 0x72;
+            if ( pos % 2 ) {
+                pos--;
+            }
+            else {
+                pos++;
+            }
+            rv = adc[ pos ];
+        }
+        // Sensor calibration values
+        else if (reg < 0x98) {
+            rv = readEEPROM( EEPROM_CALIBRATION_SENSOR0_MSB + reg - 84 ) ;
         }
     }
 
@@ -2490,21 +2499,14 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR5);
                 break;
 
-                // Calibration
-
-                // Index for calibration
+                // reserved
             case 0x74:
-                if (val < 12) {
-                    rv = calibration_index = val;
-                }
+                rv = 0;
                 break;
 
                 // Calibration values
             case 0x75:
-                writeEEPROM(EEPROM_CALIBRATION_SENSOR0_MSB +
-                        calibration_index, val);
-                rv = readEEPROM(EEPROM_CALIBRATION_SENSOR0_MSB +
-                        calibration_index);
+                rv = 0;
                 break;
 
             case 0x76:
@@ -2522,11 +2524,29 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
                 break;
         }
     } else if (1 == vscp_page_select) {
+
         // Coeffecients
         if (reg < 0x48) {
             writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg, val);
             rv = readEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg );
             writeCoeffs2Ram();
+        }
+        // Raw A/D values is not writeable
+        if (reg < 0x84) {
+            // The byte order is differenet in registers
+            uint8_t pos = reg - 0x72;
+            if ( pos % 2 ) {
+                pos--;
+            }
+            else {
+                pos++;
+            }
+            rv = adc[ pos ];
+        }
+        // Sensor calibration values
+        else if (reg < 0x98) {
+            writeEEPROM( EEPROM_CALIBRATION_SENSOR0_MSB + reg - 84, val );
+            rv = readEEPROM( EEPROM_CALIBRATION_SENSOR0_MSB + reg - 84 ) ;
         }
     }
 
