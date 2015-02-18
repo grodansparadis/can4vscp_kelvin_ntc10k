@@ -2,7 +2,7 @@
 [d version 1.1 ]
 [d edition pro ]
 [d chip 18F2580 ]
-"2888 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2891 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [e E16391 _ECAN_TX_MSG_FLAGS `uc
 ECAN_TX_PRIORITY_BITS 3
 ECAN_TX_PRIORITY_0 0
@@ -20,7 +20,7 @@ ECAN_TX_RTR_FRAME 64
 FALSE 0
 TRUE 1
 ]
-"2905
+"2908
 [e E16409 _ECAN_RX_MSG_FLAGS `uc
 ECAN_RX_OVERFLOW 8
 ECAN_RX_INVALID_MSG 16
@@ -119,9 +119,9 @@ ECAN_RX_DBL_BUFFERED 128
 [v __RegsToCANID _RegsToCANID `(v  1 e 0 0 ]
 "1207
 [v __ECANPointBuffer _ECANPointBuffer `(*.39uc  1 s 2 _ECANPointBuffer ]
-"134 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"131 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _interrupt_at_low_vector interrupt_at_low_vector `IIL(v  1 e 0 0 ]
-"297
+"296
 [v _main main `(v  1 e 0 0 ]
 "425
 [v _doWork doWork `(v  1 e 0 0 ]
@@ -135,81 +135,81 @@ ECAN_RX_DBL_BUFFERED 128
 [v _getCalibrationValue getCalibrationValue `(s  1 e 2 0 ]
 "882
 [v _init init `(v  1 e 0 0 ]
-"960
+"963
 [v _writeCoeffs2Ram writeCoeffs2Ram `(v  1 e 0 0 ]
-"978
+"981
 [v _init_app_ram init_app_ram `(v  1 e 0 0 ]
-"1013
+"1016
 [v _init_app_eeprom init_app_eeprom `(v  1 e 0 0 ]
-"1213
+"1221
 [v _convertTemperature convertTemperature `(uc  1 e 1 0 ]
-"1237
+"1245
 [v _handle_sync handle_sync `(v  1 e 0 0 ]
-"1262
+"1270
 [v _vscp_readAppReg vscp_readAppReg `(uc  1 e 1 0 ]
-"1868
+"1883
 [v _vscp_writeAppReg vscp_writeAppReg `(uc  1 e 1 0 ]
-"2548
+"2551
 [v _vscp_getMajorVersion vscp_getMajorVersion `(uc  1 e 1 0 ]
-"2557
+"2560
 [v _vscp_getMinorVersion vscp_getMinorVersion `(uc  1 e 1 0 ]
-"2566
+"2569
 [v _vscp_getSubMinorVersion vscp_getSubMinorVersion `(uc  1 e 1 0 ]
-"2577
+"2580
 [v _vscp_getGUID vscp_getGUID `(uc  1 e 1 0 ]
-"2587
+"2590
 [v _vscp_setGUID vscp_setGUID `(v  1 e 0 0 ]
-"2600
+"2603
 [v _vscp_getMDF_URL vscp_getMDF_URL `(uc  1 e 1 0 ]
-"2609
+"2612
 [v _vscp_getUserID vscp_getUserID `(uc  1 e 1 0 ]
-"2618
+"2621
 [v _vscp_setUserID vscp_setUserID `(v  1 e 0 0 ]
-"2629
+"2632
 [v _vscp_getManufacturerId vscp_getManufacturerId `(uc  1 e 1 0 ]
-"2640
+"2643
 [v _vscp_setManufacturerId vscp_setManufacturerId `(v  1 e 0 0 ]
-"2649
+"2652
 [v _vscp_getBootLoaderAlgorithm vscp_getBootLoaderAlgorithm `(uc  1 e 1 0 ]
-"2658
+"2661
 [v _vscp_getBufferSize vscp_getBufferSize `(uc  1 e 1 0 ]
-"2667
+"2670
 [v _vscp_getMatrixInfo vscp_getMatrixInfo `(v  1 e 0 0 ]
-"2683
+"2686
 [v _vscp_getEmbeddedMdfInfo vscp_getEmbeddedMdfInfo `(v  1 e 0 0 ]
-"2705
+"2708
 [v _vscp_getRegisterPagesUsed vscp_getRegisterPagesUsed `(uc  1 e 1 0 ]
-"2714
+"2717
 [v _vscp_getZone vscp_getZone `(uc  1 e 1 0 ]
-"2723
+"2726
 [v _vscp_getSubzone vscp_getSubzone `(uc  1 e 1 0 ]
-"2732
+"2735
 [v _vscp_goBootloaderMode vscp_goBootloaderMode `(v  1 e 0 0 ]
-"2747
+"2750
 [v _vscp_readNicknamePermanent vscp_readNicknamePermanent `(uc  1 e 1 0 ]
-"2756
+"2759
 [v _vscp_writeNicknamePermanent vscp_writeNicknamePermanent `(v  1 e 0 0 ]
-"2765
+"2768
 [v _vscp_getSegmentCRC vscp_getSegmentCRC `(uc  1 e 1 0 ]
-"2774
+"2777
 [v _vscp_setSegmentCRC vscp_setSegmentCRC `(v  1 e 0 0 ]
-"2783
+"2786
 [v _vscp_setControlByte vscp_setControlByte `(v  1 e 0 0 ]
-"2793
+"2796
 [v _vscp_getControlByte vscp_getControlByte `(uc  1 e 1 0 ]
-"2802
+"2805
 [v _vscp_getFamilyCode vscp_getFamilyCode `(ul  1 e 4 0 ]
-"2812
+"2815
 [v _vscp_getFamilyType vscp_getFamilyType `(ul  1 e 4 0 ]
-"2821
+"2824
 [v _vscp_restoreDefaults vscp_restoreDefaults `(v  1 e 0 0 ]
-"2836
+"2839
 [v _sendVSCPFrame sendVSCPFrame `(uc  1 e 1 0 ]
-"2862
+"2865
 [v _getVSCPFrame getVSCPFrame `(uc  1 e 1 0 ]
-"2883
+"2886
 [v _sendCANFrame sendCANFrame `(uc  1 e 1 0 ]
-"2904
+"2907
 [v _getCANFrame getCANFrame `(uc  1 e 1 0 ]
 "41 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/ntc.c
 [v _Celsius2Fahrenheit Celsius2Fahrenheit `(d  1 e 4 0 ]
@@ -420,30 +420,28 @@ ECAN_RX_DBL_BUFFERED 128
 "93 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_deviceURL vscp_deviceURL `C[32]uc  1 e 32 0 ]
 "96
-[v _calibration_index calibration_index `uc  1 e 1 0 ]
-"99
 [v _current_temp current_temp `[6]s  1 e 12 0 ]
-"101
+"98
 [v _adc adc `[960]uc  1 e 960 0 ]
-"102
+"99
 [v _adc_conversion_flags adc_conversion_flags `uc  1 e 1 0 ]
-"103
+"100
 [v _adc_series_counter adc_series_counter `uc  1 e 1 0 ]
-"105
+"102
 [v _measurement_clock measurement_clock `ul  1 e 4 0 ]
-"106
+"103
 [v _timeout_clock timeout_clock `ul  1 e 4 0 ]
-"107
+"104
 [v _sendTimer sendTimer `uc  1 e 1 0 ]
-"108
+"105
 [v _seconds seconds `uc  1 e 1 0 ]
-"110
+"107
 [v _seconds_temp seconds_temp `[6]uc  1 e 6 0 ]
-"113
+"110
 [v _low_alarm low_alarm `uc  1 e 1 0 ]
-"114
+"111
 [v _high_alarm high_alarm `uc  1 e 1 0 ]
-"117
+"114
 [v _sh_coefficients sh_coefficients `[18]d  1 e 72 0 ]
 "5134 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18f2580.h
 [v _RXFCON0 RXFCON0 `VEuc  1 e 1 @3540 ]
@@ -815,10 +813,10 @@ ECAN_RX_DBL_BUFFERED 128
 [v _RXM0EXIDM RXM0EXIDM `VEb  1 e 0 @30923 ]
 "38004
 [v _RXM1EXIDEN RXM1EXIDEN `VEb  1 e 0 @30955 ]
-"297 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"296 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"298
+"297
 [v main@i i `uc  1 a 1 82 ]
 "415
 } 0
@@ -1030,15 +1028,15 @@ ECAN_RX_DBL_BUFFERED 128
 [v vscp_sendHeartBeat@subzone subzone `uc  1 p 1 67 ]
 "378
 } 0
-"2723 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2726 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_getSubzone vscp_getSubzone `(uc  1 e 1 0 ]
 {
-"2725
+"2728
 } 0
-"2714
+"2717
 [v _vscp_getZone vscp_getZone `(uc  1 e 1 0 ]
 {
-"2716
+"2719
 } 0
 "698
 [v _doOneSecondWork doOneSecondWork `(v  1 e 0 0 ]
@@ -1054,12 +1052,12 @@ ECAN_RX_DBL_BUFFERED 128
 {
 "190
 } 0
-"1237 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"1245 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _handle_sync handle_sync `(v  1 e 0 0 ]
 {
-"1238
+"1246
 [v handle_sync@i i `uc  1 a 1 41 ]
-"1255
+"1263
 } 0
 "811
 [v _sendTempEvent sendTempEvent `(uc  1 e 1 0 ]
@@ -1181,62 +1179,64 @@ ECAN_RX_DBL_BUFFERED 128
 [v vscp_writeStdReg@value value `uc  1 p 1 33 ]
 "775
 } 0
-"2821 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2824 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_restoreDefaults vscp_restoreDefaults `(v  1 e 0 0 ]
 {
-"2824
+"2827
 } 0
-"1013
+"1016
 [v _init_app_eeprom init_app_eeprom `(v  1 e 0 0 ]
 {
-"1187
+"1197
 [v init_app_eeprom@i i `uc  1 a 1 16 ]
-"1205
+"1213
 } 0
-"2812
+"2815
 [v _vscp_getFamilyType vscp_getFamilyType `(ul  1 e 4 0 ]
 {
-"2814
+"2817
 } 0
-"2802
+"2805
 [v _vscp_getFamilyCode vscp_getFamilyCode `(ul  1 e 4 0 ]
 {
-"2804
+"2807
 } 0
-"2640
+"2643
 [v _vscp_setManufacturerId vscp_setManufacturerId `(v  1 e 0 0 ]
 {
 [v vscp_setManufacturerId@idx idx `uc  1 a 1 17 ]
 [v vscp_setManufacturerId@idx idx `uc  1 a 1 17 ]
 [v vscp_setManufacturerId@data data `uc  1 p 1 16 ]
-"2642
+"2645
 } 0
-"2618
+"2621
 [v _vscp_setUserID vscp_setUserID `(v  1 e 0 0 ]
 {
 [v vscp_setUserID@idx idx `uc  1 a 1 17 ]
 [v vscp_setUserID@idx idx `uc  1 a 1 17 ]
 [v vscp_setUserID@data data `uc  1 p 1 16 ]
-"2620
+"2623
 } 0
-"2587
+"2590
 [v _vscp_setGUID vscp_setGUID `(v  1 e 0 0 ]
 {
 [v vscp_setGUID@idx idx `uc  1 a 1 17 ]
 [v vscp_setGUID@idx idx `uc  1 a 1 17 ]
 [v vscp_setGUID@data data `uc  1 p 1 16 ]
-"2590
+"2593
 } 0
-"1868
+"1883
 [v _vscp_writeAppReg vscp_writeAppReg `(uc  1 e 1 0 ]
 {
-[v vscp_writeAppReg@reg reg `uc  1 a 1 33 ]
-"1869
-[v vscp_writeAppReg@rv rv `uc  1 a 1 34 ]
-"1868
-[v vscp_writeAppReg@reg reg `uc  1 a 1 33 ]
+[v vscp_writeAppReg@reg reg `uc  1 a 1 34 ]
+"2520
+[v vscp_writeAppReg@pos pos `uc  1 a 1 33 ]
+"1884
+[v vscp_writeAppReg@rv rv `uc  1 a 1 35 ]
+"1883
+[v vscp_writeAppReg@reg reg `uc  1 a 1 34 ]
 [v vscp_writeAppReg@val val `uc  1 p 1 32 ]
-"2534
+"2537
 } 0
 "550 C:\Users\grodansparadis\development/vscp_firmware/common/vscp_firmware.c
 [v _vscp_readRegister vscp_readRegister `(uc  1 e 1 0 ]
@@ -1255,63 +1255,63 @@ ECAN_RX_DBL_BUFFERED 128
 [v vscp_readStdReg@reg reg `uc  1 a 1 19 ]
 "668
 } 0
-"2705 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2708 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_getRegisterPagesUsed vscp_getRegisterPagesUsed `(uc  1 e 1 0 ]
 {
-"2707
+"2710
 } 0
-"2658
+"2661
 [v _vscp_getBufferSize vscp_getBufferSize `(uc  1 e 1 0 ]
 {
-"2660
+"2663
 } 0
-"2649
+"2652
 [v _vscp_getBootLoaderAlgorithm vscp_getBootLoaderAlgorithm `(uc  1 e 1 0 ]
 {
-"2651
+"2654
 } 0
-"2629
+"2632
 [v _vscp_getManufacturerId vscp_getManufacturerId `(uc  1 e 1 0 ]
 {
 [v vscp_getManufacturerId@idx idx `uc  1 a 1 17 ]
 [v vscp_getManufacturerId@idx idx `uc  1 a 1 17 ]
-"2631
+"2634
 } 0
-"2609
+"2612
 [v _vscp_getUserID vscp_getUserID `(uc  1 e 1 0 ]
 {
 [v vscp_getUserID@idx idx `uc  1 a 1 17 ]
 [v vscp_getUserID@idx idx `uc  1 a 1 17 ]
-"2611
+"2614
 } 0
-"2600
+"2603
 [v _vscp_getMDF_URL vscp_getMDF_URL `(uc  1 e 1 0 ]
 {
 [v vscp_getMDF_URL@idx idx `uc  1 a 1 14 ]
 [v vscp_getMDF_URL@idx idx `uc  1 a 1 14 ]
-"2602
+"2605
 } 0
-"2577
+"2580
 [v _vscp_getGUID vscp_getGUID `(uc  1 e 1 0 ]
 {
 [v vscp_getGUID@idx idx `uc  1 a 1 17 ]
 [v vscp_getGUID@idx idx `uc  1 a 1 17 ]
-"2579
+"2582
 } 0
-"2566
+"2569
 [v _vscp_getSubMinorVersion vscp_getSubMinorVersion `(uc  1 e 1 0 ]
 {
-"2568
+"2571
 } 0
-"2557
+"2560
 [v _vscp_getMinorVersion vscp_getMinorVersion `(uc  1 e 1 0 ]
 {
-"2559
+"2562
 } 0
-"2548
+"2551
 [v _vscp_getMajorVersion vscp_getMajorVersion `(uc  1 e 1 0 ]
 {
-"2550
+"2553
 } 0
 "491 C:\Users\grodansparadis\development/vscp_firmware/common/vscp_firmware.c
 [v _vscp_newNodeOnline vscp_newNodeOnline `(v  1 e 0 0 ]
@@ -1330,10 +1330,10 @@ ECAN_RX_DBL_BUFFERED 128
 {
 "153
 } 0
-"2747 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2750 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_readNicknamePermanent vscp_readNicknamePermanent `(uc  1 e 1 0 ]
 {
-"2749
+"2752
 } 0
 "411 C:\Users\grodansparadis\development/vscp_firmware/common/vscp_firmware.c
 [v _vscp_handleSetNickname vscp_handleSetNickname `(v  1 e 0 0 ]
@@ -1345,20 +1345,20 @@ ECAN_RX_DBL_BUFFERED 128
 {
 "404
 } 0
-"2732 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2735 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_goBootloaderMode vscp_goBootloaderMode `(v  1 e 0 0 ]
 {
-"2740
+"2743
 } 0
-"2667
+"2670
 [v _vscp_getMatrixInfo vscp_getMatrixInfo `(v  1 e 0 0 ]
 {
 [v vscp_getMatrixInfo@pData pData `*.30uc  1 a 1 13 ]
-"2668
+"2671
 [v vscp_getMatrixInfo@i i `uc  1 a 1 14 ]
-"2667
+"2670
 [v vscp_getMatrixInfo@pData pData `*.30uc  1 a 1 13 ]
-"2676
+"2679
 } 0
 "197 C:\Users\grodansparadis\development/vscp_firmware/common/vscp_firmware.c
 [v _vscp_handleProbeState vscp_handleProbeState `(v  1 e 0 0 ]
@@ -1377,30 +1377,30 @@ ECAN_RX_DBL_BUFFERED 128
 [v vscp_sendEvent@rv rv `uc  1 a 1 66 ]
 "1285
 } 0
-"2836 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2839 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _sendVSCPFrame sendVSCPFrame `(uc  1 e 1 0 ]
 {
-"2837
+"2840
 [v sendVSCPFrame@id id `ul  1 a 4 27 ]
-"2836
+"2839
 [v sendVSCPFrame@vscpclass vscpclass `us  1 p 2 0 ]
 [v sendVSCPFrame@vscptype vscptype `uc  1 p 1 2 ]
 [v sendVSCPFrame@nodeid nodeid `uc  1 p 1 3 ]
 [v sendVSCPFrame@priority priority `uc  1 p 1 4 ]
 [v sendVSCPFrame@size size `uc  1 p 1 5 ]
 [v sendVSCPFrame@pData pData `*.30uc  1 p 1 6 ]
-"2849
+"2852
 } 0
-"2883
+"2886
 [v _sendCANFrame sendCANFrame `(uc  1 e 1 0 ]
 {
-"2884
+"2887
 [v sendCANFrame@rv rv `uc  1 a 1 65 ]
-"2883
+"2886
 [v sendCANFrame@id id `ul  1 p 4 59 ]
 [v sendCANFrame@dlc dlc `uc  1 p 1 63 ]
 [v sendCANFrame@pdata pdata `*.30uc  1 p 1 64 ]
-"2897
+"2900
 } 0
 "617 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/ECAN.c
 [v _ECANSendMessage ECANSendMessage `(E15660  1 e 1 0 ]
@@ -1473,32 +1473,32 @@ ECAN_RX_DBL_BUFFERED 128
 [v vscp_getEvent@rv rv `uc  1 a 1 49 ]
 "1314
 } 0
-"2862 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2865 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _getVSCPFrame getVSCPFrame `(uc  1 e 1 0 ]
 {
 [v getVSCPFrame@pvscpclass pvscpclass `*.30us  1 a 1 44 ]
-"2863
+"2866
 [v getVSCPFrame@id id `ul  1 a 4 45 ]
-"2862
+"2865
 [v getVSCPFrame@pvscpclass pvscpclass `*.30us  1 a 1 44 ]
 [v getVSCPFrame@pvscptype pvscptype `*.30uc  1 p 1 35 ]
 [v getVSCPFrame@pNodeId pNodeId `*.30uc  1 p 1 36 ]
 [v getVSCPFrame@pPriority pPriority `*.30uc  1 p 1 37 ]
 [v getVSCPFrame@pSize pSize `*.30uc  1 p 1 38 ]
 [v getVSCPFrame@pData pData `*.30uc  1 p 1 39 ]
-"2875
+"2878
 } 0
-"2904
+"2907
 [v _getCANFrame getCANFrame `(uc  1 e 1 0 ]
 {
 [v getCANFrame@pid pid `*.29ul  1 a 1 33 ]
-"2905
+"2908
 [v getCANFrame@flags flags `E16409  1 a 1 34 ]
-"2904
+"2907
 [v getCANFrame@pid pid `*.29ul  1 a 1 33 ]
 [v getCANFrame@pdlc pdlc `*.30uc  1 p 1 31 ]
 [v getCANFrame@pdata pdata `*.30uc  1 p 1 32 ]
-"2922
+"2925
 } 0
 "803 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/ECAN.c
 [v _ECANReceiveMessage ECANReceiveMessage `(E15660  1 e 1 0 ]
@@ -1572,24 +1572,24 @@ ECAN_RX_DBL_BUFFERED 128
 {
 "181
 } 0
-"2783 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2786 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_setControlByte vscp_setControlByte `(v  1 e 0 0 ]
 {
 [v vscp_setControlByte@ctrl ctrl `uc  1 a 1 16 ]
 [v vscp_setControlByte@ctrl ctrl `uc  1 a 1 16 ]
-"2785
+"2788
 } 0
-"2774
+"2777
 [v _vscp_setSegmentCRC vscp_setSegmentCRC `(v  1 e 0 0 ]
 {
 [v vscp_setSegmentCRC@crc crc `uc  1 a 1 16 ]
 [v vscp_setSegmentCRC@crc crc `uc  1 a 1 16 ]
-"2776
+"2779
 } 0
-"2765
+"2768
 [v _vscp_getSegmentCRC vscp_getSegmentCRC `(uc  1 e 1 0 ]
 {
-"2767
+"2770
 } 0
 "92 C:\Users\grodansparadis\development/vscp_firmware/pic/common/eeprom.c
 [v _readEEPROM readEEPROM `(uc  1 e 1 0 ]
@@ -1600,12 +1600,12 @@ ECAN_RX_DBL_BUFFERED 128
 [v readEEPROM@address address `us  1 p 2 13 ]
 "105
 } 0
-"2756 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"2759 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_writeNicknamePermanent vscp_writeNicknamePermanent `(v  1 e 0 0 ]
 {
 [v vscp_writeNicknamePermanent@nickname nickname `uc  1 a 1 16 ]
 [v vscp_writeNicknamePermanent@nickname nickname `uc  1 a 1 16 ]
-"2758
+"2761
 } 0
 "23 C:\Users\grodansparadis\development/vscp_firmware/pic/common/eeprom.c
 [v _writeEEPROM writeEEPROM `(v  1 e 0 0 ]
@@ -1617,7 +1617,7 @@ ECAN_RX_DBL_BUFFERED 128
 "882 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _init init `(v  1 e 0 0 ]
 {
-"953
+"956
 } 0
 "168 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/ECAN.c
 [v _ECANInitialize ECANInitialize `(v  1 e 0 0 ]
@@ -1647,22 +1647,22 @@ ECAN_RX_DBL_BUFFERED 128
 [v OpenTimer0@config config `uc  1 a 1 13 ]
 "31
 } 0
-"978 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"981 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _init_app_ram init_app_ram `(v  1 e 0 0 ]
 {
-"979
+"982
 [v init_app_ram@i i `uc  1 a 1 32 ]
-"1004
+"1007
 } 0
-"960
+"963
 [v _writeCoeffs2Ram writeCoeffs2Ram `(v  1 e 0 0 ]
 {
-"962
+"965
 [v writeCoeffs2Ram@c c `[3]uc  1 a 3 25 ]
-"961
+"964
 [v writeCoeffs2Ram@j j `i  1 a 2 30 ]
 [v writeCoeffs2Ram@i i `i  1 a 2 28 ]
-"971
+"974
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\common\wmul.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -1720,22 +1720,22 @@ ECAN_RX_DBL_BUFFERED 128
 [v ___flpack@sign sign `uc  1 p 1 18 ]
 "87
 } 0
-"1262 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
+"1270 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/main.c
 [v _vscp_readAppReg vscp_readAppReg `(uc  1 e 1 0 ]
 {
 [v vscp_readAppReg@reg reg `uc  1 a 1 18 ]
-"1853
+"1859
 [v vscp_readAppReg@pos pos `uc  1 a 1 17 ]
-"1263
+"1271
 [v vscp_readAppReg@rv rv `uc  1 a 1 19 ]
-"1262
+"1270
 [v vscp_readAppReg@reg reg `uc  1 a 1 18 ]
-"1861
+"1876
 } 0
-"134
+"131
 [v _interrupt_at_low_vector interrupt_at_low_vector `IIL(v  1 e 0 0 ]
 {
-"289
+"288
 } 0
 "17 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic18\plib\Timers\t0write.c
 [v i1_WriteTimer0 WriteTimer0 `(v  1 e 0 0 ]

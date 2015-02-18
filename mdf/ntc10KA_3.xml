@@ -1424,7 +1424,7 @@
 			<access>rw</access>
 		</reg>
 
-		<reg page="0" offset="90"default="0x7f" >
+		<reg page="0" offset="90" default="0x7f" >
 			<name lang="en">Sensor absolute low temperature for sensor 2 MSB</name>
 			<description lang="en">
 				Sensor absolute low temperature for sensor 2. Write Write any value to reset.
@@ -1962,7 +1962,7 @@
 			<access>rw</access>
 		</reg>
 		
-		<reg page="1" offset="30"default="0"  >
+		<reg page="1" offset="30" default="0"  >
 			<name lang="en">Steinhart–Hart equation b coefficient byte 2, sensor 2</name>
 			<description lang="en">
 				Byte 2 of Steinhart–Hart equation b coefficient for sensor 2
@@ -2167,7 +2167,7 @@
 			<access>rw</access>
 		</reg>
 		
-		<reg page="1" offset="55"default="0"  >
+		<reg page="1" offset="55" default="0"  >
 			<name lang="en">Steinhart–Hart equation b coefficient byte 3 (LSB), sensor 4</name>
 			<description lang="en">
 				Byte 3  (LSB)of Steinhart–Hart equation b coefficient for sensor 4
@@ -2670,7 +2670,7 @@
 							page = "0" offset = "52" >
 			<name lang="en">Low alarm for sensor 1</name>
 			<description lang="en">
-				Low alarm setpoint for sensor 1.\n
+				Low alarm set point for sensor 1.\n
 			</description>
 			<access>rw</access>
 		</abstraction>
@@ -2679,7 +2679,7 @@
 							page = "0" offset = "54" >
 			<name lang="en">Low alarm for sensor 2</name>
 			<description lang="en">
-				Low alarm setpoint for sensor 2.\n
+				Low alarm set point for sensor 2.\n
 			</description>
 			<access>rw</access>
 		</abstraction>
@@ -2688,7 +2688,7 @@
 							page = "0" offset = "56" >
 			<name lang="en">Low alarm for sensor 3</name>
 			<description lang="en">
-				Low alarm setpoint for sensor 3.\n
+				Low alarm set point for sensor 3.\n
 			</description>
 			<access>rw</access>
 		</abstraction>
@@ -2697,7 +2697,7 @@
 							page = "0" offset = "58" >
 			<name lang="en">Low alarm for sensor 4</name>
 			<description lang="en">
-				Low alarm setpoint for sensor 4.\n
+				Low alarm set point for sensor 4.\n
 			</description>
 			<access>rw</access>
 		</abstraction>
@@ -2706,7 +2706,7 @@
 							page = "0" offset = "60" >
 			<name lang="en">Low alarm for sensor 5</name>
 			<description lang="en">
-				Low alarm setpoint for sensor 5.\n
+				Low alarm set point for sensor 5.\n
 			</description>
 			<access>rw</access>
 		</abstraction>	
@@ -2715,7 +2715,7 @@
 							page = "0" offset = "62" >
 			<name lang="en">High alarm for sensor 0</name>
 			<description lang="en">
-				High alarm setpoint for sensor 0.\n
+				High alarm set point for sensor 0.\n
 			</description>
 			<access>rw</access>
 		</abstraction>	
@@ -2724,7 +2724,7 @@
 							page = "0" offset = "64" >
 			<name lang="en">High alarm for sensor 1</name>
 			<description lang="en">
-				High alarm setpoint for sensor 1.\n
+				High alarm set point for sensor 1.\n
 			</description>
 			<access>rw</access>
 		</abstraction>
@@ -2733,7 +2733,7 @@
 							page = "0" offset = "66" >
 			<name lang="en">High alarm for sensor 2</name>
 			<description lang="en">
-				High alarm setpoint for sensor 2.\n
+				High alarm set point for sensor 2.\n
 			</description>
 			<access>rw</access>
 		</abstraction>		
@@ -2742,7 +2742,7 @@
 							page = "0" offset = "68" >
 			<name lang="en">High alarm for sensor 3</name>
 			<description lang="en">
-				High alarm setpoint for sensor 3.\n
+				High alarm set point for sensor 3.\n
 			</description>
 			<access>rw</access>
 		</abstraction>
@@ -2751,7 +2751,7 @@
 							page = "0" offset = "70" >
 			<name lang="en">High alarm for sensor 4</name>
 			<description lang="en">
-				High alarm setpoint for sensor 4.\n
+				High alarm set point for sensor 4.\n
 			</description>
 			<access>rw</access>
 		</abstraction>
@@ -2760,16 +2760,16 @@
 							page = "0" offset = "72" >
 			<name lang="en">High alarm for sensor 5</name>
 			<description lang="en">
-				High alarm setpoint for sensor 5.\n
+				High alarm set point for sensor 5.\n
 			</description>
 			<access>rw</access>
 		</abstraction>	
 
 		<abstraction id="Abslow0" type="int16_t"  default="0"
 							page = "0" offset = "86" >
-			<name lang="en">Absolut high temperatur for sensor 0</name>
+			<name lang="en">Absolute high temperature for sensor 0</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 0.\n
+				Absolute high temperature for sensor 0.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2778,9 +2778,9 @@
 		
 		<abstraction id="Abslow1" type="int16_t"  default="0"
 							page = "0" offset = "88" >
-			<name lang="en">Absolut high temperatur for sensor 1</name>
+			<name lang="en">Absolute high temperature for sensor 1</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 1.\n
+				Absolute high temperature for sensor 1.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2789,9 +2789,9 @@
 
 		<abstraction id="Abslow2" type="int16_t"  default="0"
 							page = "0" offset = "90" >
-			<name lang="en">Absolut high temperatur for sensor 2</name>
+			<name lang="en">Absolute high temperature for sensor 2</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 2.\n
+				Absolute high temperature for sensor 2.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2800,9 +2800,9 @@
 
 		<abstraction id="Abslow3" type="int16_t"  default="0"
 							page = "0" offset = "92" >
-			<name lang="en">Absolut high temperatur for sensor 3</name>
+			<name lang="en">Absolute high temperature for sensor 3</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 3.\n
+				Absolute high temperature for sensor 3.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2811,9 +2811,9 @@
 
 		<abstraction id="Abslow4" type="int16_t"  default="0"
 							page = "0" offset = "94" >
-			<name lang="en">Absolut high temperatur for sensor 4</name>
+			<name lang="en">Absolute high temperature for sensor 4</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 4.\n
+				Absolute high temperature for sensor 4.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2822,9 +2822,9 @@
 
 		<abstraction id="Abslow5" type="int16_t"  default="0"
 							page = "0" offset = "96" >
-			<name lang="en">Absolut high temperatur for sensor 5</name>
+			<name lang="en">Absolute high temperature for sensor 5</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 5.\n
+				Absolute high temperature for sensor 5.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2833,9 +2833,9 @@
 		
 		<abstraction id="Abshigh0" type="int16_t" default="0" 
 							page = "0" offset = "98" >
-			<name lang="en">Absolut high temperatur for sensor 0</name>
+			<name lang="en">Absolute high temperature for sensor 0</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 0.\n
+				Absolute high temperature for sensor 0.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2844,9 +2844,9 @@
 
 		<abstraction id="Abshigh1" type="int16_t" default="0" 
 							page = "0" offset = "100" >
-			<name lang="en">Absolut high temperatur for sensor 1</name>
+			<name lang="en">Absolute high temperature for sensor 1</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 1.\n
+				Absolute high temperature for sensor 1.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2855,9 +2855,9 @@
 
 		<abstraction id="Abshigh2" type="int16_t"  default="0"
 							page = "0" offset = "102" >
-			<name lang="en">Absolut high temperatur for sensor 2</name>
+			<name lang="en">Absolute high temperature for sensor 2</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 2.\n
+				Absolute high temperature for sensor 2.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2866,9 +2866,9 @@
 
 		<abstraction id="Abshigh3" type="int16_t"  default="0"
 							page = "0" offset = "104" >
-			<name lang="en">Absolut high temperatur for sensor 3</name>
+			<name lang="en">Absolute high temperature for sensor 3</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 3.\n
+				Absolute high temperature for sensor 3.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2877,9 +2877,9 @@
 
 		<abstraction id="Abshigh4" type="int16_t"  default="0"
 							page = "0" offset = "106" >
-			<name lang="en">Absolut high temperatur for sensor 4</name>
+			<name lang="en">Absolute high temperature for sensor 4</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 4.\n
+				Absolute high temperature for sensor 4.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
@@ -2888,33 +2888,77 @@
 
 		<abstraction id="Abshigh5" type="int16_t"  default="0"
 							page = "0" offset = "108" >
-			<name lang="en">Absolut high temperatur for sensor 5</name>
+			<name lang="en">Absolute high temperature for sensor 5</name>
 			<description lang="en">
-				Absolut high temperatur for sensor 5.\n
+				Absolute high temperature for sensor 5.\n
 				This is the highest temperature measured for this sensor.
 				The value can be rested by writing any value to it.
 			</description>
 			<access>rw</access>
 		</abstraction>	
 		
-		<abstraction id="Calibrations" type="index8_int16_t"  default="0"
-							page = "0" offset = "116" size="6" >
-			<name lang="en">Calibration values for sensors</name>
+		<abstraction id="Calibration0" type="int16_t"  default="0"
+							page = "1" offset = "84" >
+			<name lang="en">Calibration value for sensors 0</name>
 			<description lang="en">
-				This array holds a calibration value for each sensor. This
-				value is added to the value read form the sensor before it is
-				presented. The value entered should be temperature * 100.
+				Calibration value for sensor 0. This value signed value is added to 
+				the value read form the sensor before it is presented. The value entered 
+				should be a temperature * 100.
 			</description>
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="CalibratedVoltage" type="uint32_t"  default="0"
-							page = "0" offset = "118" >
-			<name lang="en">Calibration voltage value</name>
+		<abstraction id="Calibration1" type="int16_t"  default="0"
+							page = "1" offset = "84" >
+			<name lang="en">Calibration value for sensors 1</name>
 			<description lang="en">
-				For precise measurements the actual voltage level in the NTC circuit may need to be
-				measured and set. Here the calibrated voltage level * 10000 is set. Default is 50000
-				representing 5V.
+				Calibration value for sensor 1. This value signed value is added to 
+				the value read form the sensor before it is presented. The value entered 
+				should be a temperature * 100.
+			</description>
+			<access>rw</access>
+		</abstraction>
+		
+		<abstraction id="Calibration2" type="int16_t"  default="0"
+							page = "1" offset = "84" >
+			<name lang="en">Calibration value for sensors 2</name>
+			<description lang="en">
+				Calibration value for sensor 2. This value signed value is added to 
+				the value read form the sensor before it is presented. The value entered 
+				should be a temperature * 100.
+			</description>
+			<access>rw</access>
+		</abstraction>
+		
+		<abstraction id="Calibration3" type="int16_t"  default="0"
+							page = "1" offset = "84" >
+			<name lang="en">Calibration value for sensors 3</name>
+			<description lang="en">
+				Calibration value for sensor 3. This value signed value is added to 
+				the value read form the sensor before it is presented. The value entered 
+				should be a temperature * 100.
+			</description>
+			<access>rw</access>
+		</abstraction>
+		
+		<abstraction id="Calibration4" type="int16_t"  default="0"
+							page = "1" offset = "84" >
+			<name lang="en">Calibration value for sensors 4</name>
+			<description lang="en">
+				Calibration value for sensor 4. This value signed value is added to 
+				the value read form the sensor before it is presented. The value entered 
+				should be a temperature * 100.
+			</description>
+			<access>rw</access>
+		</abstraction>
+		
+		<abstraction id="Calibration5" type="int16_t"  default="0"
+							page = "1" offset = "84" >
+			<name lang="en">Calibration value for sensors 5</name>
+			<description lang="en">
+				Calibration value for sensor 5. This value signed value is added to 
+				the value read form the sensor before it is presented. The value entered 
+				should be a temperature * 100.
 			</description>
 			<access>rw</access>
 		</abstraction>

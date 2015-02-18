@@ -1178,6 +1178,7 @@ void init_app_eeprom(void)
     writeEEPROM(EEPROM_CALIBRATION_SENSOR5_LSB, 0);
 
     // S-H Coefficients sensor 0
+
     writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0, 0);
     writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_1, 0);
     writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_2, 0);
@@ -1192,6 +1193,7 @@ void init_app_eeprom(void)
     writeEEPROM(EEPROM_COEFFICIENT_C_SENSOR0_3, 0);
 
     // S-H Coefficients sensor 1-5
+    
     for (uint8_t i = 0; i < 6; i++) {
         writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR1_0 + i * 12, 0);
         writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR1_1 + i * 12, 0);
@@ -1823,17 +1825,14 @@ uint8_t vscp_readAppReg(unsigned char reg)
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR5);
                 break;
 
-                // Calibration
-
-                // Index for calibration
+                // Reserved
             case 0x74:
-                rv = calibration_index;
+                rv = 0;
                 break;
 
-                // Calibration values
+                // Reserved
             case 0x75:
-                rv = readEEPROM(EEPROM_CALIBRATION_SENSOR0_MSB +
-                        calibration_index);
+                rv = 0;
                 break;
 
             case 0x76:
@@ -1851,13 +1850,13 @@ uint8_t vscp_readAppReg(unsigned char reg)
     }
     else if (1 == vscp_page_select) {
         // SH Coeffecients
-        if (reg < 0x72) {
+        if (reg < 72) {
             rv = readEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg ) ;
         }
         // Raw A/D values
-        else if (reg < 0x84) {
+        else if (reg < 84) {
             // The byte order is differenet in registers
-            uint8_t pos = reg - 0x72;
+            uint8_t pos = reg - 72;
             if ( pos % 2 ) {
                 pos--;
             }
@@ -1867,7 +1866,7 @@ uint8_t vscp_readAppReg(unsigned char reg)
             rv = adc[ pos ];
         }
         // Sensor calibration values
-        else if (reg < 0x98) {
+        else if (reg < 98) {
             rv = readEEPROM( EEPROM_CALIBRATION_SENSOR0_MSB + reg - 84 ) ;
         }
     }
@@ -2297,85 +2296,73 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
 
                 // Sensor absolute low temperature register MSB for sensor 0
             case 0x56:
-                writeEEPROM(EEPROM_ABSOLUT_LOW0_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW0_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW0_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW0_MSB);
                 break;
 
                 // Sensor absolute low temperature register LSB for sensor 0
             case 0x57:
-                writeEEPROM(EEPROM_ABSOLUT_LOW0_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW0_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW0_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW0_LSB);
                 break;
 
                 // Sensor absolute low temperature register MSB for sensor 1
             case 0x58:
-                writeEEPROM(EEPROM_ABSOLUT_LOW1_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW1_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW1_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW1_MSB);
                 break;
 
                 // Sensor absolute low temperature register LSB for sensor 1
             case 0x59:
-                writeEEPROM(EEPROM_ABSOLUT_LOW1_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW1_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW1_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW1_LSB);
                 break;
 
                 // Sensor absolute low temperature register MSB for sensor 2
             case 0x5A:
-                writeEEPROM(EEPROM_ABSOLUT_LOW2_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW2_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW2_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW2_MSB);
                 break;
 
                 // Sensor absolute low temperature register LSB for sensor 2
             case 0x5B:
-                writeEEPROM(EEPROM_ABSOLUT_LOW2_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW2_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW2_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW2_LSB);
                 break;
 
                 // Sensor absolute low temperature register MSB for sensor 3
             case 0x5C:
-                writeEEPROM(EEPROM_ABSOLUT_LOW3_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW3_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW3_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW3_MSB);
                 break;
 
                 // Sensor absolute low temperature register LSB for sensor 3
             case 0x5D:
-                writeEEPROM(EEPROM_ABSOLUT_LOW3_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW3_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW3_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW3_LSB);
                 break;
 
                 // Sensor absolute low temperature register MSB for sensor 4
             case 0x5E:
-                writeEEPROM(EEPROM_ABSOLUT_LOW4_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW4_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW4_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW4_MSB);
                 break;
 
                 // Sensor absolute low temperature register LSB for sensor 4
             case 0x5F:
-                writeEEPROM(EEPROM_ABSOLUT_LOW4_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW4_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW4_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW4_LSB);
                 break;
 
                 // Sensor absolute low temperature register MSB for sensor 5
             case 0x60:
-                writeEEPROM(EEPROM_ABSOLUT_LOW5_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW5_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW5_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW5_MSB);
                 break;
 
                 // Sensor absolute low temperature register LSB for sensor 5
             case 0x61:
-                writeEEPROM(EEPROM_ABSOLUT_LOW5_MSB, DEFAULT_LOW_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_LOW5_LSB, DEFAULT_LOW_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_LOW5_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW5_LSB);
                 break;
 
@@ -2385,85 +2372,73 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
 
                 // Sensor absolute high temperature register MSB for sensor 0
             case 0x62:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH0_MSB);
                 break;
 
                 // Sensor absolute high temperature register LSB for sensor 0
             case 0x63:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH0_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH0_LSB);
                 break;
 
                 // Sensor absolute high temperature register MSB for sensor 1
             case 0x64:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH1_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH1_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH1_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH1_MSB);
                 break;
 
                 // Sensor absolute high temperature register LSB for sensor 1
             case 0x65:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH1_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH1_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH1_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH1_LSB);
                 break;
 
                 // Sensor absolute high temperature register MSB for sensor 2
             case 0x66:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH2_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH2_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH2_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH2_MSB);
                 break;
 
                 // Sensor absolute high temperature register LSB for sensor 2
             case 0x67:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH2_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH2_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH2_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH2_LSB);
                 break;
 
                 // Sensor absolute high temperature register MSB for sensor 3
             case 0x68:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH3_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH3_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH3_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH3_MSB);
                 break;
 
                 // Sensor absolute high temperature register LSB for sensor 3
             case 0x69:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH3_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH3_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH3_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH3_LSB);
                 break;
 
                 // Sensor absolute high temperature register MSB for sensor 4
             case 0x6A:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH4_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH4_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH4_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH4_MSB);
                 break;
 
                 // Sensor absolute high temperature register LSB for sensor 4
             case 0x6B:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH4_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH4_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH4_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH4_LSB);
                 break;
 
                 // Sensor absolute high temperature register MSB for sensor 5
             case 0x6C:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH5_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH5_MSB);
                 break;
 
                 // Sensor absolute high temperature register LSB for sensor 5
             case 0x6D:
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_MSB);
-                writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_LSB);
+                writeEEPROM(EEPROM_ABSOLUT_HIGH5_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH5_LSB);
                 break;
 
@@ -2530,18 +2505,19 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
                 rv = ~val; // error return
                 break;
         }
-    } else if (1 == vscp_page_select) {
+    }
+    else if (1 == vscp_page_select) {
 
         // Coeffecients
-        if (reg < 0x48) {
+        if (reg < 72) {
             writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg, val);
             rv = readEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg );
             writeCoeffs2Ram();
         }
         // Raw A/D values is not writeable
-        if (reg < 0x84) {
+        else if (reg < 84) {
             // The byte order is differenet in registers
-            uint8_t pos = reg - 0x72;
+            uint8_t pos = reg - 72;
             if ( pos % 2 ) {
                 pos--;
             }
@@ -2551,7 +2527,7 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
             rv = adc[ pos ];
         }
         // Sensor calibration values
-        else if (reg < 0x98) {
+        else if (reg < 98) {
             writeEEPROM( EEPROM_CALIBRATION_SENSOR0_MSB + reg - 84, val );
             rv = readEEPROM( EEPROM_CALIBRATION_SENSOR0_MSB + reg - 84 ) ;
         }
