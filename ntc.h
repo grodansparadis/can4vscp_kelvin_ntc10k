@@ -57,7 +57,7 @@
 #define MASK_CONTROL_CONTINUOUS             0x80
 
 // Default report interval fro sensor 0
-#define DEFAULT_REPORT_INTERVAL_SENSOR0     10
+#define DEFAULT_REPORT_INTERVAL_SENSOR0     30
 
 // Default report interval for sensor 1-5
 #define DEFAULT_REPORT_INTERVAL             0
@@ -112,6 +112,10 @@
 
 // Default hysteresis
 #define DEFAULT_HYSTERESIS                  2
+
+// Default calibrated voltage
+#define DEFAULT_CALIBRATED_VOLTAGE_MSB      0xc3
+#define DEFAULT_CALIBRATED_VOLTAGE_LSB      0x50
 
 //
 // Error

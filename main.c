@@ -294,123 +294,124 @@ void interrupt low_priority interrupt_at_low_vector(void)
 
 void main()
 {
-	unsigned char i;
+    unsigned char i;
 
-	init(); // Initialize Microcontroller
+    init(); // Initialize Microcontroller
 
-	// Check VSCP persistent storage and
-	// restore if needed
-	if (!vscp_check_pstorage()) {
+    // Check VSCP persistent storage and
+    // restore if needed
+    if (!vscp_check_pstorage()) {
 
         // Spoiled or not initialized - reinitialize
         init_app_eeprom();
 
+    }
+
+    vscp_init(); // Initialize the VSCP functionality
+
+    while (TRUE) { // Loop Forever
+
+        ClrWdt(); // Feed the dog
+
+        if ((vscp_initbtncnt > 250) &&
+                (VSCP_STATE_INIT != vscp_node_state)) {
+
+            // Init button pressed
+            vscp_nickname = VSCP_ADDRESS_FREE;
+            writeEEPROM(VSCP_EEPROM_NICKNAME, VSCP_ADDRESS_FREE);
+            vscp_init();
+
+        }
+
+
+        // Check for a valid  event
+        vscp_imsg.flags = 0;
+        vscp_getEvent();
+
+
+        switch (vscp_node_state) {
+
+            case VSCP_STATE_STARTUP: // Cold/warm reset
+
+                // Get nickname from EEPROM
+                if (VSCP_ADDRESS_FREE == vscp_nickname) {
+                    // new on segment need a nickname
+                    vscp_node_state = VSCP_STATE_INIT;
+                }
+                else {
+                    // been here before - go on
+                    vscp_node_state = VSCP_STATE_ACTIVE;
+                    vscp_goActiveState();
+                }
+                break;
+
+            case VSCP_STATE_INIT: // Assigning nickname
+                vscp_handleProbeState();
+                break;
+
+            case VSCP_STATE_PREACTIVE: // Waiting for host initialisation
+                vscp_goActiveState();
+                break;
+
+            case VSCP_STATE_ACTIVE: // The normal state
+
+                // Check for incoming message?
+                if (vscp_imsg.flags & VSCP_VALID_MSG) {
+
+                    if (VSCP_CLASS1_PROTOCOL == vscp_imsg.vscp_class) {
+
+                        // Handle protocol event
+                        vscp_handleProtocolEvent();
+
+                    }
+                    else if ((VSCP_CLASS1_CONTROL == vscp_imsg.vscp_class) &&
+                                (VSCP_TYPE_CONTROL_SYNC == vscp_imsg.vscp_type)) {
+                        handle_sync();
+                    }
+
+                }
+                break;
+
+            case VSCP_STATE_ERROR: // Everything is *very* *very* bad.
+                vscp_error();
+                break;
+
+            default: // Should not be here...
+                vscp_node_state = VSCP_STATE_STARTUP;
+                break;
+
+        }
+
+
+        // do a meaurement if needed
+        if ( measurement_clock > 1000 ) {
+
+            measurement_clock = 0;
+            doOneSecondWork();
+            seconds++;
+            sendTimer++;
+
+            // Temperature report timers are only updated if in active
+            // state
+            if (VSCP_STATE_ACTIVE == vscp_node_state) {
+                for (i = 0; i < 6; i++) {
+                    seconds_temp[i]++;
+                }
+            }
+
+            if (seconds > 60) {
+                seconds = 0;
+            }
+
+            // Do VSCP one second jobs
+            vscp_doOneSecondWork();
+
+            // Also do some work
+            doWork();
+
 	}
 
-	vscp_init(); // Initialize the VSCP functionality
-
-	while (TRUE) { // Loop Forever
-
-		ClrWdt(); // Feed the dog
-
-		if ((vscp_initbtncnt > 250) &&
-                            (VSCP_STATE_INIT != vscp_node_state)) {
-
-			// Init button pressed
-			vscp_nickname = VSCP_ADDRESS_FREE;
-			writeEEPROM(VSCP_EEPROM_NICKNAME, VSCP_ADDRESS_FREE);
-			vscp_init();
-
-		}
-
-
-		// Check for a valid  event
-		vscp_imsg.flags = 0;
-		vscp_getEvent();
-
-
-		switch (vscp_node_state) {
-
-		case VSCP_STATE_STARTUP: // Cold/warm reset
-
-			// Get nickname from EEPROM
-			if (VSCP_ADDRESS_FREE == vscp_nickname) {
-				// new on segment need a nickname
-				vscp_node_state = VSCP_STATE_INIT;
-			} else {
-				// been here before - go on
-				vscp_node_state = VSCP_STATE_ACTIVE;
-				vscp_goActiveState();
-			}
-			break;
-
-		case VSCP_STATE_INIT: // Assigning nickname
-			vscp_handleProbeState();
-			break;
-
-		case VSCP_STATE_PREACTIVE: // Waiting for host initialisation
-			vscp_goActiveState();
-			break;
-
-		case VSCP_STATE_ACTIVE: // The normal state
-
-			// Check for incoming message?
-			if (vscp_imsg.flags & VSCP_VALID_MSG) {
-
-				if (VSCP_CLASS1_PROTOCOL == vscp_imsg.vscp_class) {
-
-					// Handle protocol event
-					vscp_handleProtocolEvent();
-
-				} else if ((VSCP_CLASS1_CONTROL == vscp_imsg.vscp_class) &&
-					(VSCP_TYPE_CONTROL_SYNC == vscp_imsg.vscp_type)) {
-					handle_sync();
-				}
-
-			}
-			break;
-
-		case VSCP_STATE_ERROR: // Everything is *very* *very* bad.
-			vscp_error();
-			break;
-
-		default: // Should not be here...
-			vscp_node_state = VSCP_STATE_STARTUP;
-			break;
-
-		}
-
-
-		// do a meaurement if needed
-		if ( measurement_clock > 1000 ) {
-
-			measurement_clock = 0;
-			doOneSecondWork();
-			seconds++;
-                        sendTimer++;
-
-			// Temperature report timers are only updated if in active
-			// state
-			if (VSCP_STATE_ACTIVE == vscp_node_state) {
-				for (i = 0; i < 6; i++) {
-					seconds_temp[i]++;
-				}
-			}
-
-			if (seconds > 60) {
-				seconds = 0;
-			}
-
-			// Do VSCP one second jobs
-			vscp_doOneSecondWork();
-
-			// Also do some work
-			doWork();
-
-		}
-
-
-	} // while
+    } // while
 }
 
 
@@ -937,7 +938,10 @@ void init()
             msgdata[ 2 ] = 3;
             msgdata[ 3 ] = 4;
 
-            if ( vscp18f_sendMsg( 0x123,  msgdata, 4, CAN_TX_PRIORITY_0 & CAN_TX_XTD_FRAME & CAN_TX_NO_RTR_FRAME ) ) {
+            if ( vscp18f_sendMsg( 0x123,
+     *                              msgdata,
+     *                              4,
+     *        CAN_TX_PRIORITY_0 & CAN_TX_XTD_FRAME & CAN_TX_NO_RTR_FRAME ) ) {
                     ;
             }
 
@@ -1153,6 +1157,11 @@ void init_app_eeprom(void)
     writeEEPROM(EEPROM_HYSTERESIS_SENSOR4, DEFAULT_HYSTERESIS);
     writeEEPROM(EEPROM_HYSTERESIS_SENSOR5, DEFAULT_HYSTERESIS);
 
+    // Calibrated voltage
+    
+    writeEEPROM(EEPROM_CALIBRATED_VOLTAGE_MSB, DEFAULT_CALIBRATED_VOLTAGE_MSB);
+    writeEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB, DEFAULT_CALIBRATED_VOLTAGE_LSB);
+
     // Calibration
 
     writeEEPROM(EEPROM_CALIBRATION_SENSOR0_MSB, 0);
@@ -1198,9 +1207,7 @@ void init_app_eeprom(void)
         writeEEPROM(EEPROM_COEFFICIENT_C_SENSOR1_3 + i * 12, 0);
     }
 
-    // Calibrated voltage
-    writeEEPROM(EEPROM_CALIBRATED_VOLTAGE_MSB, 0xc3);
-    writeEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB, 0x50);
+    
 }
 
 
