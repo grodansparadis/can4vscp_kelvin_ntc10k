@@ -136,6 +136,7 @@ void interrupt low_priority interrupt_at_low_vector(void)
         WriteTimer0(TIMER0_RELOAD_VALUE);
 
         vscp_timer++;
+        vscp_configtimer++;
         measurement_clock++;
         timeout_clock++;
 
