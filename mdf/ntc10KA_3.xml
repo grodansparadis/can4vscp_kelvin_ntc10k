@@ -53,7 +53,7 @@
 	</picture>
 	
 	<!-- Firmware for the device -->
-	<firmware path="http://www.auto.grodansparadis.com/kelvin/firmware_kelvin_ntc10ka_1_2_0.hex" 
+	<firmware path="http://www.grodansparadis.com/kelvin/firmware_kelvin_ntc10ka_1_2_0.hex" 
 		format="intelhex8"
 		size="32000"
 		date="2015-02-18"
@@ -66,7 +66,7 @@
 	</firmware>
 
 	<!-- Full documentation for the device -->
-	<manual path="http://www.auto.grodansparadis.com/kelvin/kelvin_ntc10ka_manual_11.pdf" 	
+	<manual path="http://www.grodansparadis.com/kelvin/kelvin_ntc10ka_manual_11.pdf" 	
 		lang="en"
 		format="pdf">
     	<description lang="en" >
