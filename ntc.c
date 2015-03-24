@@ -25,11 +25,12 @@
  * ******************************************************************************
  */
 
+#include "vscp_compiler.h"
+#include "vscp_projdefs.h"
 
 #include <p18cxxx.h>
 #include <float.h>
 #include <math.h>
-#include <delays.h>
 #include "ntc.h"
 
 

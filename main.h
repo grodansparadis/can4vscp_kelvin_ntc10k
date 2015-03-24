@@ -72,17 +72,17 @@
 // as the pic1 bootloader expect them to be there.
 
 // EEPROM Storage
-#define VSCP_EEPROM_BOOTLOADER_FLAG	0x00	// Reserved for bootloader	 
+#define VSCP_EEPROM_BOOTLOADER_FLAG             0x00	// Reserved for bootloader
 
-#define VSCP_EEPROM_NICKNAME		0x01	// Persistant nickname id storage
-#define VSCP_EEPROM_SEGMENT_CRC		0x02	// Persistant segment crc storage
-#define VSCP_EEPROM_CONTROL         0x03    // Persistant control byte
+#define VSCP_EEPROM_NICKNAME                    0x01	// Persistant nickname id storage
+#define VSCP_EEPROM_SEGMENT_CRC                 0x02	// Persistant segment crc storage
+#define VSCP_EEPROM_CONTROL                     0x03    // Persistant control byte
 
-#define VSCP_EEPROM_REG_USERID		0x04
-#define VSCP_EEPROM_REG_USERID1		0x05
-#define VSCP_EEPROM_REG_USERID2		0x06
-#define VSCP_EEPROM_REG_USERID3		0x07
-#define VSCP_EEPROM_REG_USERID4		0x08
+#define VSCP_EEPROM_REG_USERID                  0x04
+#define VSCP_EEPROM_REG_USERID1                 0x05
+#define VSCP_EEPROM_REG_USERID2                 0x06
+#define VSCP_EEPROM_REG_USERID3                 0x07
+#define VSCP_EEPROM_REG_USERID4                 0x08
 
 // The following can be stored in flash or eeprom
 

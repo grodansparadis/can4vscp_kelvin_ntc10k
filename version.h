@@ -4,8 +4,8 @@
  *
  * 	Last change: 2012-03-08
  *
- *  Copyright (C) 1995-2012 Ake Hedman, Grodans Paradis AB
- *							<akhe@grodansparadis.com>
+ *  Copyright (C) 1995-2015 Ake Hedman, Grodans Paradis AB
+ *  <akhe@grodansparadis.com>
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -33,4 +33,4 @@
 
 #define FIRMWARE_MAJOR_VERSION		1
 #define FIRMWARE_MINOR_VERSION		2
-#define FIRMWARE_SUB_MINOR_VERSION	0
+#define FIRMWARE_SUB_MINOR_VERSION	1

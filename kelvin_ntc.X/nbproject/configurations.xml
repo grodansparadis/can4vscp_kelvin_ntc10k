@@ -11,7 +11,9 @@
       <itemPath>../ECAN.h</itemPath>
       <itemPath>../ntc.h</itemPath>
       <itemPath>../../../../../../../../../Program Files (x86)/Microchip/xc8/v1.21/include/plib/adc.h</itemPath>
-      <itemPath>../../../../../../vscp_firmware/common/vscp_firmware.h</itemPath>
+      <itemPath>../../vscp_firmware/common/vscp_firmware.h</itemPath>
+      <itemPath>../../vscp_firmware/pic/common/eeprom.h</itemPath>
+      <itemPath>../ECAN.def</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
@@ -20,7 +22,6 @@
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
-      <itemPath>../18f2580_reloc_g.lkr</itemPath>
     </logicalFolder>
     <logicalFolder name="ObjectFiles"
                    displayName="Object Files"
@@ -44,18 +45,15 @@
       <itemPath>../readme.txt</itemPath>
       <itemPath>../conversion_C2F.txt</itemPath>
     </logicalFolder>
-    <itemPath>../../../../../../../vscp_firmware/pic/common/eeprom.h</itemPath>
-    <itemPath>../ECAN.def</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>../</Elem>
     <Elem>../../vscp_firmware/common</Elem>
     <Elem>../../vscp_firmware/pic/common</Elem>
-    <Elem>../../Program Files (x86)/Microchip/xc8/v1.21/include/plib</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="release" type="2">
+    <conf name="Relocated" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <targetDevice>PIC18F2580</targetDevice>
@@ -86,11 +84,11 @@
         <makeCustomizationPostStep></makeCustomizationPostStep>
         <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
-        <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
+        <makeCustomizationNormalizeHexFile>true</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
-        <property key="define-macros" value="ENABLE_WRITE_2PROTECTED_LOCATIONS;RELEASE"/>
+        <property key="define-macros" value="RELEASE"/>
         <property key="extra-include-directories"
                   value="../;..\..\vscp_firmware\pic\common;..\..\vscp_firmware\common;..\..\vscp_software\src\vscp\common"/>
         <property key="identifier-length" value="255"/>
@@ -115,7 +113,7 @@
       </HI-TECH-COMP>
       <HI-TECH-LINK>
         <property key="additional-options-checksum" value=""/>
-        <property key="additional-options-code-offset" value=""/>
+        <property key="additional-options-code-offset" value="0x800"/>
         <property key="additional-options-command-line" value=""/>
         <property key="additional-options-errata" value=""/>
         <property key="additional-options-extend-address" value="false"/>
@@ -127,7 +125,7 @@
         <property key="clear-bss" value="true"/>
         <property key="code-model-external" value="wordwrite"/>
         <property key="code-model-rom" value=""/>
-        <property key="create-html-files" value="true"/>
+        <property key="create-html-files" value="false"/>
         <property key="data-model-ram" value=""/>
         <property key="data-model-size-of-double" value="32"/>
         <property key="data-model-size-of-float" value="24"/>
@@ -148,11 +146,18 @@
         <property key="link-in-c-library" value="true"/>
         <property key="link-in-peripheral-library" value="true"/>
         <property key="managed-stack" value="false"/>
-        <property key="opt-xc8-linker-file" value="true"/>
+        <property key="opt-xc8-linker-file" value="false"/>
         <property key="opt-xc8-linker-link_startup" value="false"/>
         <property key="opt-xc8-linker-serial" value=""/>
         <property key="program-the-device-with-default-config-words" value="true"/>
       </HI-TECH-LINK>
+      <PICkit2PlatformTool>
+        <property key="pk2settings.3state" value="false"/>
+        <property key="pk2settings.preserveee" value="false"/>
+        <property key="pk2settings.setvddvoltage" value="5,00"/>
+        <property key="pk2settings.userpgmexec" value="true"/>
+        <property key="pk2settings.usetargetpower" value="false"/>
+      </PICkit2PlatformTool>
       <RealICEPlatformTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="Freeze Peripherals" value="true"/>
@@ -208,9 +213,9 @@
         <property key="tracecontrol.select" value="0"/>
         <property key="tracecontrol.spiselect" value="0"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
-        <property key="tracecontrol.tracebufmax" value="54600"/>
-        <property key="tracecontrol.tracefile" value="C:\Users\akhe\mpdeftrace.log"/>
-        <property key="tracecontrol.tracefilemax" value="54600"/>
+        <property key="tracecontrol.tracebufmax" value="546000"/>
+        <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
+        <property key="tracecontrol.tracefilemax" value="10000000"/>
         <property key="voltagevalue" value="5.0"/>
       </RealICEPlatformTool>
       <XC8-config-global>
@@ -222,7 +227,7 @@
         <property key="stack-type" value="compiled"/>
       </XC8-config-global>
     </conf>
-    <conf name="Relocated" type="2">
+    <conf name="Debug" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <targetDevice>PIC18F2580</targetDevice>
@@ -257,7 +262,7 @@
       </makeCustomizationType>
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
-        <property key="define-macros" value="ENABLE_WRITE_2PROTECTED_LOCATIONS;RELEASE"/>
+        <property key="define-macros" value="DEBUG"/>
         <property key="extra-include-directories"
                   value="../;..\..\vscp_firmware\pic\common;..\..\vscp_firmware\common;..\..\vscp_software\src\vscp\common"/>
         <property key="identifier-length" value="255"/>
@@ -265,13 +270,13 @@
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
         <property key="optimization-assembler" value="true"/>
         <property key="optimization-assembler-files" value="false"/>
-        <property key="optimization-debug" value="false"/>
+        <property key="optimization-debug" value="true"/>
         <property key="optimization-global" value="true"/>
         <property key="optimization-invariant-enable" value="false"/>
         <property key="optimization-invariant-value" value="16"/>
         <property key="optimization-level" value="9"/>
         <property key="optimization-set" value="default"/>
-        <property key="optimization-speed" value="true"/>
+        <property key="optimization-speed" value="false"/>
         <property key="preprocess-assembler" value="true"/>
         <property key="undefine-macros" value=""/>
         <property key="use-cci" value="false"/>
@@ -282,7 +287,7 @@
       </HI-TECH-COMP>
       <HI-TECH-LINK>
         <property key="additional-options-checksum" value=""/>
-        <property key="additional-options-code-offset" value="0x200"/>
+        <property key="additional-options-code-offset" value="0"/>
         <property key="additional-options-command-line" value=""/>
         <property key="additional-options-errata" value=""/>
         <property key="additional-options-extend-address" value="false"/>

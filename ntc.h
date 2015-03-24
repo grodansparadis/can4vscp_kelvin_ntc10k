@@ -31,7 +31,7 @@
 #include "main.h"
 
 // Defines the number of samples that is taken for each sensor
-// An avarage temperature is calulated of this number of samples.
+// An avarage temperature is calculated of this number of samples.
 #define NUMBER_OF_TEMP_SERIES   80
 
 //
@@ -256,7 +256,7 @@
 #define EEPROM_SENSOR5_ZONE         0x7D
 #define EEPROM_SENSOR5_SUBZONE      0x7E
 
-// Absolut low temperatures
+// Absolute low temperatures
 
 #define EEPROM_ABSOLUT_LOW0_MSB     0x7F
 #define EEPROM_ABSOLUT_LOW0_LSB     0x80
@@ -276,7 +276,7 @@
 #define EEPROM_ABSOLUT_LOW5_MSB     0x89
 #define EEPROM_ABSOLUT_LOW5_LSB     0x8A
 
-// Absolut high temperatures
+// Absolute high temperatures
 
 #define EEPROM_ABSOLUT_HIGH0_MSB    0x8B
 #define EEPROM_ABSOLUT_HIGH0_LSB    0x8C

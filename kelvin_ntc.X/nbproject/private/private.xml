@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
             <url>file:/home/akhe/vscp_hardware/can4vscp/kelvin/kelvin_temperature_modules/Kelvin%20NTC/firmware/main.c</url>
@@ -15,7 +16,60 @@
             <line>1116</line>
         </file>
     </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/C:/Users/grodansparadis/development/can4vscp_kelvin_ntc10k/main.c</file>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0">
+        <file>
+            <url>file:/home/akhe/vscp_hardware/can4vscp/kelvin/kelvin_temperature_modules/Kelvin%20NTC/firmware/main.c</url>
+            <bookmark id="0">
+                <name/>
+                <line>1762</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>file:/C:/Users/akhe/Documents/development/hardware_zeus/can4vscp/kelvin/kelvin_temperature_modules/Kelvin%20NTC/firmware/main.c</url>
+            <bookmark id="0">
+                <name/>
+                <line>392</line>
+                <key/>
+            </bookmark>
+            <bookmark id="0">
+                <name/>
+                <line>790</line>
+                <key/>
+            </bookmark>
+            <bookmark id="0">
+                <name/>
+                <line>869</line>
+                <key/>
+            </bookmark>
+            <bookmark id="0">
+                <name/>
+                <line>900</line>
+                <key/>
+            </bookmark>
+            <bookmark id="0">
+                <name/>
+                <line>1062</line>
+                <key/>
+            </bookmark>
+            <bookmark id="0">
+                <name/>
+                <line>1067</line>
+                <key/>
+            </bookmark>
+            <bookmark id="0">
+                <name/>
+                <line>1116</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/grodansparadis/development/can4vscp_kelvin_ntc10k/ntc.h</file>
+            <file>file:/C:/Users/grodansparadis/development/can4vscp_kelvin_ntc10k/vscp_projdefs.h</file>
+            <file>file:/C:/Users/grodansparadis/development/can4vscp_kelvin_ntc10k/main.c</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.21/sources/common/evalpoly.c</file>
+        </group>
     </open-files>
 </project-private>

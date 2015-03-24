@@ -31,7 +31,7 @@ DEFAULTCONF=Relocated
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=release Relocated 
+ALLCONFS=Relocated Debug 
 
 
 # build
@@ -45,15 +45,15 @@ ALLCONFS=release Relocated
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=release clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=release build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug build
 
 
 

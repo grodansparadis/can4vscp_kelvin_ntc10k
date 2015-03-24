@@ -46,6 +46,7 @@
 #include "version.h"
 #include "ntc.h"
 
+
 #if defined(RELEASE)
 
 #pragma config WDT = ON, WDTPS = 128
@@ -86,8 +87,11 @@
 
 #endif
 
+// Startup code from c018.c
+//void _startup(void);
+
 // ISR Routines
-void isr_low(void);
+//void isr_low(void);
 
 // The device URL (max 32 characters including null termination)
 const uint8_t vscp_deviceURL[] = "www.eurosource.se/ntc10KA_3.xml";
@@ -96,7 +100,7 @@ const uint8_t vscp_deviceURL[] = "www.eurosource.se/ntc10KA_3.xml";
 int16_t current_temp[6]; // Current temperature
 
 uint8_t adc[NUMBER_OF_TEMP_SERIES * 12];// Current ADC values
-uint8_t adc_conversion_flags;   // Bits to flag new adc values
+uint8_t adc_conversion_flags;           // Bits to flag new adc values
 uint8_t adc_series_counter;     // Series counter
 
 uint32_t measurement_clock;     // Clock for measurments
@@ -120,14 +124,13 @@ double sh_coefficients[6*3];    // 6 sensors each with 3 32-bit constants
 //      	- Services GP3 Pin Change
 //////////////////////////////////////////////////////////////////////////////
 
-
 #ifdef RELOCATE
 #pragma code low_vector = 0x208
 #else
 //#pragma code low_vector = 0x08
 #endif
 
-void interrupt low_priority interrupt_at_low_vector(void)
+void interrupt low_priority  interrupt_at_low_vector( void )
 {
     // Check timer
     if (INTCONbits.TMR0IF) { // If A Timer0 Interrupt, Then
@@ -317,7 +320,7 @@ void main()
         if ((vscp_initbtncnt > 250) &&
                 (VSCP_STATE_INIT != vscp_node_state)) {
 
-            // Init button pressed
+            // Init. button pressed
             vscp_nickname = VSCP_ADDRESS_FREE;
             writeEEPROM(VSCP_EEPROM_NICKNAME, VSCP_ADDRESS_FREE);
             vscp_init();
@@ -350,7 +353,7 @@ void main()
                 vscp_handleProbeState();
                 break;
 
-            case VSCP_STATE_PREACTIVE: // Waiting for host initialisation
+            case VSCP_STATE_PREACTIVE: // Waiting for host initialization
                 vscp_goActiveState();
                 break;
 
@@ -384,7 +387,7 @@ void main()
         }
 
 
-        // do a meaurement if needed
+        // do a measurement if needed
         if ( measurement_clock > 1000 ) {
 
             measurement_clock = 0;
@@ -1015,6 +1018,10 @@ void init_app_ram(void)
 
 void init_app_eeprom(void)
 {
+    // Zone subzone
+    writeEEPROM( EEPROM_ZONE, 0 );
+    writeEEPROM( EEPROM_ZONE, 0 );
+    
     writeEEPROM(EEPROM_CONTROLREG0, DEFAULT_CONTROL_REG);
     writeEEPROM(EEPROM_CONTROLREG1, DEFAULT_CONTROL_REG);
     writeEEPROM(EEPROM_CONTROLREG2, DEFAULT_CONTROL_REG);
@@ -1129,7 +1136,7 @@ void init_app_eeprom(void)
     writeEEPROM(EEPROM_ABSOLUT_LOW5_MSB, DEFAULT_LOW_MSB);
     writeEEPROM(EEPROM_ABSOLUT_LOW5_LSB, DEFAULT_LOW_LSB);
 
-    // Absolut high temperatures
+    // Absolute high temperatures
 
     writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, DEFAULT_HIGH_MSB);
     writeEEPROM(EEPROM_ABSOLUT_HIGH0_LSB, DEFAULT_HIGH_LSB);
@@ -2732,8 +2739,10 @@ uint8_t vscp_getSubzone(void)
 // vscp_goBootloaderMode
 //
 
-void vscp_goBootloaderMode(void)
+void vscp_goBootloaderMode( uint8_t algorithm )
 {
+    if ( VSCP_BOOTLOADER_PIC1 != algorithm  ) return;
+
     // OK, We should enter boot loader mode
     // 	First, activate bootloader mode
     writeEEPROM(VSCP_EEPROM_BOOTLOADER_FLAG, VSCP_BOOT_FLAG);

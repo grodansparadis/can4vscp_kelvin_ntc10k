@@ -27,8 +27,8 @@
  * ******************************************************************************
 */
 
-#ifndef KELVIN_SMART_PROJDEFS_H
-#define KELVIN_SMART_PROJDEFS_H
+#ifndef KELVIN_NTC_PROJDEFS_H
+#define KELVIN_NTC_PROJDEFS_H
 
 // VSCP Defines
 // ============
