@@ -184,7 +184,7 @@ dist/${CND_CONF}/${IMAGE_TYPE}/kelvin_ntc.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OB
 	${MP_CC} $(MP_EXTRA_LD_PRE) --chip=$(MP_PROCESSOR_OPTION) -G -mdist/${CND_CONF}/${IMAGE_TYPE}/kelvin_ntc.X.${IMAGE_TYPE}.map  --double=32 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=pro -DRELEASE -P -N255 -I"../" -I"../../vscp_firmware/pic/common" -I"../../vscp_firmware/common" -I"../../vscp_software/src/vscp/common" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --codeoffset=0x800 --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib --output=-mcof,+elf "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"     -odist/${CND_CONF}/${IMAGE_TYPE}/kelvin_ntc.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
 	
 	@echo Normalizing hex file
-	@"C:/Program Files (x86)/Microchip/MPLABX/v3.00.02-beta/mplab_ide/mplab_ide/modules/../../bin/hexmate" --edf="C:/Program Files (x86)/Microchip/MPLABX/v3.00.02-beta/mplab_ide/mplab_ide/modules/../../dat/en_msgs.txt" dist/${CND_CONF}/${IMAGE_TYPE}/kelvin_ntc.X.${IMAGE_TYPE}.hex -odist/${CND_CONF}/${IMAGE_TYPE}/kelvin_ntc.X.${IMAGE_TYPE}.hex
+	@"C:/Program Files (x86)/Microchip/MPLABX/v3.05/mplab_ide/mplab_ide/modules/../../bin/hexmate" --edf="C:/Program Files (x86)/Microchip/MPLABX/v3.05/mplab_ide/mplab_ide/modules/../../dat/en_msgs.txt" dist/${CND_CONF}/${IMAGE_TYPE}/kelvin_ntc.X.${IMAGE_TYPE}.hex -odist/${CND_CONF}/${IMAGE_TYPE}/kelvin_ntc.X.${IMAGE_TYPE}.hex
 
 endif
 

@@ -31,7 +31,7 @@
 #include "main.h"
 
 // Defines the number of samples that is taken for each sensor
-// An avarage temperature is calculated of this number of samples.
+// An average temperature is calculated of this number of samples.
 #define NUMBER_OF_TEMP_SERIES   80
 
 //
@@ -41,7 +41,7 @@
 // Default value for control register
 // bit 0,1 - 01 = Celsius
 // Bit 2 - 0 Reserved bit
-// Bit 3 = 0 Low alarm diabled
+// Bit 3 = 0 Low alarm disabled
 // Bit 4 = 0 High alarm disabled
 // Bit 5 = 0 Alarm is sent
 // Bit 6 = 0 Normal TurnOn/Off
@@ -86,12 +86,12 @@
 #define DEFAULT_EXTERNAL_COEFFICIENT_A3     -7.642331765196044e-006
 #define DEFAULT_EXTERNAL_COEFFICIENT_A4     4.048572707661904e-007
 
-// Default value for low alarm point -327.68 degrees celsius
+// Default value for low alarm point -327.68 degrees Celsius
 // A point that will not be reached
 #define DEFAULT_LOW_ALARM_MSB               0x80
 #define DEFAULT_LOW_ALARM_LSB               0xff
 
-// Default value for high alarm point +327.67 degrees celsius
+// Default value for high alarm point +327.67 degrees Celsius
 // A point that will not be reached
 #define DEFAULT_HIGH_ALARM_MSB              0x7f
 #define DEFAULT_HIGH_ALARM_LSB              0xff
@@ -100,13 +100,13 @@
 #define DEFAULT_SENSOR_ZONE                 0
 #define DEFAULT_SENSOR_SUBZONE              0
 
-// Default absolut low value
-// Set to +327.67 degrees celsius
+// Default absolute low value
+// Set to +327.67 degrees Celsius
 #define DEFAULT_LOW_MSB                     0x7f
 #define DEFAULT_LOW_LSB                     0xff
 
-// Default absolut high value
-// Set to -327.68 degrees celsius
+// Default absolute high value
+// Set to -327.68 degrees Celsius
 #define DEFAULT_HIGH_MSB                    0x80
 #define DEFAULT_HIGH_LSB                    0x00
 
@@ -160,7 +160,7 @@
 // EEPROM registers for module persistent data
 
 #define EEPROM_ZONE                 0x41	// Zone node belongs to
-#define EEPROM_SUBZONE              0x42	// Subzone node belongs to
+#define EEPROM_SUBZONE              0x42	// Sub zone node belongs to
 
 #define EEPROM_CONTROLREG0          0x43
 #define EEPROM_CONTROLREG1          0x44
@@ -428,8 +428,8 @@ double Kelvin2Celsius(double tf);
 /*!
 	Send Extended ID CAN frame
 	@param id CAN extended ID for frame.
-	@param size Number of databytes 0-8
-	@param pData Pointer to databytes of frame.
+	@param size Number of data bytes 0-8
+	@param pData Pointer to data bytes of frame.
 	@return TRUE (!=0) on success, FALSE (==0) on failure.
 */
 int8_t sendCANFrame( uint32_t id, uint8_t size, uint8_t *pData );

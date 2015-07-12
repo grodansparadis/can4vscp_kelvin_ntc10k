@@ -103,8 +103,8 @@ uint8_t adc[NUMBER_OF_TEMP_SERIES * 12];// Current ADC values
 uint8_t adc_conversion_flags;           // Bits to flag new adc values
 uint8_t adc_series_counter;     // Series counter
 
-uint32_t measurement_clock;     // Clock for measurments
-uint32_t timeout_clock;         // Clock used ofr timeouts
+uint32_t measurement_clock;     // Clock for measurements
+uint32_t timeout_clock;         // Clock used for timeouts
 uint8_t sendTimer;              // Timer for CAN send
 uint8_t seconds;                // counter for seconds
 
@@ -300,7 +300,7 @@ void main()
 {
     unsigned char i;
 
-    init(); // Initialize Microcontroller
+    init(); // Initialize Micro-controller
 
     // Check VSCP persistent storage and
     // restore if needed
@@ -362,14 +362,14 @@ void main()
                 // Check for incoming message?
                 if (vscp_imsg.flags & VSCP_VALID_MSG) {
 
-                    if (VSCP_CLASS1_PROTOCOL == vscp_imsg.vscp_class) {
+                    if ( VSCP_CLASS1_PROTOCOL == vscp_imsg.vscp_class ) {
 
                         // Handle protocol event
                         vscp_handleProtocolEvent();
 
                     }
-                    else if ((VSCP_CLASS1_CONTROL == vscp_imsg.vscp_class) &&
-                                (VSCP_TYPE_CONTROL_SYNC == vscp_imsg.vscp_type)) {
+                    else if ( ( VSCP_CLASS1_CONTROL == vscp_imsg.vscp_class ) &&
+                                ( VSCP_TYPE_CONTROL_SYNC == vscp_imsg.vscp_type ) ) {
                         handle_sync();
                     }
 
@@ -511,6 +511,7 @@ void doWork(void)
                 current_temp[ i ] = (current_temp[ i ] + ((long) (temp * 100) + getCalibrationValue(i))) / 2;
 
             }
+            
             // Check if this is the lowest temperature ever
             if (current_temp[ i ] <
                     (int16_t) (readEEPROM(2 * i + EEPROM_ABSOLUT_LOW0_MSB)*256 +
