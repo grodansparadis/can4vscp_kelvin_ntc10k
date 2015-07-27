@@ -142,6 +142,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
         vscp_configtimer++;
         measurement_clock++;
         timeout_clock++;
+        sendTimer++;
 
         // Check for init button
         if (!(PORTC & 0x01)) {
@@ -393,7 +394,6 @@ void main()
             measurement_clock = 0;
             doOneSecondWork();
             seconds++;
-            sendTimer++;
 
             // Temperature report timers are only updated if in active
             // state
@@ -2898,7 +2898,7 @@ int8_t sendCANFrame(uint32_t id, uint8_t dlc, uint8_t *pdata)
     uint8_t rv = FALSE;
     sendTimer = 0;
 
-    while ( sendTimer < 1 ) {
+    while ( sendTimer < 1000 ) {
         if ( ECANSendMessage( id, pdata, dlc, ECAN_TX_XTD_FRAME ) ) {
             rv = TRUE;
             break;
