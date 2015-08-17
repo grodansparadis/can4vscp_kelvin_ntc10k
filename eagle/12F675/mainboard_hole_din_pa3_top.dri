@@ -1,0 +1,32 @@
+Drill Station Info File: D:/development/vscp_projects/hummidity/eagle/mainboard_hole_din_pa3_top.dri
+
+ Date              : 2004-04-27 12:09:51 
+ Drills            : D:/development/vscp_projects/hummidity/eagle/mainboard_hole_din_pa3.drl
+ Device            : Excellon drill station with user supplied rack file
+
+Parameter settings:
+
+ Tolerance Drill + :  0,00 %
+ Tolerance Drill - :  0,00 %
+ Rotate            : no
+ Mirror            : no
+ Optimize          : yes
+ Auto fit          : yes
+ OffsetX           : 0inch
+ OffsetY           : 0inch
+ Layers            :(null)
+
+Drill File Info:
+
+ Data Mode         : Absolute
+ Units             : 1/1000 Inch
+
+Drills used:
+
+ Code  Size       used
+
+
+Total number of drills: 0
+
+Plotfiles:
+

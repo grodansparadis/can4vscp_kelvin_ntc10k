@@ -1,0 +1,11 @@
+EAGLE Version 4.13 Copyright (c) 1988-2004 CadSoft
+
+Electrical Rule Check for D:/dev/firmware/pic/Kelvin/SHT11/eagle/sensor/sensor_sht11_pa1.sch at 2004-12-30 18:53:13 
+
+WARNING: Sheet 1/1: POWER Pin IC1 VDD connected to N$1
+WARNING: Sheet 1/1: POWER Pin IC1 GND connected to N$2
+
+No board loaded - consistency has not been checked
+
+    0 errors
+    2 warnings

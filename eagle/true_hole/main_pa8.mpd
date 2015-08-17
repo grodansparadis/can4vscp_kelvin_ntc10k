@@ -1,0 +1,5 @@
+//MPD-File
+#ifndef(pack_JP2) #declare global_pack_JP2=yes; object {PH_1X4()translate<0,0,0> rotate<0,0.000000,0>rotate<0,-270.000000,0> rotate<0,0,0> translate<39.152200,0.000000,9.626900>}#end		//Header 2,54mm Grid 4Pin 1Row (jumper.lib) JP2  MA04-1
+#ifndef(pack_JP4) #declare global_pack_JP4=yes; object {PH_1X6()translate<0,0,0> rotate<0,0.000000,0>rotate<0,-270.000000,0> rotate<0,0,0> translate<3.346600,0.000000,39.247700>}#end		//Header 2,54mm Grid 6Pin 1Row (jumper.lib) JP4  MA06-1
+#ifndef(pack_JP6) #declare global_pack_JP6=yes; object {PH_1X4()translate<0,0,0> rotate<0,0.000000,0>rotate<0,-90.000000,0> rotate<0,0,0> translate<3.446500,0.000000,24.023600>}#end		//Header 2,54mm Grid 4Pin 1Row (jumper.lib) JP6  MA04-1
+#ifndef(pack_LED1) #declare global_pack_LED1=yes; object {DIODE_DIS_LED_3MM(Red,0.500000,0.000000,)translate<0,0,0> rotate<0,0.000000,0>rotate<0,-180.000000,0> rotate<0,0,0> translate<13.640400,0.000000,45.664300>}#end		//Diskrete 3MM LED LED1  LED3MM

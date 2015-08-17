@@ -1,0 +1,28 @@
+EAGLE Version 4.11r2 Copyright (c) 1988-2004 CadSoft
+
+Electrical Rule Check for D:/development/vscp_projects/hummidity/eagle/248/main_pa2.sch at 2004-05-14 12:01:02 
+
+WARNING: Sheet 1/1: SUPPLY Pin +5V overwritten with VDD
+WARNING: Sheet 1/1: SUPPLY Pin GND overwritten with VSS
+ERROR: Sheet 1/1: SUPPLY Pin +5V overwritten with more than one signal (+5V, VDD)
+ERROR: Sheet 1/1: SUPPLY Pin GND overwritten with more than one signal (GND, VSS)
+ERROR: Sheet 1/1: unconnected INPUT Pin: IC3 RS
+ERROR: Sheet 1/1: no SUPPLY for POWER Pin IC3 VREF
+WARNING: Sheet 1/1: POWER Pin IC1 VSS1 connected to GND
+WARNING: Sheet 1/1: POWER Pin IC1 VSS2 connected to GND
+ERROR: Sheet 1/1: unconnected INPUT Pin: IC1 MCLR/VPP
+WARNING: Sheet 1/1: POWER Pin IC2 VDD connected to N$1
+ERROR: Sheet 1/1: unconnected INPUT Pin: IC2 ST
+ERROR: OUTPUT and SUPPLY Pins mixed on net GND
+WARNING: Only 1 Pin on net N$3
+WARNING: No Pins on net N$19
+WARNING: Sheet 1/1, Net GP1: missing Junction at (6.4 4.1)
+WARNING: Sheet 1/1, Net GND: close but unconnected wires at (1.1 2.2)
+WARNING: Sheet 1/1, Net GND: close but unconnected wires at (1.1 2.2)
+WARNING: Sheet 1/1, Net N$3: wire overlaps pin at (3.6 5.8)
+WARNING: Sheet 1/1, Net +5V: wire overlaps pin at (4.8 6.35)
+
+No board loaded - consistency has not been checked
+
+    7 errors
+   12 warnings

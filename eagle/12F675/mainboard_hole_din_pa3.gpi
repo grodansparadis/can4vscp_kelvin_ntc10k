@@ -1,0 +1,48 @@
+Photoplotter Info File: D:/development/vscp_projects/hummidity/eagle/mainboard_hole_din_pa3.gpi
+
+ Date              : 2004-04-27 10:05:50 
+ Plotfile          : D:/development/vscp_projects/hummidity/eagle/mainboard_hole_din_pa3.gerb
+ Apertures         : generated: D:/development/vscp_projects/hummidity/eagle/mainboard_hole_din_pa3.whl
+ Device            : Gerber photoplotter with automatic aperture wheel generation
+
+Parameter settings:
+
+ Emulate Apertures : no
+ Emulate Thermal   : no
+ Emulate Annulus   : no
+ Tolerance Draw  + :  0,00 %
+ Tolerance Draw  - :  0,00 %
+ Tolerance Flash + :  0,00 %
+ Tolerance Flash - :  0,00 %
+ Rotate            : no
+ Mirror            : no
+ Optimize          : yes
+ Auto fit          : yes
+ OffsetX           : 0inch
+ OffsetY           : 0inch
+
+Plotfile Info:
+
+ Coordinate Format : 2.4
+ Coordinate Units  : Inch
+ Data Mode         : Absolute
+ Zero Suppression  : None
+ End Of Block      : *
+
+Apertures used:
+
+ Code     Shape     Size                  used
+
+ D10      oval      0.0520inch x 0.1040inch    26
+ D11      oval      0.1040inch x 0.0520inch    16
+ D12      octagon   0.0520inch               5
+ D13      oval      0.0560inch x 0.1120inch     2
+ D14      oval      0.1120inch x 0.0560inch     4
+ D15      round     0.0520inch               4
+ D16      square    0.0520inch               3
+ D17      octagon   0.0630inch              12
+ D18      octagon   0.0500inch              10
+ D19      octagon   0.0790inch               2
+ D20      draw      0.0100inch             145
+ D21      round     0.0400inch               9
+

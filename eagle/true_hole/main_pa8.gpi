@@ -1,0 +1,57 @@
+Photoplotter Info File: D:/dev/firmware/pic/Kelvin/SHT11/eagle/248/main_pa8.gpi
+
+ Date              : 2005-02-09 09:44:18 
+ Plotfile          : D:/dev/firmware/pic/Kelvin/SHT11/eagle/248/main_pa8.sts
+ Apertures         : D:/dev/firmware/pic/Kelvin/SHT11/eagle/248/main_pa8.whl
+ Device            : Gerber photoplotter
+
+Parameter settings:
+
+ Emulate Apertures : no
+ Emulate Thermal   : no
+ Emulate Annulus   : no
+ Tolerance Draw  + :  1.00 %
+ Tolerance Draw  - :  1.00 %
+ Tolerance Flash + :  1.00 %
+ Tolerance Flash - :  1.00 %
+ Rotate            : no
+ Mirror            : yes
+ Optimize          : yes
+ Auto fit          : yes
+ OffsetX           : 0inch
+ OffsetY           : 0inch
+
+Plotfile Info:
+
+ Coordinate Format : 2.4
+ Coordinate Units  : Inch
+ Data Mode         : Absolute
+ Zero Suppression  : None
+ End Of Block      : *
+
+Aperture Tolerances:
+
+ -------- Requested Aperture --------  ------ Used Aperture ------
+
+ Shape     Size                  used  Code     Shape     Size
+
+ octagon   0.0948inch               2  D35      octagon   0.0948inch
+ round     0.1062inch               2  D42      round     0.1062inch
+
+Apertures used:
+
+ Code     Shape     Size                  used
+
+ D13      oval      0.0624inch x 0.1144inch     8
+ D19      octagon   0.0624inch               5
+ D22      square    0.0720inch               1
+ D24      round     0.0720inch              27
+ D28      square    0.0624inch               3
+ D30      octagon   0.0756inch              29
+ D35      octagon   0.0948inch               2
+ D37      round     0.0756inch               3
+ D40      octagon   0.0720inch               2
+ D42      round     0.1062inch               2
+ D44      octagon   0.0840inch               2
+ D49      round     0.0480inch               1
+

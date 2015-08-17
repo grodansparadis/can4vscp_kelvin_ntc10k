@@ -1,0 +1,38 @@
+Drill Station Info File: D:/dev/firmware/pic/Kelvin/SHT11/eagle/248/main_pa8.dri
+
+ Date              : 2005-02-09 09:45:41 
+ Drills            : generated
+ Device            : Excellon drill station
+
+Parameter settings:
+
+ Tolerance Drill + :  2.50 %
+ Tolerance Drill - :  2.50 %
+ Rotate            : no
+ Mirror            : no
+ Optimize          : yes
+ Auto fit          : yes
+ OffsetX           : 0inch
+ OffsetY           : 0inch
+ Layers            : Drills Holes
+
+Drill File Info:
+
+ Data Mode         : Absolute
+ Units             : 1/1000 Inch
+
+Drills used:
+
+ Code  Size       used
+
+ T01   0.0320inch    38
+ T02   0.0290inch    28
+ T03   0.0400inch    16
+ T04   0.0590inch     2
+ T05   0.0240inch     1
+
+Total number of drills: 85
+
+Plotfiles:
+
+ D:/dev/firmware/pic/Kelvin/SHT11/eagle/248/main_pa8.drd

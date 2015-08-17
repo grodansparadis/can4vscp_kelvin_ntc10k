@@ -1,0 +1,44 @@
+Photoplotter Info File: D:/development/vscp_projects/hummidity/eagle/mainboard_silk.gpi
+
+ Date              : 2004-04-27 13:01:57 
+ Plotfile          : D:/development/vscp_projects/hummidity/eagle/mainboard_silk.grb
+ Apertures         : generated: 
+ Device            : Gerber photoplotter with RS-274-X aperture generation
+
+Parameter settings:
+
+ Emulate Apertures : no
+ Emulate Thermal   : no
+ Emulate Annulus   : no
+ Tolerance Draw  + :  0,00 %
+ Tolerance Draw  - :  0,00 %
+ Tolerance Flash + :  0,00 %
+ Tolerance Flash - :  0,00 %
+ Rotate            : no
+ Mirror            : no
+ Optimize          : yes
+ Auto fit          : yes
+ OffsetX           : -8454inch
+ OffsetY           : -8454inch
+
+Plotfile Info:
+
+ Coordinate Format : 2.4
+ Coordinate Units  : Inch
+ Data Mode         : Absolute
+ Zero Suppression  : None
+ End Of Block      : *
+
+Apertures used:
+
+ Code     Shape     Size                  used
+
+ D10      draw      0.0060inch             107
+ D11      draw      0.0070inch              42
+ D12      draw      0.0010inch              10
+ D13      draw      0.0050inch             376
+ D14      draw      0.0080inch               8
+ D15      draw      0.0040inch               8
+ D16      rectangle 0.0200inch x 0.1200inch     3
+ D17      rectangle 0.1200inch x 0.0200inch     3
+

@@ -1,0 +1,16 @@
+EAGLE Version 4.13 Copyright (c) 1988-2004 CadSoft
+
+Electrical Rule Check for D:/dev/firmware/pic/Kelvin/SHT11/eagle/248/main_pa8.sch at 2004-12-21 12:26:42 
+
+WARNING: Sheet 1/1: SUPPLY Pin VDD overwritten with +5V
+WARNING: Sheet 1/1: SUPPLY Pin VSS overwritten with GND
+ERROR: Sheet 1/1: unconnected INPUT Pin: IC3 RS
+ERROR: Sheet 1/1: no SUPPLY for POWER Pin IC3 VREF
+WARNING: Sheet 1/1: POWER Pin IC1 VSS1 connected to GND
+WARNING: Sheet 1/1: POWER Pin IC1 VSS2 connected to GND
+WARNING: Sheet 1/1: POWER Pin IC1 VDD connected to +5V
+
+Board and schematic are consistent
+
+    2 errors
+    5 warnings
