@@ -1,8 +1,10 @@
-
-0.0.2
-2006-08-27 AKHE  -- Rotated LED 1 so that it can be bent against short side.
-
-0.0.3
-2006-12-28 AKHE  -- Changed power regulator to LM340
-2006-12-28 AKHE  -- Added four analog inputs (One digital input added previosuly).
-2006-12-28 AKHE  -- Added on board LM50 temp sensor.
+Kelvin NTC
+==========
+2016-06-16 - AKHE Power lines to thin - fixed.
+2011-12-20 - AKHE Added termination resistor. Leave unpopulated.
+2011-11-17 - AKHE Added 1uF capacitor on uP pin 6 forPIC18F66K80 compability
+2011-11-15 - AKHE Move L1 so it fits on the board.
+2011-11-10 - AKHE Packages for D1/D2 updatet to SOD123 from SMDB
+2011-11-10 - AKHE CANH should be on pin 4 of RJ-45
+2011-11-10 - AKHE Rev B
+2011-11-02 - AKHE Kontaktlist uppdaterad. Hål var 0.9 och för trånga. Nu 1.2 istället.
