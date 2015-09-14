@@ -101,11 +101,12 @@ int16_t current_temp[6]; // Current temperature
 
 uint8_t adc[NUMBER_OF_TEMP_SERIES * 12];// Current ADC values
 uint8_t adc_conversion_flags;           // Bits to flag new adc values
-uint8_t adc_series_counter;     // Series counter
+uint8_t adc_series_counter;             // Series counter
 
-uint32_t measurement_clock;     // Clock for measurements
-uint32_t timeout_clock;         // Clock used for timeouts
-uint8_t sendTimer;              // Timer for CAN send
+volatile uint8_t sendTimer;             // Timer for CAN send
+volatile uint32_t measurement_clock;    // Clock for measurements
+volatile uint32_t timeout_clock;        // Clock used for timeouts
+
 uint8_t seconds;                // counter for seconds
 
 uint8_t seconds_temp[6];        // timers for temp event
@@ -1253,14 +1254,13 @@ int8_t convertTemperature(int temp, unsigned char unit)
 void handle_sync(void)
 {
     uint8_t i;
-    //uint32_t start;
 
     for (i = 0; i < 6; i++) {
 
-        if ((0xff != vscp_imsg.data[ 1 ] ||
-                (readEEPROM(2 * i + EEPROM_SENSOR0_ZONE) != vscp_imsg.data[ 1 ])) &&
-                (0xff != vscp_imsg.data[ 2 ] ||
-                (readEEPROM(2 * i + EEPROM_SENSOR0_SUBZONE) != vscp_imsg.data[ 2 ]))) {
+        if ( ( ( 0xff == vscp_imsg.data[ 1 ] ) ||
+                ( readEEPROM( EEPROM_SENSOR0_ZONE + 2*i ) == vscp_imsg.data[ 1 ] ) ) &&
+                ( ( 0xff == vscp_imsg.data[ 2 ] ) ||
+                ( readEEPROM( EEPROM_SENSOR0_SUBZONE + 2*i ) == vscp_imsg.data[ 2 ] ) ) ) {
 
             // We have a one second timeout
             timeout_clock = 0;
@@ -1288,42 +1288,42 @@ uint8_t vscp_readAppReg(unsigned char reg)
 
             // Zone
             case 0x00:
-                rv = readEEPROM(EEPROM_ZONE);
+                rv = readEEPROM( EEPROM_ZONE );
                 break;
 
             // Subzone
             case 0x01:
-                rv = readEEPROM(EEPROM_SUBZONE);
+                rv = readEEPROM( EEPROM_SUBZONE );
                 break;
 
             // Control register for sensor 0
             case 0x02:
-                rv = readEEPROM(EEPROM_CONTROLREG0);
+                rv = readEEPROM( EEPROM_CONTROLREG0 );
                 break;
 
             // Control register for sensor 1
             case 0x03:
-                rv = readEEPROM(EEPROM_CONTROLREG1);
+                rv = readEEPROM (EEPROM_CONTROLREG1 );
                 break;
 
             // Control register for sensor 2
             case 0x04:
-                rv = readEEPROM(EEPROM_CONTROLREG2);
+                rv = readEEPROM( EEPROM_CONTROLREG2 );
                 break;
 
             // Control register for sensor 3
             case 0x05:
-                rv = readEEPROM(EEPROM_CONTROLREG3);
+                rv = readEEPROM( EEPROM_CONTROLREG3 );
                 break;
 
             // Control register for sensor 4
             case 0x06:
-                rv = readEEPROM(EEPROM_CONTROLREG4);
+                rv = readEEPROM( EEPROM_CONTROLREG4 );
                 break;
 
             // Control register for sensor 5
             case 0x07:
-                rv = readEEPROM(EEPROM_CONTROLREG5);
+                rv = readEEPROM( EEPROM_CONTROLREG5 );
                 break;
 
             // MSB of current temperature for sensor 0
@@ -1623,52 +1623,52 @@ uint8_t vscp_readAppReg(unsigned char reg)
 
                 // Zone for sensor 1
             case 0x4C:
-                rv = readEEPROM(EEPROM_SENSOR0_ZONE);
+                rv = readEEPROM(EEPROM_SENSOR1_ZONE);
                 break;
 
                 // Subzone for senor 1
             case 0x4D:
-                rv = readEEPROM(EEPROM_SENSOR0_SUBZONE);
+                rv = readEEPROM(EEPROM_SENSOR1_SUBZONE);
                 break;
 
                 // Zone for sensor 2
             case 0x4E:
-                rv = readEEPROM(EEPROM_SENSOR0_ZONE);
+                rv = readEEPROM(EEPROM_SENSOR2_ZONE);
                 break;
 
                 // Subzone for senor 2
             case 0x4F:
-                rv = readEEPROM(EEPROM_SENSOR0_SUBZONE);
+                rv = readEEPROM(EEPROM_SENSOR2_SUBZONE);
                 break;
 
                 // Zone for sensor 3
             case 0x50:
-                rv = readEEPROM(EEPROM_SENSOR0_ZONE);
+                rv = readEEPROM(EEPROM_SENSOR3_ZONE);
                 break;
 
                 // Subzone for senor 3
             case 0x51:
-                rv = readEEPROM(EEPROM_SENSOR0_SUBZONE);
+                rv = readEEPROM(EEPROM_SENSOR3_SUBZONE);
                 break;
 
                 // Zone for sensor 4
             case 0x52:
-                rv = readEEPROM(EEPROM_SENSOR0_ZONE);
+                rv = readEEPROM(EEPROM_SENSOR4_ZONE);
                 break;
 
                 // Subzone for senor 4
             case 0x53:
-                rv = readEEPROM(EEPROM_SENSOR0_SUBZONE);
+                rv = readEEPROM(EEPROM_SENSOR4_SUBZONE);
                 break;
 
                 // Zone for sensor 5
             case 0x54:
-                rv = readEEPROM(EEPROM_SENSOR0_ZONE);
+                rv = readEEPROM(EEPROM_SENSOR5_ZONE);
                 break;
 
                 // Subzone for senor 5
             case 0x55:
-                rv = readEEPROM(EEPROM_SENSOR0_SUBZONE);
+                rv = readEEPROM(EEPROM_SENSOR5_SUBZONE);
                 break;
 
 
@@ -2517,15 +2517,15 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
     }
     else if (1 == vscp_page_select) {
 
-        // Coeffecients
+        // Coefficients
         if (reg < 72) {
             writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg, val);
             rv = readEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg );
             writeCoeffs2Ram();
         }
-        // Raw A/D values is not writeable
+        // Raw A/D values is not writable
         else if (reg < 84) {
-            // The byte order is differenet in registers
+            // The byte order is different in registers
             uint8_t pos = reg - 72;
             if ( pos % 2 ) {
                 pos--;
@@ -2896,8 +2896,8 @@ int8_t getVSCPFrame( uint16_t *pvscpclass,
 int8_t sendCANFrame(uint32_t id, uint8_t dlc, uint8_t *pdata)
 {
     uint8_t rv = FALSE;
+    
     sendTimer = 0;
-
     while ( sendTimer < 1000 ) {
         if ( ECANSendMessage( id, pdata, dlc, ECAN_TX_XTD_FRAME ) ) {
             rv = TRUE;

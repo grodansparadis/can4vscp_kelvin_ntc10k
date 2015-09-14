@@ -236,7 +236,7 @@
 #define EEPROM_HIGH_ALARM5_MSB      0x71
 #define EEPROM_HIGH_ALARM5_LSB      0x72
 
-// Sensor zone/subzone information
+// Sensor zone/sub zone information
 
 #define EEPROM_SENSOR0_ZONE         0x73
 #define EEPROM_SENSOR0_SUBZONE      0x74
