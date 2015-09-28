@@ -5,8 +5,8 @@
 <module>
 	<name>Kelvin temperature sensor module</name>
  	<model>10KA</model>
-	<version>1.0.10</version>
-	<changed>2015-09-13</changed>
+	<version>1.0.11</version>
+	<changed>2015-09-28</changed>
 	<description lang="en">
 		This module can report temperature from up to six temperature sensors. One sensor
 		is located on board and five are external to the module.
@@ -2199,7 +2199,7 @@
 		<reg page="1" offset="72" default="0" bgcolor="0xE5FFCC" >
 			<name lang="en">Raw A/D value for Sensor 0 (MSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 0 (MSB).
+				Raw A/D value for Sensor 0.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2207,7 +2207,7 @@
 		<reg page="1" offset="73" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 0 (LSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 0 (LSB).
+				Raw A/D value for Sensor 0.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2215,7 +2215,7 @@
 		<reg page="1" offset="74" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 1 (MSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 1 (MSB).
+				Raw A/D value for Sensor 1.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2223,7 +2223,7 @@
 		<reg page="1" offset="75" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 1 (LSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 1 (LSB).
+				Raw A/D value for Sensor 1.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2231,7 +2231,7 @@
 		<reg page="1" offset="76" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 2 (MSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 0 (MSB).
+				Raw A/D value for Sensor 2.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2239,7 +2239,7 @@
 		<reg page="1" offset="77" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 2 (LSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 0 (LSB).
+				Raw A/D value for Sensor 2.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2247,7 +2247,7 @@
 		<reg page="1" offset="78" default="0" bgcolor="0xE5FFCC" >
 			<name lang="en">Raw A/D value for Sensor 3 (MSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 0 (MSB).
+				Raw A/D value for Sensor 3.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2255,7 +2255,7 @@
 		<reg page="1" offset="79" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 3 (LSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 0 (LSB).
+				Raw A/D value for Sensor 3.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2263,7 +2263,7 @@
 		<reg page="1" offset="80" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 4 (MSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 4 (MSB).
+				Raw A/D value for Sensor 4.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2271,7 +2271,7 @@
 		<reg page="1" offset="81" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 4 (LSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 4 (LSB).
+				Raw A/D value for Sensor 4.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2279,7 +2279,7 @@
 		<reg page="1" offset="82" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 5 (MSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 5 (MSB).
+				Raw A/D value for Sensor 5.
 			</description>
 			<access>r</access>
 		</reg>
@@ -2287,7 +2287,7 @@
 		<reg page="1" offset="83" default="0" bgcolor="0xE5FFCC">
 			<name lang="en">Raw A/D value for Sensor 5 (LSB)</name>
 			<description lang="en">
-				Raw A/D value for Sensor 5 (LSB).
+				Raw A/D value for Sensor 5.
 			</description>
 			<access>r</access>
 		</reg>

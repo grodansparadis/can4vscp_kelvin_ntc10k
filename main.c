@@ -1378,12 +1378,12 @@ uint8_t vscp_readAppReg(unsigned char reg)
 
             // MSB of current temperature for sensor 4
             case 0x12:
-                rv = ((current_temp[4] & 0xff00) >> 8);
+                rv = ((current_temp[5] & 0xff00) >> 8);
                 break;
 
             // LSB of current temperature for sensor 4
             case 0x13:
-                rv = (current_temp[4] & 0x00ff);
+                rv = (current_temp[5] & 0x00ff);
                 break;
 
             // Report interval register for sensor 0
