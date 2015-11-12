@@ -5,6 +5,17 @@
 Readme file for the Kelvin NTC project. This project is also the base for a VSCP implemention
 on a Microchip 18F PIC device.
 
+This is one of two reference modules for the VSCP project. It is a 
+module that can handle six temperature sensors. 
+
+Product page for the module is <a href="http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc10ka.html">here</a>. 
+
+The module can be bought from the 
+<a href="http://www.frogshop.se/index.php?route=product/product&path=59&product_id=105">FrogShop</a> 
+with international delivery.
+
+<hr>
+
 Version 0.04 2015-08-16
 
 Kelvin NTC is described <a href="http://www.grodansparadis.com/paris/paris.html">here</a> and can be 
