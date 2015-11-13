@@ -10,9 +10,8 @@ module that can handle six temperature sensors.
 
 Product page for the module is <a href="http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc10ka.html">here</a>. 
 
-The module can be bought from the 
-<a href="http://www.frogshop.se/index.php?route=product/product&path=59&product_id=105">FrogShop</a> 
-with international delivery.
+You can order the module from the <a href="http://www.frogshop.se/index.php?route=product/product&path=59&product_id=105">FrogShop</a>.
+
 
 <hr>
 
