@@ -103,7 +103,7 @@ uint8_t adc[NUMBER_OF_TEMP_SERIES * 12];// Current ADC values
 uint8_t adc_conversion_flags;           // Bits to flag new adc values
 uint8_t adc_series_counter;             // Series counter
 
-volatile uint8_t sendTimer;             // Timer for CAN send
+volatile uint16_t sendTimer;             // Timer for CAN send
 volatile uint32_t measurement_clock;    // Clock for measurements
 volatile uint32_t timeout_clock;        // Clock used for timeouts
 

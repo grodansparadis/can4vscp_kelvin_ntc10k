@@ -428,7 +428,7 @@ ECAN_RX_DBL_BUFFERED 128
 "104
 [v _adc_series_counter adc_series_counter `uc  1 e 1 0 ]
 "106
-[v _sendTimer sendTimer `VEuc  1 e 1 0 ]
+[v _sendTimer sendTimer `VEus  1 e 2 0 ]
 "107
 [v _measurement_clock measurement_clock `VEul  1 e 4 0 ]
 "108
@@ -817,7 +817,7 @@ ECAN_RX_DBL_BUFFERED 128
 [v _main main `(v  1 e 0 0 ]
 {
 "303
-[v main@i i `uc  1 a 1 63 ]
+[v main@i i `uc  1 a 1 59 ]
 "420
 } 0
 "430
@@ -853,15 +853,15 @@ ECAN_RX_DBL_BUFFERED 128
 "5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic18\asfldiv.c
 [v ___asfldiv __asfldiv `(d  1 e 4 0 ]
 {
-[v ___asfldiv@f1p f1p `*.39d  1 p 2 38 ]
-[v ___asfldiv@f2 f2 `d  1 p 4 40 ]
+[v ___asfldiv@f1p f1p `*.39d  1 p 2 22 ]
+[v ___asfldiv@f2 f2 `d  1 p 4 24 ]
 "7
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic18\asfladd.c
 [v ___asfladd __asfladd `(d  1 e 4 0 ]
 {
-[v ___asfladd@f1p f1p `*.39d  1 p 2 58 ]
-[v ___asfladd@f2 f2 `d  1 p 4 60 ]
+[v ___asfladd@f1p f1p `*.39d  1 p 2 44 ]
+[v ___asfladd@f2 f2 `d  1 p 4 46 ]
 "7
 } 0
 "10 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\common\aldiv.c
@@ -891,9 +891,9 @@ ECAN_RX_DBL_BUFFERED 128
 [v _log log `(d  1 e 4 0 ]
 {
 "7
-[v log@exponent exponent `i  1 a 2 66 ]
+[v log@exponent exponent `i  1 a 2 63 ]
 "6
-[v log@x x `d  1 p 4 38 ]
+[v log@x x `d  1 p 4 22 ]
 "9
 [v log@coeff coeff `C[9]d  1 s 36 coeff ]
 "36
@@ -902,11 +902,11 @@ ECAN_RX_DBL_BUFFERED 128
 [v _exp exp `(d  1 e 4 0 ]
 {
 "14
-[v exp@exponent exponent `i  1 a 2 46 ]
+[v exp@exponent exponent `i  1 a 2 30 ]
 "15
-[v exp@sign sign `uc  1 a 1 48 ]
+[v exp@sign sign `uc  1 a 1 32 ]
 "13
-[v exp@x x `d  1 p 4 38 ]
+[v exp@x x `d  1 p 4 22 ]
 "17
 [v exp@coeff coeff `C[10]d  1 s 40 coeff ]
 "57
@@ -920,19 +920,19 @@ ECAN_RX_DBL_BUFFERED 128
 "278 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\common\frexp.c
 [v _ldexp ldexp `(d  1 e 4 0 ]
 {
-[v ldexp@value value `d  1 p 4 12 ]
-[v ldexp@newexp newexp `i  1 p 2 16 ]
+[v ldexp@value value `d  1 p 4 63 ]
+[v ldexp@newexp newexp `i  1 p 2 67 ]
 "307
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\common\evalpoly.c
 [v _eval_poly eval_poly `(d  1 e 4 0 ]
 {
 "6
-[v eval_poly@res res `d  1 a 4 8 ]
+[v eval_poly@res res `d  1 a 4 59 ]
 "5
-[v eval_poly@x x `d  1 p 4 58 ]
-[v eval_poly@d d `*.31Cd  1 p 1 62 ]
-[v eval_poly@n n `i  1 p 2 63 ]
+[v eval_poly@x x `d  1 p 4 51 ]
+[v eval_poly@d d `*.31Cd  1 p 1 55 ]
+[v eval_poly@n n `i  1 p 2 56 ]
 "12
 } 0
 "14 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\common\floor.c
@@ -982,15 +982,15 @@ ECAN_RX_DBL_BUFFERED 128
 "5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic18\asflsub.c
 [v ___asflsub __asflsub `(d  1 e 4 0 ]
 {
-[v ___asflsub@f1p f1p `*.39d  1 p 2 58 ]
-[v ___asflsub@f2 f2 `d  1 p 4 60 ]
+[v ___asflsub@f1p f1p `*.39d  1 p 2 59 ]
+[v ___asflsub@f2 f2 `d  1 p 4 61 ]
 "7
 } 0
 "22 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\common\flsub.c
 [v ___flsub __flsub `(d  1 e 4 0 ]
 {
-[v ___flsub@f1 f1 `d  1 p 4 8 ]
-[v ___flsub@f2 f2 `d  1 p 4 12 ]
+[v ___flsub@f1 f1 `d  1 p 4 51 ]
+[v ___flsub@f2 f2 `d  1 p 4 55 ]
 "30
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic18\asflmul.c
@@ -1005,14 +1005,14 @@ ECAN_RX_DBL_BUFFERED 128
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
 {
 "52
-[v ___fldiv@f3 f3 `d  1 a 4 32 ]
+[v ___fldiv@f3 f3 `d  1 a 4 16 ]
 "51
-[v ___fldiv@sign sign `uc  1 a 1 37 ]
-[v ___fldiv@exp exp `uc  1 a 1 36 ]
-[v ___fldiv@cntr cntr `uc  1 a 1 31 ]
+[v ___fldiv@sign sign `uc  1 a 1 21 ]
+[v ___fldiv@exp exp `uc  1 a 1 20 ]
+[v ___fldiv@cntr cntr `uc  1 a 1 15 ]
 "50
-[v ___fldiv@f1 f1 `d  1 p 4 16 ]
-[v ___fldiv@f2 f2 `d  1 p 4 20 ]
+[v ___fldiv@f1 f1 `d  1 p 4 0 ]
+[v ___fldiv@f2 f2 `d  1 p 4 4 ]
 "77
 } 0
 "524 C:\Users\grodansparadis\development/vscp_firmware/common/vscp_firmware.c
@@ -1042,9 +1042,9 @@ ECAN_RX_DBL_BUFFERED 128
 [v _doOneSecondWork doOneSecondWork `(v  1 e 0 0 ]
 {
 "707
-[v doOneSecondWork@i i `uc  1 a 1 54 ]
+[v doOneSecondWork@i i `uc  1 a 1 38 ]
 "706
-[v doOneSecondWork@tmp tmp `uc  1 a 1 53 ]
+[v doOneSecondWork@tmp tmp `uc  1 a 1 37 ]
 "810
 } 0
 "193 C:\Users\grodansparadis\development/vscp_firmware/common/vscp_firmware.c
@@ -1056,7 +1056,7 @@ ECAN_RX_DBL_BUFFERED 128
 [v _handle_sync handle_sync `(v  1 e 0 0 ]
 {
 "1256
-[v handle_sync@i i `uc  1 a 1 53 ]
+[v handle_sync@i i `uc  1 a 1 37 ]
 "1272
 } 0
 "817
@@ -1070,36 +1070,36 @@ ECAN_RX_DBL_BUFFERED 128
 [v _setEventData setEventData `(v  1 e 0 0 ]
 {
 "847
-[v setEventData@newval newval `d  1 a 4 45 ]
+[v setEventData@newval newval `d  1 a 4 29 ]
 "848
-[v setEventData@ival ival `i  1 a 2 49 ]
+[v setEventData@ival ival `i  1 a 2 33 ]
 "846
-[v setEventData@v v `i  1 p 2 42 ]
-[v setEventData@unit unit `uc  1 p 1 44 ]
+[v setEventData@v v `i  1 p 2 26 ]
+[v setEventData@unit unit `uc  1 p 1 28 ]
 "865
 } 0
 "42 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/ntc.c
 [v _Celsius2Fahrenheit Celsius2Fahrenheit `(d  1 e 4 0 ]
 {
-[v Celsius2Fahrenheit@tc tc `d  1 p 4 38 ]
+[v Celsius2Fahrenheit@tc tc `d  1 p 4 22 ]
 "44
 } 0
 "89 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\common\fladd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 {
 "90
-[v ___fladd@exp1 exp1 `uc  1 a 1 57 ]
-[v ___fladd@exp2 exp2 `uc  1 a 1 56 ]
-[v ___fladd@sign sign `uc  1 a 1 55 ]
+[v ___fladd@exp1 exp1 `uc  1 a 1 43 ]
+[v ___fladd@exp2 exp2 `uc  1 a 1 42 ]
+[v ___fladd@sign sign `uc  1 a 1 41 ]
 "89
-[v ___fladd@f1 f1 `d  1 p 4 0 ]
-[v ___fladd@f2 f2 `d  1 p 4 4 ]
+[v ___fladd@f1 f1 `d  1 p 4 29 ]
+[v ___fladd@f2 f2 `d  1 p 4 33 ]
 "149
 } 0
 "61 C:\Users\grodansparadis\development\can4vscp_kelvin_ntc10k/ntc.c
 [v _Celsius2Kelvin Celsius2Kelvin `(d  1 e 4 0 ]
 {
-[v Celsius2Kelvin@tc tc `d  1 p 4 58 ]
+[v Celsius2Kelvin@tc tc `d  1 p 4 44 ]
 "63
 } 0
 "797 C:\Users\grodansparadis\development/vscp_firmware/common/vscp_firmware.c
@@ -1396,6 +1396,9 @@ ECAN_RX_DBL_BUFFERED 128
 "2897
 [v _sendCANFrame sendCANFrame `(uc  1 e 1 0 ]
 {
+"2898
+[v sendCANFrame@rv rv `uc  1 a 1 65 ]
+"2897
 [v sendCANFrame@id id `ul  1 p 4 59 ]
 [v sendCANFrame@dlc dlc `uc  1 p 1 63 ]
 [v sendCANFrame@pdata pdata `*.30uc  1 p 1 64 ]

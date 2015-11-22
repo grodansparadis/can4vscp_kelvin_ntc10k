@@ -2546,7 +2546,7 @@
 		</abstraction>	
 
 		<abstraction id="lowalarm0" type="int16_t" default="0" 
-							page = "0" offset = "50" bgcolor="0xE5FFCC">
+							page = "0" offset = "50" bgcolor="0xCCFFE5">
 			<name lang="en">Low alarm for sensor 0</name>
 			<description lang="en">
 				Low alarm setpoint for sensor 0.\n
