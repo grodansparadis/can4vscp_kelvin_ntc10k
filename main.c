@@ -436,7 +436,6 @@ void doWork(void)
     double temp;
     double v;
     double calVoltage;
-    int setpoint;
 
     calVoltage = ((uint16_t) readEEPROM(EEPROM_CALIBRATED_VOLTAGE_MSB)*256 +
             readEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB));
@@ -537,6 +536,18 @@ void doWork(void)
         }
     }
 
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// doOneSecondWork
+//
+
+void doOneSecondWork(void)
+{
+    uint8_t tmp;
+    uint8_t i;
+    int setpoint;
+    
     // Check if alarm events should be sent
     if (VSCP_STATE_ACTIVE == vscp_node_state) {
 
@@ -544,7 +555,7 @@ void doWork(void)
         for (i = 0; i < 6; i++) {
 
             // Check low alarm condition already
-            if (low_alarm & 1 << i) {
+            if ( low_alarm & ( 1 << i ) ) {
 
                 // We have an alarm condition already
                 setpoint =
@@ -557,7 +568,7 @@ void doWork(void)
                 // alarm condition
                 if (current_temp[ i ] > setpoint) {
 
-                    // Reset alarm confition
+                    // Reset alarm condition
                     low_alarm &= ~(1 << i);
 
                 }
@@ -571,13 +582,13 @@ void doWork(void)
                         (int16_t) (readEEPROM(2 * i + EEPROM_LOW_ALARM0_MSB)*256 +
                         readEEPROM(2 * i + EEPROM_LOW_ALARM0_LSB));
 
-                if (current_temp[ i ] < setpoint) {
+                if ( current_temp[ i ] < setpoint ) {
 
                     // We have a low alarm condition
                     low_alarm |= (1 << i);
 
                     // Set module alarm flag
-                    // Note that this bit is set even if we are uanble
+                    // Note that this bit is set even if we are unable
                     // to send an alarm event.
                     vscp_alarmstatus |= MODULE_LOW_ALARM;
 
@@ -589,7 +600,7 @@ void doWork(void)
                         vscp_omsg.priority = VSCP_PRIORITY_HIGH;
                         vscp_omsg.flags = VSCP_VALID_MSG + 3;
 
-                        // Should TurnOn/TurnOff evenst be sent
+                        // Should TurnOn/TurnOff events be sent
                         if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNX) {
 
                             if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNON_INVERT) {
@@ -693,22 +704,8 @@ void doWork(void)
                 }
             }
         }
-    }
-}
 
-///////////////////////////////////////////////////////////////////////////////
-// doOneSecondWork
-//
-
-void doOneSecondWork(void)
-{
-
-    uint8_t tmp;
-    uint8_t i;
-
-    // Check if events should be sent
-    if ( VSCP_STATE_ACTIVE == vscp_node_state ) {
-
+        // Check if events should be sent
         for (i = 0; i < 6; i++) {
 
             // Time for temperature report
