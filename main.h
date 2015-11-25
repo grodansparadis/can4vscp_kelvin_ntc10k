@@ -36,8 +36,8 @@
 
 //Defines
 
-#define	TRUE			1
-#define	FALSE			0
+#define	TRUE                                    1
+#define	FALSE                                   0
 
 //
 // 8 MHz with PLL => 8 MHz
@@ -47,7 +47,7 @@
 //
 // Timer2 use 250 and prescaler 1:4
 //
-//#define TIMER0_RELOAD_VALUE		0xfc17
+//#define TIMER0_RELOAD_VALUE                   0xfc17
 
 //
 // 10 MHz with PLL => 40 MHz
@@ -57,7 +57,7 @@
 //
 // Timer2 use 156 and prescaler 1:8
 //
-#define TIMER0_RELOAD_VALUE		0xfb1d
+#define TIMER0_RELOAD_VALUE                     0xfb1d
 
 //
 // Timer 2 is used as a 1 ms clock
@@ -65,7 +65,7 @@
 // Timer2 use 156 and prescaler 1:4, Postscaler 1:16
 // 100 ns * 56 * 4 * 16 ~ 1 ms
 //
-#define TIMER2_RELOAD_VALUE		156
+#define TIMER2_RELOAD_VALUE                     156
 
 // IMPORTANT!!!!!
 // bootflag and nickname must be at position 0/1 in EEPROM
@@ -86,25 +86,25 @@
 
 // The following can be stored in flash or eeprom
 
-#define VSCP_EEPROM_REG_MANUFACTUR_ID0		0x09
-#define VSCP_EEPROM_REG_MANUFACTUR_ID1		0x0A
-#define VSCP_EEPROM_REG_MANUFACTUR_ID2		0x0B
-#define VSCP_EEPROM_REG_MANUFACTUR_ID3		0x0C
+#define VSCP_EEPROM_REG_MANUFACTUR_ID0          0x09
+#define VSCP_EEPROM_REG_MANUFACTUR_ID1          0x0A
+#define VSCP_EEPROM_REG_MANUFACTUR_ID2          0x0B
+#define VSCP_EEPROM_REG_MANUFACTUR_ID3          0x0C
 
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID0	0x0D	
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID1	0x0E	
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID2	0x0F	
-#define VSCP_EEPROM_REG_MANUFACTUR_SUBID3	0x10
+#define VSCP_EEPROM_REG_MANUFACTUR_SUBID0       0x0D	
+#define VSCP_EEPROM_REG_MANUFACTUR_SUBID1       0x0E	
+#define VSCP_EEPROM_REG_MANUFACTUR_SUBID2       0x0F	
+#define VSCP_EEPROM_REG_MANUFACTUR_SUBID3       0x10
 
 // The following can be stored in program ROM (recommended) or in EEPROM 
 
-#define VSCP_EEPROM_REG_GUID			0x11	// Start of GUID MSB	
+#define VSCP_EEPROM_REG_GUID                    0x11	// Start of GUID MSB	
 // 		0x11 - 0x20				
 
-#define VSCP_EEPROM_REG_DEVICE_URL		0x21	// Start of Device URL storage
+#define VSCP_EEPROM_REG_DEVICE_URL              0x21	// Start of Device URL storage
 // 		0x21 - 0x40
 
-#define VSCP_EEPROM_VSCP_END			0x41	// marks end of VSCP EEPROM usage
+#define VSCP_EEPROM_VSCP_END                    0x41	// marks end of VSCP EEPROM usage
 //   (next free position)
 
 

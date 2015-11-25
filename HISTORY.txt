@@ -1,5 +1,8 @@
 Kelvin NTC
 ==========
+
+2015-11-25 AKHE - Fixed problem with overwritten calibration value on bootload
+2015-11-24 AKHE - Moved limit and alarm tests to one second work where they belong.
 2015-09-28 AKHE - Temperature register 5 was not read correctly. Temperature register 4 was returned erronius instead.
 ----- Version 1.2.2
 2015-09-13 AKHE - Sensor zones/subzones was written correctly but not read correctly

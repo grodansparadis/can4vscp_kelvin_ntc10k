@@ -1532,7 +1532,7 @@
 		<reg page="0" offset="110" default="2" bgcolor="0xFFFFCC">
 			<name lang="en">Hysteresis in degrees Celsius for sensor 0.</name>
 			<description lang="en">
-				Hysteresis in degrees Celsius for sensor 0 (default is 5 degrees).
+				Hysteresis in degrees Celsius for sensor 0.
 				The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
@@ -1541,7 +1541,7 @@
 		<reg page="0" offset="111" default="2" bgcolor="0xFFFFCC">
 			<name lang="en">Hysteresis in degrees Celsius for sensor 1.</name>
 			<description lang="en">
-				Hysteresis in degrees Celsius for sensor 1 (default is 5 degrees).
+				Hysteresis in degrees Celsius for sensor 1.
 				The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
@@ -1550,7 +1550,7 @@
 		<reg page="0" offset="112" default="2" bgcolor="0xFFFFCC">
 			<name lang="en">Hysteresis in degrees Celsius for sensor 2.</name>
 			<description lang="en">
-				Hysteresis in degrees Celsius for sensor 2 (default is 5 degrees).
+				Hysteresis in degrees Celsius for sensor 2.
 				The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
@@ -1559,7 +1559,7 @@
 		<reg page="0" offset="113" default="2" bgcolor="0xFFFFCC">
 			<name lang="en">Hysteresis in degrees Celsius for sensor 3.</name>
 			<description lang="en">
-				Hysteresis in degrees Celsius for sensor 3 (default is 5 degrees).
+				Hysteresis in degrees Celsius for sensor 3.
 				The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
@@ -1568,7 +1568,7 @@
 		<reg page="0" offset="114" default="2" bgcolor="0xFFFFCC">
 			<name lang="en">Hysteresis in degrees Celsius for sensor 4.</name>
 			<description lang="en">
-				Hysteresis in degrees Celsius for sensor 4 (default is 5 degrees).
+				Hysteresis in degrees Celsius for sensor 4.
 				The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
@@ -1577,7 +1577,7 @@
 		<reg page="0" offset="115" default="2" bgcolor="0xFFFFCC">
 			<name lang="en">Hysteresis in degrees Celsius for sensor 5.</name>
 			<description lang="en">
-				Hysteresis in degrees Celsius for sensor 5 (default is 5 degrees).
+				Hysteresis in degrees Celsius for sensor 5.
 				The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
@@ -1604,7 +1604,7 @@
 		
 		<!-- Page 1 -->
 		
-		
+		<!--
 		<reg page="1" offset="0" default="0" bgcolor="0xCCE5FF" >
 			<name lang="en">Steinhart Hart equation a coefficient byte 0 (MSB), sensor 0</name>
 			<description lang="en">
@@ -2191,7 +2191,7 @@
 			</description>
 			<access>rw</access>
 		</reg>
-		
+		-->
 		
 		// Raw A/D values
 		

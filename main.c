@@ -118,7 +118,6 @@ uint8_t high_alarm;
 // Thermistor coefficients
 double sh_coefficients[6*3];    // 6 sensors each with 3 32-bit constants
 
-
 ///////////////////////////////////////////////////////////////////////////////
 // Isr() 	- Interrupt Service Routine
 //      	- Services Timer0 Overflow
@@ -131,12 +130,12 @@ double sh_coefficients[6*3];    // 6 sensors each with 3 32-bit constants
 //#pragma code low_vector = 0x08
 #endif
 
-void interrupt low_priority  interrupt_at_low_vector( void )
+void interrupt low_priority interrupt_at_low_vector( void )
 {
     // Check timer
     if (INTCONbits.TMR0IF) { // If A Timer0 Interrupt, Then
 
-        // Reload value for 1 ms reolution
+        // Reload value for 1 ms resolution
         WriteTimer0(TIMER0_RELOAD_VALUE);
 
         vscp_timer++;
@@ -145,7 +144,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
         timeout_clock++;
         sendTimer++;
 
-        // Check for init button
+        // Check for init. button
         if (!(PORTC & 0x01)) {
             // Active
             vscp_initbtncnt++;
@@ -188,7 +187,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
                 // Read conversion
                 adc[(12 * adc_series_counter) + 0] = ADRESH;
                 adc[(12 * adc_series_counter) + 1] = ADRESL;
-                // Start new nonversion
+                // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP1 + 1;
 
                 // Mark that a new adc value is available if a full series
@@ -203,7 +202,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
                 adc[(12 * adc_series_counter) + 2] = ADRESH;
                 adc[(12 * adc_series_counter) + 3] = ADRESL;
 
-                // Start new nonversion
+                // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP2 + 1;
 
                 // Mark that a new adc value is available if a full series
@@ -218,7 +217,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
                 adc[(12 * adc_series_counter) + 4] = ADRESH;
                 adc[(12 * adc_series_counter) + 5] = ADRESL;
 
-                // Start new nonversion
+                // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP3 + 1;
 
                 // Mark that a new adc value is available if a full series
@@ -232,7 +231,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
                 // Read conversion
                 adc[(12 * adc_series_counter) + 6] = ADRESH;
                 adc[(12 * adc_series_counter) + 7] = ADRESL;
-                // Start new nonversion
+                // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP4 + 1;
 
                 // Mark that a new adc value is available if a full series
@@ -246,7 +245,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
                 // Read conversion
                 adc[(12 * adc_series_counter) + 8] = ADRESH;
                 adc[(12 * adc_series_counter) + 9] = ADRESL;
-                // Start new nonversion
+                // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP5 + 1;
 
                 // Mark that a new adc value is available if a full series
@@ -260,7 +259,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
                 // Read conversion
                 adc[(12 * adc_series_counter) + 10] = ADRESH;
                 adc[(12 * adc_series_counter) + 11] = ADRESL;
-                // Start new nonversion
+                // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP0 + 1;
 
                 // Mark that a new adc value is available if a full series
@@ -277,7 +276,7 @@ void interrupt low_priority  interrupt_at_low_vector( void )
                 break;
 
             default:
-                // Start new nonversion
+                // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP0 + 1;
                 adc_series_counter = 0;
                 break;
@@ -300,13 +299,13 @@ void interrupt low_priority  interrupt_at_low_vector( void )
 
 void main()
 {
-    unsigned char i;
-
-    init(); // Initialize Micro-controller
-
+    uint32_t i;
+    
+    init();
+    
     // Check VSCP persistent storage and
     // restore if needed
-    if (!vscp_check_pstorage()) {
+    if ( !vscp_check_pstorage() ) {
 
         // Spoiled or not initialized - reinitialize
         init_app_eeprom();
@@ -319,8 +318,8 @@ void main()
 
         ClrWdt(); // Feed the dog
 
-        if ((vscp_initbtncnt > 250) &&
-                (VSCP_STATE_INIT != vscp_node_state)) {
+        if ( ( vscp_initbtncnt > 250 ) &&
+                ( VSCP_STATE_INIT != vscp_node_state ) ) {
 
             // Init. button pressed
             vscp_nickname = VSCP_ADDRESS_FREE;
@@ -409,7 +408,10 @@ void main()
             }
 
             // Do VSCP one second jobs
-            vscp_doOneSecondWork();
+            // Check if alarm events should be sent
+            if (VSCP_STATE_ACTIVE == vscp_node_state) {
+                vscp_doOneSecondWork();
+            }
 
             // Also do some work
             doWork();
@@ -447,10 +449,10 @@ void doWork(void)
 
         if (adc_conversion_flags & 1 << i) {
 
-            // Calulate mean value for this adc
+            // Calculate mean value for this adc
             avarage = 0;
             for (j = 0; j < NUMBER_OF_TEMP_SERIES; j++) {
-                avarage += ((uint16_t) adc[12 * j + 2 * i])*256 + adc[12 * j + 2 * i + 1];
+                avarage += ((uint16_t)adc[12 * j + 2 * i])*256 + adc[12 * j + 2 * i + 1];
             }
             avarage = avarage / NUMBER_OF_TEMP_SERIES;
 
@@ -462,7 +464,7 @@ void doWork(void)
                 // R1 = (R2V - R2V2) / V2  R2= 10K, V = 5V,  V2 = adc * voltage/1024
                 // T = B / ln(r/Rinf)
                 // Rinf = R0 e (-B/T0), R0=10K, T0 = 273.15 + 25 = 298.15
-                B = (uint16_t) readEEPROM(2 * i + EEPROM_B_CONSTANT0_MSB)*256 +
+                B = (uint16_t)readEEPROM(2 * i + EEPROM_B_CONSTANT0_MSB)*256 +
                         readEEPROM(2 * i + EEPROM_B_CONSTANT0_LSB);
 
                 
@@ -511,24 +513,6 @@ void doWork(void)
                 current_temp[ i ] = (current_temp[ i ] + ((long) (temp * 100) + getCalibrationValue(i))) / 2;
 
             }
-            
-            // Check if this is the lowest temperature ever
-            if (current_temp[ i ] <
-                    (int16_t) (readEEPROM(2 * i + EEPROM_ABSOLUT_LOW0_MSB)*256 +
-                    readEEPROM(2 * i + EEPROM_ABSOLUT_LOW0_LSB))) {
-                // Store new lowest value
-                writeEEPROM(2 * i + EEPROM_ABSOLUT_LOW0_MSB, current_temp[ i ] >> 8);
-                writeEEPROM(2 * i + EEPROM_ABSOLUT_LOW0_LSB, 0xff & current_temp[ i ]);
-            }
-
-            // Check if this is the highest temperature ever
-            if (current_temp[ i ] >
-                    (int16_t) (readEEPROM(2 * i + EEPROM_ABSOLUT_HIGH0_MSB)*256 +
-                    readEEPROM(2 * i + EEPROM_ABSOLUT_HIGH0_LSB))) {
-                // Store new lowest value
-                writeEEPROM(2 * i + EEPROM_ABSOLUT_HIGH0_MSB, current_temp[ i ] >> 8);
-                writeEEPROM(2 * i + EEPROM_ABSOLUT_HIGH0_LSB, 0xff & current_temp[ i ]);
-            }
 
             // Reset flag
             adc_conversion_flags &= ~(1 << i);
@@ -542,267 +526,276 @@ void doWork(void)
 // doOneSecondWork
 //
 
-void doOneSecondWork(void)
-{
+void doOneSecondWork(void) {
     uint8_t tmp;
     uint8_t i;
-    int setpoint;
-    
-    // Check if alarm events should be sent
-    if (VSCP_STATE_ACTIVE == vscp_node_state) {
+    int16_t setpoint;
 
-        // Check alarm conditions
-        for (i = 0; i < 6; i++) {
+    for (i = 0; i < 6; i++) {
 
-            // Check low alarm condition already
-            if ( low_alarm & ( 1 << i ) ) {
+        // Check if this is the lowest temperature ever
+        if (current_temp[ i ] < construct_signed16( readEEPROM(EEPROM_ABSOLUT_LOW0_MSB + 2*i),
+                                                    readEEPROM(EEPROM_ABSOLUT_LOW0_LSB + 2*i) ) ) {
+            // Store new lowest value
+            writeEEPROM(EEPROM_ABSOLUT_LOW0_MSB + 2*i, current_temp[ i ] >> 8);
+            writeEEPROM(EEPROM_ABSOLUT_LOW0_LSB + 2*i, current_temp[ i ] & 0xff);
+        }
 
-                // We have an alarm condition already
-                setpoint =
-                        (int16_t) (readEEPROM(2 * i + EEPROM_LOW_ALARM0_MSB)*256 +
-                        readEEPROM(2 * i + EEPROM_LOW_ALARM0_LSB) +
-                        readEEPROM(i + EEPROM_HYSTERESIS_SENSOR0)*100);
+        // Check if this is the highest temperature ever
+        if (current_temp[ i ] > construct_signed16( readEEPROM(EEPROM_ABSOLUT_HIGH0_MSB + 2*i), 
+                                                    readEEPROM(EEPROM_ABSOLUT_HIGH0_LSB + 2*i ) ) ) {
+            // Store new lowest value
+            writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB + 2*i, current_temp[ i ] >> 8);
+            writeEEPROM(EEPROM_ABSOLUT_HIGH0_LSB + 2*i,  current_temp[ i ] & 0xff );
+        }
+        
+        // * * * Check if temperature report events should be sent * * *
+        tmp = readEEPROM(EEPROM_REPORT_INTERVAL0 + i);
+        if (tmp && (seconds_temp[i] > tmp)) {
 
-                // Check if it is no longer valid
-                // that is under hysteresis so we can rest
-                // alarm condition
-                if (current_temp[ i ] > setpoint) {
-
-                    // Reset alarm condition
-                    low_alarm &= ~(1 << i);
-
-                }
-
-            }
-            else {
-
-                // We do not have an alarm condition
-                // check if we should have
-                setpoint =
-                        (int16_t) (readEEPROM(2 * i + EEPROM_LOW_ALARM0_MSB)*256 +
-                        readEEPROM(2 * i + EEPROM_LOW_ALARM0_LSB));
-
-                if ( current_temp[ i ] < setpoint ) {
-
-                    // We have a low alarm condition
-                    low_alarm |= (1 << i);
-
-                    // Set module alarm flag
-                    // Note that this bit is set even if we are unable
-                    // to send an alarm event.
-                    vscp_alarmstatus |= MODULE_LOW_ALARM;
-
-                    // Should ALARM (TURNON/TURNOFF) events be sent
-                    if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_LOW_ALARM) {
-
-                        vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
-                        vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
-                        vscp_omsg.priority = VSCP_PRIORITY_HIGH;
-                        vscp_omsg.flags = VSCP_VALID_MSG + 3;
-
-                        // Should TurnOn/TurnOff events be sent
-                        if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNX) {
-
-                            if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNON_INVERT) {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
-                            }
-                            else {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
-                            }
-
-                        }
-
-                        vscp_omsg.data[ 0 ] = i; // Index
-                        vscp_omsg.data[ 1 ] =
-                                readEEPROM(2 * i + EEPROM_SENSOR0_ZONE); // Zone
-                        vscp_omsg.data[ 2 ] =
-                                readEEPROM(2 * i + EEPROM_SENSOR0_SUBZONE); // Subzone
-
-                        // Send event
-                        if (!vscp_sendEvent()) {
-                            // Could not send alarm event
-                            // Reset alarm - we try again next round
-                            low_alarm &= ~(1 << i);
-                        }
-                    }
-                }
+            // Send event
+            if (sendTempEvent(i)) {
+                seconds_temp[i] = 0;
             }
 
-            // Check high alarm
-            if ( high_alarm & (1 << i ) ) {
+        }
 
-                // We have an alarm condition already
+        // * * * Check for continuous alarm * * *
+        if (MASK_CONTROL_CONTINUOUS & readEEPROM(EEPROM_CONTROLREG0 + i)) {
 
-                setpoint =
-                        (int16_t) (readEEPROM(2 * i + EEPROM_HIGH_ALARM0_MSB)*256 +
-                        readEEPROM(2 * i + EEPROM_HIGH_ALARM0_LSB) -
-                        readEEPROM(i + EEPROM_HYSTERESIS_SENSOR0)*100);
+            // If  low alarm active for sensor
+            if (low_alarm & (1 << i)) {
 
-                // Under hysteresis so we can reset condition
-                if (current_temp[ i ] < setpoint) {
+                // Alarm must be enabled
+                if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_LOW_ALARM) {
 
-                    // Reset alarm
-                    high_alarm &= ~(1 << i);
-
-                }
-
-            }
-            else {
-
-                // We do not have an alarm condition
-                // check for one
-
-                setpoint = (int16_t) (readEEPROM(2 * i + EEPROM_HIGH_ALARM0_MSB)*256 +
-                        readEEPROM(2 * i + EEPROM_HIGH_ALARM0_LSB));
-
-                if (current_temp[ i ] > setpoint) {
-
-                    // We have a low alarm condition
-                    high_alarm |= (1 << i);
-
-                    // Set module alarm flag
-                    // Note that this bit is set even if we are uanble
-                    // to send an alarm event.
-
-                    vscp_alarmstatus |= MODULE_HIGH_ALARM;
+                    vscp_omsg.priority = VSCP_PRIORITY_HIGH;
+                    vscp_omsg.flags = VSCP_VALID_MSG + 3;
 
                     // Should ALARM or TURNON/TURNOFF events be sent
-                    if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_HIGH_ALARM) {
+                    if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNX) {
 
+                        if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNON_INVERT) {
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
+                        } 
+                        else {
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
+                        }
+
+                    } 
+                    else {
+                        // Alarm event should be sent
                         vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
                         vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
-                        vscp_omsg.priority = VSCP_PRIORITY_HIGH;
-                        vscp_omsg.flags = VSCP_VALID_MSG + 3;
-
-                        if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNX) {
-                            if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNON_INVERT) {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
-                            } else {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
-                            }
-                        }
-
-                        vscp_omsg.data[ 0 ] = i; // Index
-                        vscp_omsg.data[ 1 ] =
-                                readEEPROM(2 * i +
-                                EEPROM_SENSOR0_ZONE); // Zone
-                        vscp_omsg.data[ 2 ] =
-                                readEEPROM(2 * i +
-                                EEPROM_SENSOR0_SUBZONE); // Subzone
-
-                        // Send event
-                        if (!vscp_sendEvent()) {
-                            // Could not send alarm event
-                            // Reset alarm - we try again next round
-                            high_alarm &= ~(1 << i);
-                        }
                     }
+
+                    vscp_omsg.data[ 0 ] = i; // Index = sensor
+                    vscp_omsg.data[ 1 ] =
+                            readEEPROM(EEPROM_SENSOR0_ZONE + 2*i);      // Zone
+                    vscp_omsg.data[ 2 ] =
+                            readEEPROM(EEPROM_SENSOR0_SUBZONE + 2*i);   // Subzone
+
+                    // Send event
+                    // We allow for missing to send this event
+                    // as it will be sent next second instead.
+                    vscp_sendEvent();
+
+                }
+            }
+
+            // If  high alarm active for sensor
+            if (high_alarm & (1 << i)) {
+
+                // Should ALARM or TURNON/TURNOFF events be sent
+                if ((readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_HIGH_ALARM)) {
+
+                    vscp_omsg.priority = VSCP_PRIORITY_HIGH;
+                    vscp_omsg.flags = VSCP_VALID_MSG + 3;
+
+                    if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNX) {
+                        
+                        if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNON_INVERT) {
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
+                        } 
+                        else {
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
+                        }
+                    } 
+                    else {
+                        // Alarm event should be sent
+                        vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
+                        vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
+                    }
+
+                    vscp_omsg.data[ 0 ] = i;                            // Index = sensor
+                    vscp_omsg.data[ 1 ] = 
+                            readEEPROM(EEPROM_SENSOR0_ZONE + 2*i);      // Zone
+                    vscp_omsg.data[ 2 ] = 
+                            readEEPROM(EEPROM_SENSOR0_SUBZONE + 2*i);   // Sub zone
+
+                    // Send event
+                    // We allow for missing to send this event
+                    // as it will be sent next second instead.
+                    vscp_sendEvent();
+                }
+            }
+        }       
+        
+        // Check if alarm events should be sent
+
+        // Check if low alarm condition already
+        if (low_alarm & (1 << i)) {
+
+            // We have an alarm condition already
+            setpoint = construct_signed16(readEEPROM(EEPROM_LOW_ALARM0_MSB + 2 * i),
+                    readEEPROM(EEPROM_LOW_ALARM0_LSB + 2 * i)) +
+                    (int8_t) readEEPROM(EEPROM_HYSTERESIS_SENSOR0 + i);
+
+            // Check if it is no longer valid
+            // that is under hysteresis so we can rest
+            // alarm condition
+            if (current_temp[ i ] > setpoint) {
+
+                // Reset alarm condition
+                low_alarm &= ~(1 << i);
+
+            }
+
+        } 
+        else {
+
+            // We do not have an alarm condition already
+            // check if we should have
+            setpoint = construct_signed16(readEEPROM(EEPROM_LOW_ALARM0_MSB + 2 * i),
+                    readEEPROM(EEPROM_LOW_ALARM0_LSB + 2 * i));
+
+            if (current_temp[ i ] < setpoint) {
+
+                // We have a low alarm condition
+                low_alarm |= (1 << i);
+
+                // Set module alarm flag
+                // Note that this bit is set even if we are unable
+                // to send an alarm event.
+                vscp_alarmstatus |= MODULE_LOW_ALARM;
+
+                // Should ALARM (TURNON/TURNOFF) events be sent
+                if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_LOW_ALARM) {
+
+                    vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
+                    vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
+                    vscp_omsg.priority = VSCP_PRIORITY_HIGH;
+                    vscp_omsg.flags = VSCP_VALID_MSG + 3;
+
+                    // Should TurnOn/TurnOff events be sent
+                    if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNX) {
+
+                        if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNON_INVERT) {
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
+                        } 
+                        else {
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
+                        }
+
+                    }
+
+                    vscp_omsg.data[ 0 ] = i; // Index
+                    vscp_omsg.data[ 1 ] =
+                            readEEPROM(EEPROM_SENSOR0_ZONE + 2 * i); // Zone
+                    vscp_omsg.data[ 2 ] =
+                            readEEPROM(EEPROM_SENSOR0_SUBZONE + 2 * i); // Subzone
+
+                    // Send event
+                    if (!vscp_sendEvent()) {
+                        // Could not send alarm event
+                        // Reset alarm - we try again next round
+                        low_alarm &= ~(1 << i);
+                    }
+
                 }
             }
         }
 
-        // Check if events should be sent
-        for (i = 0; i < 6; i++) {
+        // Check high alarm
+        if (high_alarm & (1 << i)) {
 
-            // Time for temperature report
-            tmp = readEEPROM(EEPROM_REPORT_INTERVAL0 + i);
-            if (tmp && (seconds_temp[i] > tmp)) {
+            // We have an alarm condition already
 
-                // Send event
-                if ( sendTempEvent( i ) ) {
-                    seconds_temp[i] = 0;
-                }
+            setpoint = construct_signed16(readEEPROM(EEPROM_HIGH_ALARM0_MSB + 2 * i),
+                    readEEPROM(EEPROM_HIGH_ALARM0_LSB + 2 * i)) +
+                    (int8_t) readEEPROM(EEPROM_HYSTERESIS_SENSOR0 + i);
+
+            // Under hysteresis so we can reset condition
+            if (current_temp[ i ] < setpoint) {
+
+                // Reset alarm
+                high_alarm &= ~(1 << i);
 
             }
 
-            // Check for continuous alarm
-            if (MASK_CONTROL_CONTINUOUS & readEEPROM(EEPROM_CONTROLREG0 + i)) {
+        } 
+        else {
 
-                // Check low alarm
-                if (low_alarm & (1 << i)) {
+            // We do not have an alarm condition
+            // check for one
 
-                    // Should ALARM or TURNON/TURNOFF events be sent
-                    if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_LOW_ALARM) {
+            setpoint = construct_signed16(readEEPROM(EEPROM_HIGH_ALARM0_MSB + 2 * i),
+                    readEEPROM(EEPROM_HIGH_ALARM0_LSB + 2 * i));
 
+            if (current_temp[ i ] > setpoint) {
 
-                        vscp_omsg.priority = VSCP_PRIORITY_HIGH;
-                        vscp_omsg.flags = VSCP_VALID_MSG + 3;
+                // We have a low alarm condition
+                high_alarm |= (1 << i);
 
-                        if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNX) {
+                // Set module alarm flag
+                // Note that this bit is set even if we are unable
+                // to send an alarm event.
 
-                            if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNON_INVERT) {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
-                            }
-                            else {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
-                            }
+                vscp_alarmstatus |= MODULE_HIGH_ALARM;
 
-                        }
+                // Should ALARM or TURNON/TURNOFF events be sent
+                if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_HIGH_ALARM) {
+
+                    vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
+                    vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
+                    vscp_omsg.priority = VSCP_PRIORITY_HIGH;
+                    vscp_omsg.flags = VSCP_VALID_MSG + 3;
+
+                    if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNX) {
+
+                        if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_TURNON_INVERT) {
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
+                        } 
                         else {
-                            // Alarm event should be sent
-                            vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
-                            vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
+                            vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
+                            vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
                         }
-
-                        vscp_omsg.data[ 0 ] = i; // Index
-                        vscp_omsg.data[ 1 ] =
-                                readEEPROM(2 * i + EEPROM_SENSOR0_ZONE); // Zone
-                        vscp_omsg.data[ 2 ] =
-                                readEEPROM(2 * i + EEPROM_SENSOR0_SUBZONE); // Subzone
-
-                        // Send event
-                        // We allow for missing to send this event
-                        // as it will be sent next second instead.
-                        vscp_sendEvent();
-
                     }
-                }
 
-                // Check high alarm
-                if (high_alarm & (1 << i)) {
+                    vscp_omsg.data[ 0 ] = i; // Index
+                    vscp_omsg.data[ 1 ] =
+                            readEEPROM(EEPROM_SENSOR0_ZONE + 2 * i); // Zone
+                    vscp_omsg.data[ 2 ] =
+                            readEEPROM(EEPROM_SENSOR0_SUBZONE + 2 * i); // Sub zone
 
-                    // Should ALARM or TURNON/TURNOFF events be sent
-                    if ((readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_HIGH_ALARM)) {
-
-                        vscp_omsg.priority = VSCP_PRIORITY_HIGH;
-                        vscp_omsg.flags = VSCP_VALID_MSG + 3;
-
-                        if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNX) {
-                            if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_TURNON_INVERT) {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNOFF;
-                            }
-                            else {
-                                vscp_omsg.vscp_class = VSCP_CLASS1_CONTROL;
-                                vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
-                            }
-                        }
-                        else {
-                            // Alarm event should be sent
-                            vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
-                            vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
-                        }
-
-                        vscp_omsg.data[ 0 ] = i; // Index
-                        vscp_omsg.data[ 1 ] = readEEPROM(2 * i +
-                                EEPROM_SENSOR0_ZONE); // Zone
-                        vscp_omsg.data[ 2 ] = readEEPROM(2 * i +
-                                EEPROM_SENSOR0_SUBZONE); // Subzone
-
-                        // Send event
-                        // We allow for missing to send this event
-                        // as it will be sent next second instead.
-                        vscp_sendEvent();
+                    // Send event
+                    if (!vscp_sendEvent()) {
+                        // Could not send alarm event
+                        // Reset alarm - we try again next round
+                        high_alarm &= ~(1 << i);
                     }
+
                 }
             }
         }
+        
     }
 }
 
@@ -871,7 +864,7 @@ int16_t getCalibrationValue(uint8_t i)
 {
     int16_t cal;
 
-    cal = readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_MSB) * 256 +
+    cal = ((uint8_t)readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_MSB))<<8 +
             readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_LSB);
 
     return cal;
@@ -913,7 +906,7 @@ void init()
     // RC3 - Output - Not used.
     // RC2 - Output - Not used.
     // RC1 - Output - Status LED - Default off
-    // RC0 - Input  - Init button
+    // RC0 - Input  - Init. button
 
     TRISC = 0x01;
     PORTC = 0x00;
@@ -929,7 +922,7 @@ void init()
     // Initialize CAN
     ECANInitialize();
 
-    // Must be in Config mode to change many of settings.
+    // Must be in Config. mode to change many of settings.
     //ECANSetOperationMode(ECAN_OP_MODE_CONFIG);
 
     // Return to Normal mode to communicate.
@@ -977,14 +970,14 @@ void writeCoeffs2Ram(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// init_app_ram
+// init._app._ram
 //
 
 void init_app_ram(void)
 {
     char i;
 
-    measurement_clock = 0; // start a new meaurement cycle
+    measurement_clock = 0; // start a new measurement cycle
     seconds = 0;
 
     // no temp. reads yet
@@ -1006,7 +999,7 @@ void init_app_ram(void)
     high_alarm = 0;
 
     // Write coefficients to ram
-    writeCoeffs2Ram();
+    //writeCoeffs2Ram();
 }
 
 
@@ -1017,7 +1010,7 @@ void init_app_ram(void)
 
 void init_app_eeprom(void)
 {
-    // Zone subzone
+    // Zone sub zone
     writeEEPROM( EEPROM_ZONE, 0 );
     writeEEPROM( EEPROM_ZONE, 0 );
     
@@ -1186,6 +1179,7 @@ void init_app_eeprom(void)
 
     // S-H Coefficients sensor 0
 
+    /*
     writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0, 0);
     writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_1, 0);
     writeEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_2, 0);
@@ -1215,7 +1209,7 @@ void init_app_eeprom(void)
         writeEEPROM(EEPROM_COEFFICIENT_C_SENSOR1_2 + i * 12, 0);
         writeEEPROM(EEPROM_COEFFICIENT_C_SENSOR1_3 + i * 12, 0);
     }
-
+    */
     
 }
 
@@ -1231,10 +1225,12 @@ int8_t convertTemperature(int temp, unsigned char unit)
     if (TEMP_UNIT_KELVIN == unit) {
         // Convert to Kelvin
         newval = (int) Celsius2Kelvin(temp);
-    } else if (TEMP_UNIT_FAHRENHEIT == unit) {
+    } 
+    else if (TEMP_UNIT_FAHRENHEIT == unit) {
         // Convert to Fahrenheit
         newval = (int) Celsius2Fahrenheit(temp);
-    } else {
+    } 
+    else {
         // Defaults to Celsius
         newval = (int) temp;
     }
@@ -1288,7 +1284,7 @@ uint8_t vscp_readAppReg(unsigned char reg)
                 rv = readEEPROM( EEPROM_ZONE );
                 break;
 
-            // Subzone
+            // Sub zone
             case 0x01:
                 rv = readEEPROM( EEPROM_SUBZONE );
                 break;
@@ -1484,367 +1480,369 @@ uint8_t vscp_readAppReg(unsigned char reg)
                 rv = readEEPROM(EEPROM_LOW_ALARM0_MSB);
                 break;
 
-                // Low alarm registers LSB for sensor 0
+            // Low alarm registers LSB for sensor 0
             case 0x33:
                 rv = readEEPROM(EEPROM_LOW_ALARM0_LSB);
                 break;
 
-                // Low alarm registers MSB for sensor 1
+            // Low alarm registers MSB for sensor 1
             case 0x34:
                 rv = readEEPROM(EEPROM_LOW_ALARM1_MSB);
                 break;
 
-                // Low alarm registers LSB for sensor 1
+            // Low alarm registers LSB for sensor 1
             case 0x35:
                 rv = readEEPROM(EEPROM_LOW_ALARM1_LSB);
                 break;
 
-                // Low alarm registers MSB for sensor 2
+            // Low alarm registers MSB for sensor 2
             case 0x36:
                 rv = readEEPROM(EEPROM_LOW_ALARM2_MSB);
                 break;
 
-                // Low alarm registers LSB for sensor 2
+            // Low alarm registers LSB for sensor 2
             case 0x37:
                 rv = readEEPROM(EEPROM_LOW_ALARM2_LSB);
                 break;
 
-                // Low alarm registers MSB for sensor 3
+            // Low alarm registers MSB for sensor 3
             case 0x38:
                 rv = readEEPROM(EEPROM_LOW_ALARM3_MSB);
                 break;
 
-                // Low alarm registers LSB for sensor 3
+            // Low alarm registers LSB for sensor 3
             case 0x39:
                 rv = readEEPROM(EEPROM_LOW_ALARM3_LSB);
                 break;
 
-                // Low alarm registers MSB for sensor 4
+            // Low alarm registers MSB for sensor 4
             case 0x3A:
                 rv = readEEPROM(EEPROM_LOW_ALARM4_MSB);
                 break;
 
-                // Low alarm registers LSB for sensor 4
+            // Low alarm registers LSB for sensor 4
             case 0x3B:
                 rv = readEEPROM(EEPROM_LOW_ALARM4_LSB);
                 break;
 
-                // Low alarm registers MSB for sensor 5
+            // Low alarm registers MSB for sensor 5
             case 0x3C:
                 rv = readEEPROM(EEPROM_LOW_ALARM5_MSB);
                 break;
 
-                // Low alarm registers LSB for sensor 5
+            // Low alarm registers LSB for sensor 5
             case 0x3D:
                 rv = readEEPROM(EEPROM_LOW_ALARM5_LSB);
                 break;
 
 
 
-                // High alarm registers
+            // High alarm registers
 
 
-                // High alarm registers MSB for sensor 0
+            // High alarm registers MSB for sensor 0
             case 0x3E:
                 rv = readEEPROM(EEPROM_HIGH_ALARM0_MSB);
                 break;
 
-                // High alarm registers LSB for sensor 0
+            // High alarm registers LSB for sensor 0
             case 0x3F:
                 rv = readEEPROM(EEPROM_HIGH_ALARM0_LSB);
                 break;
 
-                // High alarm registers MSB for sensor 1
+            // High alarm registers MSB for sensor 1
             case 0x40:
                 rv = readEEPROM(EEPROM_HIGH_ALARM1_MSB);
                 break;
 
-                // High alarm registers LSB for sensor 1
+            // High alarm registers LSB for sensor 1
             case 0x41:
                 rv = readEEPROM(EEPROM_HIGH_ALARM1_LSB);
                 break;
 
-                // High alarm registers MSB for sensor 2
+            // High alarm registers MSB for sensor 2
             case 0x42:
                 rv = readEEPROM(EEPROM_HIGH_ALARM2_MSB);
                 break;
 
-                // High alarm registers LSB for sensor 2
+            // High alarm registers LSB for sensor 2
             case 0x43:
                 rv = readEEPROM(EEPROM_HIGH_ALARM2_LSB);
                 break;
 
-                // High alarm registers MSB for sensor 3
+            // High alarm registers MSB for sensor 3
             case 0x44:
                 rv = readEEPROM(EEPROM_HIGH_ALARM3_MSB);
                 break;
 
-                // High alarm registers LSB for sensor 3
+            // High alarm registers LSB for sensor 3
             case 0x45:
                 rv = readEEPROM(EEPROM_HIGH_ALARM3_LSB);
                 break;
 
-                // High alarm registers MSB for sensor 4
+            // High alarm registers MSB for sensor 4
             case 0x46:
                 rv = readEEPROM(EEPROM_HIGH_ALARM4_MSB);
                 break;
 
-                // High alarm registers LSB for sensor 4
+            // High alarm registers LSB for sensor 4
             case 0x47:
                 rv = readEEPROM(EEPROM_HIGH_ALARM4_LSB);
                 break;
 
-                // High alarm registers MSB for sensor 5
+            // High alarm registers MSB for sensor 5
             case 0x48:
                 rv = readEEPROM(EEPROM_HIGH_ALARM5_MSB);
                 break;
 
-                // High alarm registers LSB for sensor 5
+            // High alarm registers LSB for sensor 5
             case 0x49:
                 rv = readEEPROM(EEPROM_HIGH_ALARM5_LSB);
                 break;
 
 
-                // Sensor zone information
+            // Sensor zone information
 
 
-                // Zone for sensor 0
+            // Zone for sensor 0
             case 0x4A:
                 rv = readEEPROM(EEPROM_SENSOR0_ZONE);
                 break;
 
-                // Subzone for senor 0
+            // Sub zone for senor 0
             case 0x4B:
                 rv = readEEPROM(EEPROM_SENSOR0_SUBZONE);
                 break;
 
-                // Zone for sensor 1
+            // Zone for sensor 1
             case 0x4C:
                 rv = readEEPROM(EEPROM_SENSOR1_ZONE);
                 break;
 
-                // Subzone for senor 1
+            // Sub zone for senor 1
             case 0x4D:
                 rv = readEEPROM(EEPROM_SENSOR1_SUBZONE);
                 break;
 
-                // Zone for sensor 2
+            // Zone for sensor 2
             case 0x4E:
                 rv = readEEPROM(EEPROM_SENSOR2_ZONE);
                 break;
 
-                // Subzone for senor 2
+            // Sub zone for senor 2
             case 0x4F:
                 rv = readEEPROM(EEPROM_SENSOR2_SUBZONE);
                 break;
 
-                // Zone for sensor 3
+            // Zone for sensor 3
             case 0x50:
                 rv = readEEPROM(EEPROM_SENSOR3_ZONE);
                 break;
 
-                // Subzone for senor 3
+            // Sub zone for senor 3
             case 0x51:
                 rv = readEEPROM(EEPROM_SENSOR3_SUBZONE);
                 break;
 
-                // Zone for sensor 4
+            // Zone for sensor 4
             case 0x52:
                 rv = readEEPROM(EEPROM_SENSOR4_ZONE);
                 break;
 
-                // Subzone for senor 4
+            // Sub zone for senor 4
             case 0x53:
                 rv = readEEPROM(EEPROM_SENSOR4_SUBZONE);
                 break;
 
-                // Zone for sensor 5
+            // Zone for sensor 5
             case 0x54:
                 rv = readEEPROM(EEPROM_SENSOR5_ZONE);
                 break;
 
-                // Subzone for senor 5
+            // Sub zone for senor 5
             case 0x55:
                 rv = readEEPROM(EEPROM_SENSOR5_SUBZONE);
                 break;
 
 
-                // Sensor absolute low
+            // Sensor absolute low
 
 
-                // Absolute low registers MSB for sensor 0
+            // Absolute low registers MSB for sensor 0
             case 0x56:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW0_MSB);
                 break;
 
-                // Absolute low  registers LSB for sensor 0
+            // Absolute low  registers LSB for sensor 0
             case 0x57:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW0_LSB);
                 break;
 
-                // Absolute low  registers MSB for sensor 1
+            // Absolute low  registers MSB for sensor 1
             case 0x58:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW1_MSB);
                 break;
 
-                // Absolute low  registers LSB for sensor 1
+            // Absolute low  registers LSB for sensor 1
             case 0x59:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW1_LSB);
                 break;
 
-                // Absolute low  registers MSB for sensor 2
+            // Absolute low  registers MSB for sensor 2
             case 0x5A:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW2_MSB);
                 break;
 
-                // Absolute low  registers LSB for sensor 2
+            // Absolute low  registers LSB for sensor 2
             case 0x5B:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW2_LSB);
                 break;
 
-                // Absolute low  registers MSB for sensor 3
+            // Absolute low  registers MSB for sensor 3
             case 0x5C:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW3_MSB);
                 break;
 
-                // Absolute low  registers LSB for sensor 3
+            // Absolute low  registers LSB for sensor 3
             case 0x5D:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW3_LSB);
                 break;
 
-                // Absolute low  registers MSB for sensor 4
+            // Absolute low  registers MSB for sensor 4
             case 0x5E:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW4_MSB);
                 break;
 
-                // Absolute low  registers LSB for sensor 4
+            // Absolute low  registers LSB for sensor 4
             case 0x5F:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW4_LSB);
                 break;
 
-                // Absolute low  registers MSB for sensor 5
+            // Absolute low  registers MSB for sensor 5
             case 0x60:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW5_MSB);
                 break;
 
-                // Absolute low  registers LSB for sensor 5
+            // Absolute low  registers LSB for sensor 5
             case 0x61:
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW5_LSB);
                 break;
 
 
-                // Sensor absolute high
+            // Sensor absolute high
 
 
-                // Absolute high registers MSB for sensor 0
+            // Absolute high registers MSB for sensor 0
             case 0x62:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH0_MSB);
                 break;
 
-                // Absolute high  registers LSB for sensor 0
+            // Absolute high  registers LSB for sensor 0
             case 0x63:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH0_LSB);
                 break;
 
-                // Absolute high  registers MSB for sensor 1
+            // Absolute high  registers MSB for sensor 1
             case 0x64:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH1_MSB);
                 break;
 
-                // Absolute high  registers LSB for sensor 1
+            // Absolute high  registers LSB for sensor 1
             case 0x65:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH1_LSB);
                 break;
 
-                // Absolute high  registers MSB for sensor 2
+            // Absolute high  registers MSB for sensor 2
             case 0x66:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH2_MSB);
                 break;
 
-                // Absolute high  registers LSB for sensor 2
+            // Absolute high  registers LSB for sensor 2
             case 0x67:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH2_LSB);
                 break;
 
-                // Absolute high  registers MSB for sensor 3
+            // Absolute high  registers MSB for sensor 3
             case 0x68:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH3_MSB);
                 break;
 
-                // Absolute high  registers LSB for sensor 3
+            // Absolute high  registers LSB for sensor 3
             case 0x69:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH3_LSB);
                 break;
 
-                // Absolute high  registers MSB for sensor 4
+            // Absolute high  registers MSB for sensor 4
             case 0x6A:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH4_MSB);
                 break;
 
-                // Absolute high  registers LSB for sensor 4
+            // Absolute high  registers LSB for sensor 4
             case 0x6B:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH4_LSB);
                 break;
 
-                // Absolute high  registers MSB for sensor 5
+            // Absolute high  registers MSB for sensor 5
             case 0x6C:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH5_MSB);
                 break;
 
-                // Absolute high  registers LSB for sensor 5
+            // Absolute high  registers LSB for sensor 5
             case 0x6D:
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH5_LSB);
                 break;
 
 
-                // Hsyteresis
+            // Hysteresis
 
 
 
-                // hysteresis for sensor 0
+            // hysteresis for sensor 0
             case 0x6E:
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR0);
                 break;
 
-                // hysteresis for sensor 1
+            // hysteresis for sensor 1
             case 0x6F:
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR1);
                 break;
 
-                // hysteresis for sensor 2
+            // hysteresis for sensor 2
             case 0x70:
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR2);
                 break;
 
-                // hysteresis for sensor 3
+            // hysteresis for sensor 3
             case 0x71:
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR3);
                 break;
 
-                // hysteresis for sensor 4
+            // hysteresis for sensor 4
             case 0x72:
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR4);
                 break;
 
-                // hysteresis for sensor 5
+            // hysteresis for sensor 5
             case 0x73:
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR5);
                 break;
 
-                // Reserved
+            // Reserved
             case 0x74:
                 rv = 0;
                 break;
 
-                // Reserved
+            // Reserved
             case 0x75:
                 rv = 0;
                 break;
 
+            // Calibration voltage MSB    
             case 0x76:
                 rv = readEEPROM(EEPROM_CALIBRATED_VOLTAGE_MSB);
                 break;
 
+            // Calibration voltage LSB    
             case 0x77:
                 rv = readEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB);
                 break;
@@ -1855,13 +1853,14 @@ uint8_t vscp_readAppReg(unsigned char reg)
         }
     }
     else if (1 == vscp_page_select) {
-        // SH Coeffecients
+        
+        // SH Coefficients
         if (reg < 72) {
             rv = readEEPROM(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg ) ;
         }
         // Raw A/D values
         else if (reg < 84) {
-            // The byte order is differenet in registers
+            // The byte order is different in registers
             uint8_t pos = reg - 72;
             if ( pos % 2 ) {
                 pos--;
@@ -1882,7 +1881,7 @@ uint8_t vscp_readAppReg(unsigned char reg)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// vscp_writeAppReg
+// VSCP_writeAppReg
 //
 
 uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
@@ -1900,608 +1899,610 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
 
         switch (reg) {
 
-                // Zone
+            // Zone
             case 0x00:
                 writeEEPROM(EEPROM_ZONE, val);
                 rv = readEEPROM(EEPROM_ZONE);
                 break;
 
-                // SubZone
+            // SubZone
             case 0x01:
                 writeEEPROM(EEPROM_SUBZONE, val);
                 rv = readEEPROM(EEPROM_SUBZONE);
                 break;
 
 
-                // Control registers
+            // Control registers
 
 
-                // Control register sensor 0
+            // Control register sensor 0
             case 0x02:
                 writeEEPROM(EEPROM_CONTROLREG0, val);
                 rv = readEEPROM(EEPROM_CONTROLREG0);
                 break;
 
-                // Control register sensor 1
+            // Control register sensor 1
             case 0x03:
                 writeEEPROM(EEPROM_CONTROLREG1, val);
                 rv = readEEPROM(EEPROM_CONTROLREG1);
                 break;
 
-                // Control register sensor 2
+            // Control register sensor 2
             case 0x04:
                 writeEEPROM(EEPROM_CONTROLREG2, val);
                 rv = readEEPROM(EEPROM_CONTROLREG2);
                 break;
 
-                // Control register sensor 3
+            // Control register sensor 3
             case 0x05:
                 writeEEPROM(EEPROM_CONTROLREG3, val);
                 rv = readEEPROM(EEPROM_CONTROLREG3);
                 break;
 
-                // Control register sensor 4
+            // Control register sensor 4
             case 0x06:
                 writeEEPROM(EEPROM_CONTROLREG4, val);
                 rv = readEEPROM(EEPROM_CONTROLREG4);
                 break;
 
-                // Control register sensor 5
+            // Control register sensor 5
             case 0x07:
                 writeEEPROM(EEPROM_CONTROLREG5, val);
                 rv = readEEPROM(EEPROM_CONTROLREG5);
                 break;
 
 
-                // Report interval
+            // Report interval
 
 
-                // Report interval register sensor 0
+            // Report interval register sensor 0
             case 0x14:
                 writeEEPROM(EEPROM_REPORT_INTERVAL0, val);
                 rv = readEEPROM(EEPROM_REPORT_INTERVAL0);
                 break;
 
-                // Report interval register sensor 1
+            // Report interval register sensor 1
             case 0x15:
                 writeEEPROM(EEPROM_REPORT_INTERVAL1, val);
                 rv = readEEPROM(EEPROM_REPORT_INTERVAL1);
                 break;
 
-                // Report interval register sensor 2
+            // Report interval register sensor 2
             case 0x16:
                 writeEEPROM(EEPROM_REPORT_INTERVAL2, val);
                 rv = readEEPROM(EEPROM_REPORT_INTERVAL2);
                 break;
 
-                // Report interval register sensor 3
+            // Report interval register sensor 3
             case 0x17:
                 writeEEPROM(EEPROM_REPORT_INTERVAL3, val);
                 rv = readEEPROM(EEPROM_REPORT_INTERVAL3);
                 break;
 
-                // Report interval register sensor 4
+            // Report interval register sensor 4
             case 0x18:
                 writeEEPROM(EEPROM_REPORT_INTERVAL4, val);
                 rv = readEEPROM(EEPROM_REPORT_INTERVAL4);
                 break;
 
-                // Report interval register sensor 5
+            // Report interval register sensor 5
             case 0x19:
                 writeEEPROM(EEPROM_REPORT_INTERVAL5, val);
                 rv = readEEPROM(EEPROM_REPORT_INTERVAL5);
                 break;
 
 
-                // B constant registers
+             // B constant registers
 
 
-                // B constant register MSB for sensor 0
+            // B constant register MSB for sensor 0
             case 0x26:
                 writeEEPROM(EEPROM_B_CONSTANT0_MSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT0_MSB);
                 break;
 
-                // B constant register LSB for sensor 0
+            // B constant register LSB for sensor 0
             case 0x27:
                 writeEEPROM(EEPROM_B_CONSTANT0_LSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT0_LSB);
                 break;
 
-                // B constant register MSB for sensor 1
+            // B constant register MSB for sensor 1
             case 0x28:
                 writeEEPROM(EEPROM_B_CONSTANT1_MSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT1_MSB);
                 break;
 
-                // B constant register LSB for sensor 1
+            // B constant register LSB for sensor 1
             case 0x29:
                 writeEEPROM(EEPROM_B_CONSTANT1_LSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT1_LSB);
                 break;
 
-                // B constant register MSB for sensor 2
+            // B constant register MSB for sensor 2
             case 0x2A:
                 writeEEPROM(EEPROM_B_CONSTANT2_MSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT2_MSB);
                 break;
 
-                // B constant register LSB for sensor 2
+            // B constant register LSB for sensor 2
             case 0x2B:
                 writeEEPROM(EEPROM_B_CONSTANT2_LSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT2_LSB);
                 break;
 
-                // B constant register MSB for sensor 3
+            // B constant register MSB for sensor 3
             case 0x2C:
                 writeEEPROM(EEPROM_B_CONSTANT3_MSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT3_MSB);
                 break;
 
-                // B constant register LSB for sensor 3
+            // B constant register LSB for sensor 3
             case 0x2D:
                 writeEEPROM(EEPROM_B_CONSTANT3_LSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT3_LSB);
                 break;
 
-                // B constant register MSB for sensor 4
+            // B constant register MSB for sensor 4
             case 0x2E:
                 writeEEPROM(EEPROM_B_CONSTANT4_MSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT4_MSB);
                 break;
 
-                // B constant register LSB for sensor 4
+            // B constant register LSB for sensor 4
             case 0x2F:
                 writeEEPROM(EEPROM_B_CONSTANT4_LSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT4_LSB);
                 break;
 
-                // B constant register MSB for sensor 5
+            // B constant register MSB for sensor 5
             case 0x30:
                 writeEEPROM(EEPROM_B_CONSTANT5_MSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT5_MSB);
                 break;
 
-                // B constant register LSB for sensor 5
+            // B constant register LSB for sensor 5
             case 0x31:
                 writeEEPROM(EEPROM_B_CONSTANT5_LSB, val);
                 rv = readEEPROM(EEPROM_B_CONSTANT5_LSB);
                 break;
 
 
-                // Low alarm registers
+            // Low alarm registers
 
 
-                // Low alarm point register MSB for sensor 0
+            // Low alarm point register MSB for sensor 0
             case 0x32:
                 writeEEPROM(EEPROM_LOW_ALARM0_MSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM0_MSB);
                 break;
 
-                // Low alarm point register LSB for sensor 0
+            // Low alarm point register LSB for sensor 0
             case 0x33:
                 writeEEPROM(EEPROM_LOW_ALARM0_LSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM0_LSB);
                 break;
 
-                // Low alarm point register MSB for sensor 1
+            // Low alarm point register MSB for sensor 1
             case 0x34:
                 writeEEPROM(EEPROM_LOW_ALARM1_MSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM1_MSB);
                 break;
 
-                // Low alarm point register LSB for sensor 1
+            // Low alarm point register LSB for sensor 1
             case 0x35:
                 writeEEPROM(EEPROM_LOW_ALARM1_LSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM1_LSB);
                 break;
 
-                // Low alarm point register MSB for sensor 2
+            // Low alarm point register MSB for sensor 2
             case 0x36:
                 writeEEPROM(EEPROM_LOW_ALARM2_MSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM2_MSB);
                 break;
 
-                // Low alarm point register LSB for sensor 2
+            // Low alarm point register LSB for sensor 2
             case 0x37:
                 writeEEPROM(EEPROM_LOW_ALARM2_LSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM2_LSB);
                 break;
 
-                // Low alarm point register MSB for sensor 3
+            // Low alarm point register MSB for sensor 3
             case 0x38:
                 writeEEPROM(EEPROM_LOW_ALARM3_MSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM3_MSB);
                 break;
 
-                // Low alarm point register LSB for sensor 3
+            // Low alarm point register LSB for sensor 3
             case 0x39:
                 writeEEPROM(EEPROM_LOW_ALARM3_LSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM3_LSB);
                 break;
 
-                // Low alarm point register MSB for sensor 4
+            // Low alarm point register MSB for sensor 4
             case 0x3A:
                 writeEEPROM(EEPROM_LOW_ALARM4_MSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM4_MSB);
                 break;
 
-                // Low alarm point register LSB for sensor 4
+            // Low alarm point register LSB for sensor 4
             case 0x3B:
                 writeEEPROM(EEPROM_LOW_ALARM4_LSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM4_LSB);
                 break;
 
-                // Low alarm point register MSB for sensor 5
+            // Low alarm point register MSB for sensor 5
             case 0x3C:
                 writeEEPROM(EEPROM_LOW_ALARM5_MSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM5_MSB);
                 break;
 
-                // Low alarm point register LSB for sensor 5
+            // Low alarm point register LSB for sensor 5
             case 0x3D:
                 writeEEPROM(EEPROM_LOW_ALARM5_LSB, val);
                 rv = readEEPROM(EEPROM_LOW_ALARM5_LSB);
                 break;
 
 
-                // High alarm registers
+            // High alarm registers
 
 
-                // High alarm point register MSB for sensor 0
+            // High alarm point register MSB for sensor 0
             case 0x3E:
                 writeEEPROM(EEPROM_HIGH_ALARM0_MSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM0_MSB);
                 break;
 
-                // High alarm point register LSB for sensor 0
+            // High alarm point register LSB for sensor 0
             case 0x3F:
                 writeEEPROM(EEPROM_HIGH_ALARM0_LSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM0_LSB);
                 break;
 
-                // High alarm point register MSB for sensor 1
+            // High alarm point register MSB for sensor 1
             case 0x40:
                 writeEEPROM(EEPROM_HIGH_ALARM1_MSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM1_MSB);
                 break;
 
-                // High alarm point register LSB for sensor 1
+            // High alarm point register LSB for sensor 1
             case 0x41:
                 writeEEPROM(EEPROM_HIGH_ALARM1_LSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM1_LSB);
                 break;
 
-                // High alarm point register MSB for sensor 2
+            // High alarm point register MSB for sensor 2
             case 0x42:
                 writeEEPROM(EEPROM_HIGH_ALARM2_MSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM2_MSB);
                 break;
 
-                // High alarm point register LSB for sensor 2
+            // High alarm point register LSB for sensor 2
             case 0x43:
                 writeEEPROM(EEPROM_HIGH_ALARM2_LSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM2_LSB);
                 break;
 
-                // High alarm point register MSB for sensor 3
+            // High alarm point register MSB for sensor 3
             case 0x44:
                 writeEEPROM(EEPROM_HIGH_ALARM3_MSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM3_MSB);
                 break;
 
-                // High alarm point register LSB for sensor 3
+            // High alarm point register LSB for sensor 3
             case 0x45:
                 writeEEPROM(EEPROM_HIGH_ALARM3_LSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM3_LSB);
                 break;
 
-                // High alarm point register MSB for sensor 4
+            // High alarm point register MSB for sensor 4
             case 0x46:
                 writeEEPROM(EEPROM_HIGH_ALARM4_MSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM4_MSB);
                 break;
 
-                // High alarm point register LSB for sensor 4
+            // High alarm point register LSB for sensor 4
             case 0x47:
                 writeEEPROM(EEPROM_HIGH_ALARM4_LSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM4_LSB);
                 break;
 
-                // High alarm point register MSB for sensor 5
+            // High alarm point register MSB for sensor 5
             case 0x48:
                 writeEEPROM(EEPROM_HIGH_ALARM5_MSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM5_MSB);
                 break;
 
-                // High alarm point register LSB for sensor 5
+            // High alarm point register LSB for sensor 5
             case 0x49:
                 writeEEPROM(EEPROM_HIGH_ALARM5_LSB, val);
                 rv = readEEPROM(EEPROM_HIGH_ALARM5_LSB);
                 break;
 
 
-                // Sensor zone information registers
+            // Sensor zone information registers
 
 
-                // Zone for sensor 0
+            // Zone for sensor 0
             case 0x4A:
                 writeEEPROM(EEPROM_SENSOR0_ZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR0_ZONE);
                 break;
 
-                // Subzone for sensor 0
+            // Sub zone for sensor 0
             case 0x4B:
                 writeEEPROM(EEPROM_SENSOR0_SUBZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR0_SUBZONE);
                 break;
 
-                // Zone for sensor 1
+            // Zone for sensor 1
             case 0x4C:
                 writeEEPROM(EEPROM_SENSOR1_ZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR1_ZONE);
                 break;
 
-                // Subzone for sensor 1
+            // Subzone for sensor 1
             case 0x4D:
                 writeEEPROM(EEPROM_SENSOR1_SUBZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR1_SUBZONE);
                 break;
 
-                // Zone for sensor 2
+            // Zone for sensor 2
             case 0x4E:
                 writeEEPROM(EEPROM_SENSOR2_ZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR2_ZONE);
                 break;
 
-                // Subzone for sensor 2
+            // Sub zone for sensor 2
             case 0x4F:
                 writeEEPROM(EEPROM_SENSOR2_SUBZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR2_SUBZONE);
                 break;
 
-                // Zone for sensor 3
+            // Zone for sensor 3
             case 0x50:
                 writeEEPROM(EEPROM_SENSOR3_ZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR3_ZONE);
                 break;
 
-                // Subzone for sensor 3
+            // Sub zone for sensor 3
             case 0x51:
                 writeEEPROM(EEPROM_SENSOR3_SUBZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR3_SUBZONE);
                 break;
 
-                // Zone for sensor 4
+            // Zone for sensor 4
             case 0x52:
                 writeEEPROM(EEPROM_SENSOR4_ZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR4_ZONE);
                 break;
 
-                // Subzone for sensor 4
+            // Sub zone for sensor 4
             case 0x53:
                 writeEEPROM(EEPROM_SENSOR4_SUBZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR4_SUBZONE);
                 break;
 
-                // Zone for sensor 5
+            // Zone for sensor 5
             case 0x54:
                 writeEEPROM(EEPROM_SENSOR5_ZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR5_ZONE);
                 break;
 
-                // Subzone for sensor 5
+            // Sub zone for sensor 5
             case 0x55:
                 writeEEPROM(EEPROM_SENSOR5_SUBZONE, val);
                 rv = readEEPROM(EEPROM_SENSOR5_SUBZONE);
                 break;
 
 
-                // Sensor absolute low temperature registers
+            // Sensor absolute low temperature registers
 
 
-                // Sensor absolute low temperature register MSB for sensor 0
+            // Sensor absolute low temperature register MSB for sensor 0
             case 0x56:
                 writeEEPROM(EEPROM_ABSOLUT_LOW0_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW0_MSB);
                 break;
 
-                // Sensor absolute low temperature register LSB for sensor 0
+            // Sensor absolute low temperature register LSB for sensor 0
             case 0x57:
                 writeEEPROM(EEPROM_ABSOLUT_LOW0_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW0_LSB);
                 break;
 
-                // Sensor absolute low temperature register MSB for sensor 1
+            // Sensor absolute low temperature register MSB for sensor 1
             case 0x58:
                 writeEEPROM(EEPROM_ABSOLUT_LOW1_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW1_MSB);
                 break;
 
-                // Sensor absolute low temperature register LSB for sensor 1
+            // Sensor absolute low temperature register LSB for sensor 1
             case 0x59:
                 writeEEPROM(EEPROM_ABSOLUT_LOW1_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW1_LSB);
                 break;
 
-                // Sensor absolute low temperature register MSB for sensor 2
+            // Sensor absolute low temperature register MSB for sensor 2
             case 0x5A:
                 writeEEPROM(EEPROM_ABSOLUT_LOW2_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW2_MSB);
                 break;
 
-                // Sensor absolute low temperature register LSB for sensor 2
+            // Sensor absolute low temperature register LSB for sensor 2
             case 0x5B:
                 writeEEPROM(EEPROM_ABSOLUT_LOW2_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW2_LSB);
                 break;
 
-                // Sensor absolute low temperature register MSB for sensor 3
+            // Sensor absolute low temperature register MSB for sensor 3
             case 0x5C:
                 writeEEPROM(EEPROM_ABSOLUT_LOW3_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW3_MSB);
                 break;
 
-                // Sensor absolute low temperature register LSB for sensor 3
+            // Sensor absolute low temperature register LSB for sensor 3
             case 0x5D:
                 writeEEPROM(EEPROM_ABSOLUT_LOW3_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW3_LSB);
                 break;
 
-                // Sensor absolute low temperature register MSB for sensor 4
+            // Sensor absolute low temperature register MSB for sensor 4
             case 0x5E:
                 writeEEPROM(EEPROM_ABSOLUT_LOW4_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW4_MSB);
                 break;
 
-                // Sensor absolute low temperature register LSB for sensor 4
+            // Sensor absolute low temperature register LSB for sensor 4
             case 0x5F:
                 writeEEPROM(EEPROM_ABSOLUT_LOW4_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW4_LSB);
                 break;
 
-                // Sensor absolute low temperature register MSB for sensor 5
+            // Sensor absolute low temperature register MSB for sensor 5
             case 0x60:
                 writeEEPROM(EEPROM_ABSOLUT_LOW5_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW5_MSB);
                 break;
 
-                // Sensor absolute low temperature register LSB for sensor 5
+            // Sensor absolute low temperature register LSB for sensor 5
             case 0x61:
                 writeEEPROM(EEPROM_ABSOLUT_LOW5_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_LOW5_LSB);
                 break;
 
 
-                // Sensor absolute high temperature registers
+            // Sensor absolute high temperature registers
 
 
-                // Sensor absolute high temperature register MSB for sensor 0
+            // Sensor absolute high temperature register MSB for sensor 0
             case 0x62:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH0_MSB);
                 break;
 
-                // Sensor absolute high temperature register LSB for sensor 0
+            // Sensor absolute high temperature register LSB for sensor 0
             case 0x63:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH0_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH0_LSB);
                 break;
 
-                // Sensor absolute high temperature register MSB for sensor 1
+            // Sensor absolute high temperature register MSB for sensor 1
             case 0x64:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH1_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH1_MSB);
                 break;
 
-                // Sensor absolute high temperature register LSB for sensor 1
+            // Sensor absolute high temperature register LSB for sensor 1
             case 0x65:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH1_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH1_LSB);
                 break;
 
-                // Sensor absolute high temperature register MSB for sensor 2
+            // Sensor absolute high temperature register MSB for sensor 2
             case 0x66:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH2_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH2_MSB);
                 break;
 
-                // Sensor absolute high temperature register LSB for sensor 2
+            // Sensor absolute high temperature register LSB for sensor 2
             case 0x67:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH2_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH2_LSB);
                 break;
 
-                // Sensor absolute high temperature register MSB for sensor 3
+            // Sensor absolute high temperature register MSB for sensor 3
             case 0x68:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH3_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH3_MSB);
                 break;
 
-                // Sensor absolute high temperature register LSB for sensor 3
+            // Sensor absolute high temperature register LSB for sensor 3
             case 0x69:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH3_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH3_LSB);
                 break;
 
-                // Sensor absolute high temperature register MSB for sensor 4
+            // Sensor absolute high temperature register MSB for sensor 4
             case 0x6A:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH4_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH4_MSB);
                 break;
 
-                // Sensor absolute high temperature register LSB for sensor 4
+            // Sensor absolute high temperature register LSB for sensor 4
             case 0x6B:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH4_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH4_LSB);
                 break;
 
-                // Sensor absolute high temperature register MSB for sensor 5
+            // Sensor absolute high temperature register MSB for sensor 5
             case 0x6C:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH5_MSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH5_MSB);
                 break;
 
-                // Sensor absolute high temperature register LSB for sensor 5
+            // Sensor absolute high temperature register LSB for sensor 5
             case 0x6D:
                 writeEEPROM(EEPROM_ABSOLUT_HIGH5_LSB, val );
                 rv = readEEPROM(EEPROM_ABSOLUT_HIGH5_LSB);
                 break;
 
 
-                // Sensor hysteresis
+            // Sensor hysteresis
 
 
-                // Hysteresis for sensor 0
+            // Hysteresis for sensor 0
             case 0x6E:
                 writeEEPROM(EEPROM_HYSTERESIS_SENSOR0, val);
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR0);
                 break;
 
-                // Hysteresis for sensor 1
+            // Hysteresis for sensor 1
             case 0x6F:
                 writeEEPROM(EEPROM_HYSTERESIS_SENSOR1, val);
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR1);
                 break;
 
-                // Hysteresis for sensor 2
+            // Hysteresis for sensor 2
             case 0x70:
                 writeEEPROM(EEPROM_HYSTERESIS_SENSOR2, val);
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR2);
 
-                // Hysteresis for sensor 3
+            // Hysteresis for sensor 3
             case 0x71:
                 writeEEPROM(EEPROM_HYSTERESIS_SENSOR3, val);
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR3);
                 break;
 
-                // Hysteresis for sensor 4
+            // Hysteresis for sensor 4
             case 0x72:
                 writeEEPROM(EEPROM_HYSTERESIS_SENSOR4, val);
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR4);
                 break;
 
-                // Hysteresis for sensor 5
+            // Hysteresis for sensor 5
             case 0x73:
                 writeEEPROM(EEPROM_HYSTERESIS_SENSOR5, val);
                 rv = readEEPROM(EEPROM_HYSTERESIS_SENSOR5);
                 break;
 
-                // reserved
+            // reserved
             case 0x74:
                 rv = 0;
                 break;
 
-                // Calibration values
+            // Reserved
             case 0x75:
                 rv = 0;
                 break;
 
+            // Voltage calibration values MSB                
             case 0x76:
                 writeEEPROM(EEPROM_CALIBRATED_VOLTAGE_MSB, val);
                 rv = readEEPROM(EEPROM_CALIBRATED_VOLTAGE_MSB);
                 break;
 
+            // Voltage calibration values LSB    
             case 0x77:
                 writeEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB, val);
                 rv = readEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB);
@@ -2568,7 +2569,7 @@ unsigned char vscp_getMinorVersion()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Get Subminor version number for this hardware module
+// Get Sub minor version number for this hardware module
 //
 
 unsigned char vscp_getSubMinorVersion()
@@ -2588,7 +2589,7 @@ uint8_t vscp_getGUID(uint8_t idx)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// vscp_setGUID
+// VSCP_setGUID
 //
 
 #ifdef ENABLE_WRITE_2PROTECTED_LOCATIONS
@@ -2669,7 +2670,7 @@ uint8_t vscp_getBufferSize(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//  vscp_getMatrixInfo
+//  VSCP_getMatrixInfo
 //
 
 void vscp_getMatrixInfo(char *pData)
@@ -2744,9 +2745,11 @@ void vscp_goBootloaderMode( uint8_t algorithm )
     // OK, We should enter boot loader mode
     // 	First, activate bootloader mode
     writeEEPROM(VSCP_EEPROM_BOOTLOADER_FLAG, VSCP_BOOT_FLAG);
-
-    //_asm goto _startup reset _endasm
-    //_asm reset _endasm
+    
+    // Turn off CAN
+    ECANSetOperationMode( ECAN_OP_MODE_CONFIG ); 
+    
+    // Reset the "thingi"
     asm("reset");
 }
 

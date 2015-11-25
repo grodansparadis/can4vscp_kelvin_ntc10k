@@ -57,3 +57,10 @@
 /eagle/smd/*.b#2
 /eagle/smd/*.b#3
 /eagle/smd/*.b#4
+/kelvin_ntc.X/dist/Relocated/debug/*.cmf
+/kelvin_ntc.X/dist/Relocated/debug/*.hxl
+/kelvin_ntc.X/dist/Relocated/debug/*.lst
+/kelvin_ntc.X/dist/Relocated/debug/*.map
+/kelvin_ntc.X/dist/Relocated/debug/*.rlf
+/kelvin_ntc.X/dist/Relocated/debug/*.sdb
+/kelvin_ntc.X/dist/Relocated/debug/*.sym
