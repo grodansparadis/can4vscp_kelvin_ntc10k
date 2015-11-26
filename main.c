@@ -526,30 +526,39 @@ void doWork(void)
 // doOneSecondWork
 //
 
-void doOneSecondWork(void) {
+void doOneSecondWork(void) 
+{
     uint8_t tmp;
     uint8_t i;
     int16_t setpoint;
 
     for (i = 0; i < 6; i++) {
 
+        //*********************************************************************
         // Check if this is the lowest temperature ever
+        //*********************************************************************
+        
         if (current_temp[ i ] < construct_signed16( readEEPROM(EEPROM_ABSOLUT_LOW0_MSB + 2*i),
                                                     readEEPROM(EEPROM_ABSOLUT_LOW0_LSB + 2*i) ) ) {
             // Store new lowest value
-            writeEEPROM(EEPROM_ABSOLUT_LOW0_MSB + 2*i, current_temp[ i ] >> 8);
-            writeEEPROM(EEPROM_ABSOLUT_LOW0_LSB + 2*i, current_temp[ i ] & 0xff);
+            writeEEPROM(EEPROM_ABSOLUT_LOW0_MSB + 2*i, ((uint16_t)current_temp[ i ]) >> 8);
+            writeEEPROM(EEPROM_ABSOLUT_LOW0_LSB + 2*i, ((uint16_t)current_temp[ i ]) & 0xff);
         }
 
+        //*********************************************************************
         // Check if this is the highest temperature ever
+        //*********************************************************************
+        
         if (current_temp[ i ] > construct_signed16( readEEPROM(EEPROM_ABSOLUT_HIGH0_MSB + 2*i), 
                                                     readEEPROM(EEPROM_ABSOLUT_HIGH0_LSB + 2*i ) ) ) {
             // Store new lowest value
-            writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB + 2*i, current_temp[ i ] >> 8);
-            writeEEPROM(EEPROM_ABSOLUT_HIGH0_LSB + 2*i,  current_temp[ i ] & 0xff );
+            writeEEPROM(EEPROM_ABSOLUT_HIGH0_MSB + 2*i, ((uint16_t)current_temp[ i ]) >> 8);
+            writeEEPROM(EEPROM_ABSOLUT_HIGH0_LSB + 2*i,  ((uint16_t)current_temp[ i ]) & 0xff );
         }
         
-        // * * * Check if temperature report events should be sent * * *
+        //*********************************************************************
+        // Check if temperature report events should be sent
+        //*********************************************************************
         tmp = readEEPROM(EEPROM_REPORT_INTERVAL0 + i);
         if (tmp && (seconds_temp[i] > tmp)) {
 
@@ -560,10 +569,12 @@ void doOneSecondWork(void) {
 
         }
 
-        // * * * Check for continuous alarm * * *
+        //*********************************************************************
+        // Check for continuous alarm 
+        //*********************************************************************
         if (MASK_CONTROL_CONTINUOUS & readEEPROM(EEPROM_CONTROLREG0 + i)) {
 
-            // If  low alarm active for sensor
+            // If low alarm active for sensor
             if (low_alarm & (1 << i)) {
 
                 // Alarm must be enabled
@@ -645,20 +656,21 @@ void doOneSecondWork(void) {
             }
         }       
         
-        // Check if alarm events should be sent
-
-        // Check if low alarm condition already
+        
+        //*********************************************************************
+        // Check if we have a low alarm condition 
+        //*********************************************************************
         if (low_alarm & (1 << i)) {
 
             // We have an alarm condition already
-            setpoint = construct_signed16(readEEPROM(EEPROM_LOW_ALARM0_MSB + 2 * i),
-                    readEEPROM(EEPROM_LOW_ALARM0_LSB + 2 * i)) +
-                    (int8_t) readEEPROM(EEPROM_HYSTERESIS_SENSOR0 + i);
+            setpoint = construct_signed16(readEEPROM(EEPROM_LOW_ALARM0_MSB + 2*i),
+                                            readEEPROM(EEPROM_LOW_ALARM0_LSB + 2*i)) +
+                        (int8_t) readEEPROM(EEPROM_HYSTERESIS_SENSOR0 + i);
 
             // Check if it is no longer valid
             // that is under hysteresis so we can rest
             // alarm condition
-            if (current_temp[ i ] > setpoint) {
+            if (current_temp[ i ] > (setpoint * 100)) {
 
                 // Reset alarm condition
                 low_alarm &= ~(1 << i);
@@ -668,12 +680,12 @@ void doOneSecondWork(void) {
         } 
         else {
 
-            // We do not have an alarm condition already
+            // We do not have a low alarm condition already
             // check if we should have
-            setpoint = construct_signed16(readEEPROM(EEPROM_LOW_ALARM0_MSB + 2 * i),
-                    readEEPROM(EEPROM_LOW_ALARM0_LSB + 2 * i));
+            setpoint = construct_signed16( readEEPROM(EEPROM_LOW_ALARM0_MSB + 2*i ),
+                                            readEEPROM(EEPROM_LOW_ALARM0_LSB + 2*i ) );
 
-            if (current_temp[ i ] < setpoint) {
+            if (current_temp[ i ] < (setpoint * 100)) {
 
                 // We have a low alarm condition
                 low_alarm |= (1 << i);
@@ -683,11 +695,9 @@ void doOneSecondWork(void) {
                 // to send an alarm event.
                 vscp_alarmstatus |= MODULE_LOW_ALARM;
 
-                // Should ALARM (TURNON/TURNOFF) events be sent
-                if (readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_LOW_ALARM) {
+                // Should ALARM events be sent
+                if ( readEEPROM(i + EEPROM_CONTROLREG0) & CONFIG_ENABLE_LOW_ALARM ) {
 
-                    vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
-                    vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
                     vscp_omsg.priority = VSCP_PRIORITY_HIGH;
                     vscp_omsg.flags = VSCP_VALID_MSG + 3;
 
@@ -704,12 +714,14 @@ void doOneSecondWork(void) {
                         }
 
                     }
+                    else {
+                        vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
+                        vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
+                    }
 
                     vscp_omsg.data[ 0 ] = i; // Index
-                    vscp_omsg.data[ 1 ] =
-                            readEEPROM(EEPROM_SENSOR0_ZONE + 2 * i); // Zone
-                    vscp_omsg.data[ 2 ] =
-                            readEEPROM(EEPROM_SENSOR0_SUBZONE + 2 * i); // Subzone
+                    vscp_omsg.data[ 1 ] = readEEPROM(EEPROM_SENSOR0_ZONE + 2 * i);    // Zone
+                    vscp_omsg.data[ 2 ] = readEEPROM(EEPROM_SENSOR0_SUBZONE + 2 * i); // Sub zone
 
                     // Send event
                     if (!vscp_sendEvent()) {
@@ -722,17 +734,19 @@ void doOneSecondWork(void) {
             }
         }
 
-        // Check high alarm
+        //*********************************************************************
+        // Check if we have a high alarm condition 
+        //*********************************************************************
         if (high_alarm & (1 << i)) {
 
             // We have an alarm condition already
 
             setpoint = construct_signed16(readEEPROM(EEPROM_HIGH_ALARM0_MSB + 2 * i),
-                    readEEPROM(EEPROM_HIGH_ALARM0_LSB + 2 * i)) +
-                    (int8_t) readEEPROM(EEPROM_HYSTERESIS_SENSOR0 + i);
+                                            readEEPROM(EEPROM_HIGH_ALARM0_LSB + 2 * i)) -
+                            (int8_t)readEEPROM(EEPROM_HYSTERESIS_SENSOR0 + i);
 
             // Under hysteresis so we can reset condition
-            if (current_temp[ i ] < setpoint) {
+            if (current_temp[ i ] < (setpoint * 100) ) {
 
                 // Reset alarm
                 high_alarm &= ~(1 << i);
@@ -746,9 +760,9 @@ void doOneSecondWork(void) {
             // check for one
 
             setpoint = construct_signed16(readEEPROM(EEPROM_HIGH_ALARM0_MSB + 2 * i),
-                    readEEPROM(EEPROM_HIGH_ALARM0_LSB + 2 * i));
+                                            readEEPROM(EEPROM_HIGH_ALARM0_LSB + 2 * i));
 
-            if (current_temp[ i ] > setpoint) {
+            if (current_temp[ i ] > (setpoint * 100)) {
 
                 // We have a low alarm condition
                 high_alarm |= (1 << i);
@@ -762,8 +776,6 @@ void doOneSecondWork(void) {
                 // Should ALARM or TURNON/TURNOFF events be sent
                 if (readEEPROM(EEPROM_CONTROLREG0 + i) & CONFIG_ENABLE_HIGH_ALARM) {
 
-                    vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
-                    vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
                     vscp_omsg.priority = VSCP_PRIORITY_HIGH;
                     vscp_omsg.flags = VSCP_VALID_MSG + 3;
 
@@ -778,12 +790,14 @@ void doOneSecondWork(void) {
                             vscp_omsg.vscp_type = VSCP_TYPE_CONTROL_TURNON;
                         }
                     }
+                    else {
+                        vscp_omsg.vscp_class = VSCP_CLASS1_ALARM;
+                        vscp_omsg.vscp_type = VSCP_TYPE_ALARM_ALARM;
+                    }
 
                     vscp_omsg.data[ 0 ] = i; // Index
-                    vscp_omsg.data[ 1 ] =
-                            readEEPROM(EEPROM_SENSOR0_ZONE + 2 * i); // Zone
-                    vscp_omsg.data[ 2 ] =
-                            readEEPROM(EEPROM_SENSOR0_SUBZONE + 2 * i); // Sub zone
+                    vscp_omsg.data[ 1 ] = readEEPROM(EEPROM_SENSOR0_ZONE + 2 * i);      // Zone
+                    vscp_omsg.data[ 2 ] = readEEPROM(EEPROM_SENSOR0_SUBZONE + 2 * i);   // Sub zone
 
                     // Send event
                     if (!vscp_sendEvent()) {
