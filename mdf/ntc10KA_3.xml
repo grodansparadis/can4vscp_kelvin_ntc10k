@@ -5,8 +5,8 @@
 <module>
 	<name>Kelvin temperature sensor module</name>
  	<model>10KA</model>
-	<version>1.0.11</version>
-	<changed>2015-11-26</changed>
+	<version>45</version>
+	<changed>2015-12-01</changed>
 	<description lang="en">
 		This module can report temperature from up to six temperature sensors. One sensor
 		is located on board and five are external to the module.
@@ -2364,24 +2364,6 @@
 		
 		<reg page="1" offset="95" default="0" bgcolor="0xCCFFCC" >
 			<name lang="en">Sensor calibration value for Sensor 5 (LSB)</name>
-			<description lang="en">
-				Set a 16-bit signed value here to adjust the temperature readings up or down. 
-				The value should be the temperature adjustment expressed as temperature * 100.
-			</description>
-			<access>rw</access>
-		</reg>
-		
-		<reg page="1" offset="96" default="0" bgcolor="0xCCFFCC">
-			<name lang="en">Sensor calibration value for Sensor 6 (MSB)</name>
-			<description lang="en">
-				Set a 16-bit signed value here to adjust the temperature readings up or down. 
-				The value should be the temperature adjustment expressed as temperature * 100.
-			</description>
-			<access>rw</access>
-		</reg>
-		
-		<reg page="1" offset="97" default="0" bgcolor="0xCCFFCC">
-			<name lang="en">Sensor calibration value for Sensor 6 (LSB)</name>
 			<description lang="en">
 				Set a 16-bit signed value here to adjust the temperature readings up or down. 
 				The value should be the temperature adjustment expressed as temperature * 100.

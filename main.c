@@ -124,12 +124,6 @@ double sh_coefficients[6*3];    // 6 sensors each with 3 32-bit constants
 //      	- Services GP3 Pin Change
 //////////////////////////////////////////////////////////////////////////////
 
-#ifdef RELOCATE
-#pragma code low_vector = 0x208
-#else
-//#pragma code low_vector = 0x08
-#endif
-
 void interrupt low_priority interrupt_at_low_vector( void )
 {
     // Check timer
