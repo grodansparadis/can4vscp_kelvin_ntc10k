@@ -434,7 +434,7 @@ void doWork(void)
     double calVoltage;
 
     calVoltage = ((uint16_t) readEEPROM(EEPROM_CALIBRATED_VOLTAGE_MSB)*256 +
-            readEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB));
+                    readEEPROM(EEPROM_CALIBRATED_VOLTAGE_LSB));
 
     // Check if there are new adc values to
     // convert to temperatures

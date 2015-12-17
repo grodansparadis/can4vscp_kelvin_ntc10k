@@ -14,6 +14,8 @@
       <itemPath>../../vscp_firmware/common/vscp_firmware.h</itemPath>
       <itemPath>../../vscp_firmware/pic/common/eeprom.h</itemPath>
       <itemPath>../ECAN.def</itemPath>
+      <itemPath>../../vscp_firmware/common/vscp_class.h</itemPath>
+      <itemPath>../../vscp_firmware/common/vscp_type.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
