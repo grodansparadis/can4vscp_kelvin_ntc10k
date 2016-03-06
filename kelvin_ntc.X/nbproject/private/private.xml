@@ -18,6 +18,14 @@
     </editor-bookmarks>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
+            <url>file:/home/akhe/vscp_hardware/can4vscp/kelvin/kelvin_temperature_modules/Kelvin%20NTC/firmware/main.c</url>
+            <bookmark id="0">
+                <name/>
+                <line>1762</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
             <url>file:/C:/Users/akhe/Documents/development/hardware_zeus/can4vscp/kelvin/kelvin_temperature_modules/Kelvin%20NTC/firmware/main.c</url>
             <bookmark id="0">
                 <name/>
@@ -52,14 +60,6 @@
             <bookmark id="0">
                 <name/>
                 <line>1116</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>file:/home/akhe/vscp_hardware/can4vscp/kelvin/kelvin_temperature_modules/Kelvin%20NTC/firmware/main.c</url>
-            <bookmark id="0">
-                <name/>
-                <line>1762</line>
                 <key/>
             </bookmark>
         </file>

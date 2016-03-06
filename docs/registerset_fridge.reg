@@ -1,0 +1,1151 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<registerset>
+<register offset='0' page='0'>
+<value>0x00</value>
+<description>Zone
+Zone this module belongs to</description>
+</register>
+<register offset='1' page='0'>
+<value>0xFF</value>
+<description>Subzone
+Subzone this module belongs to</description>
+</register>
+<register offset='2' page='0'>
+<value>0x01</value>
+<description>Control register for sensor 0
+In the sensor control register you can set functionality for themeasurements of temperature
+0.
+Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 2: Reserved.
+Bit 3: Enable low alarm if set to 1.
+Bit 4: Enable high alarm if set to 1
+Bit 5: Send TurnOn/TurnOff events instead of alarm events.
+Bit 6: Invert TurnOn/TurnOff sending.
+Bit 7: Continuous alarm events.
+</description>
+</register>
+<register offset='3' page='0'>
+<value>0xB9</value>
+<description>Control register for sensor 1
+In the sensor control register you can set functionality for themeasurements of temperature
+0.
+Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 2: Reserved.
+Bit 3: Enable low alarm if set to 1.
+Bit 4: Enable high alarm if set to 1
+Bit 5: Send TurnOn/TurnOff events instead of alarm events.
+Bit 6: Invert TurnOn/TurnOff sending.
+Bit 7: Continuous alarm events.
+</description>
+</register>
+<register offset='4' page='0'>
+<value>0x01</value>
+<description>Control register for sensor 2
+In the sensor control register you can set functionality for themeasurements of temperature
+0.
+Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 2: Reserved.
+Bit 3: Enable low alarm if set to 1.
+Bit 4: Enable high alarm if set to 1
+Bit 5: Send TurnOn/TurnOff events instead of alarm events.
+Bit 6: Invert TurnOn/TurnOff sending.
+Bit 7: Continuous alarm events.
+</description>
+</register>
+<register offset='5' page='0'>
+<value>0x01</value>
+<description>Control register for sensor 3
+In the sensor control register you can set functionality for themeasurements of temperature
+0.
+Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 2: Reserved.
+Bit 3: Enable low alarm if set to 1.
+Bit 4: Enable high alarm if set to 1
+Bit 5: Send TurnOn/TurnOff events instead of alarm events.
+Bit 6: Invert TurnOn/TurnOff sending.
+Bit 7: Continuous alarm events.
+</description>
+</register>
+<register offset='6' page='0'>
+<value>0x01</value>
+<description>Control register for sensor 4
+In the sensor control register you can set functionality for themeasurements of temperature
+0.
+Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 2: Reserved.
+Bit 3: Enable low alarm if set to 1.
+Bit 4: Enable high alarm if set to 1
+Bit 5: Send TurnOn/TurnOff events instead of alarm events.
+Bit 6: Invert TurnOn/TurnOff sending.
+Bit 7: Continuous alarm events.
+</description>
+</register>
+<register offset='7' page='0'>
+<value>0x01</value>
+<description>Control register for sensor 5
+In the sensor control register you can set functionality for themeasurements of temperature
+0.
+Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).
+Bit 2: Reserved.
+Bit 3: Enable low alarm if set to 1.
+Bit 4: Enable high alarm if set to 1
+Bit 5: Send TurnOn/TurnOff events instead of alarm events.
+Bit 6: Invert TurnOn/TurnOff sending.
+Bit 7: Continuous alarm events.
+</description>
+</register>
+<register offset='8' page='0'>
+<value>0x0A</value>
+<description>Temperature sensor 0 MSB
+This register holds the most significant byte for the reading of thetemperature for
+sensor 0 (on board sensor). The reading is always stored in the Celsius unit and
+the read value should be divided by100to get the real temperature in Celsius.The
+value is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='9' page='0'>
+<value>0x50</value>
+<description>Temperature sensor 0 LSB
+This register holds the least significant byte for the reading of thetemperature
+for sensor 0 (on board sensor). The reading is always stored in the Celsius unit
+and the read value should be divided by100to get the real temperature in Celsius.The
+value is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='10' page='0'>
+<value>0xF8</value>
+<description>Temperature sensor 1 MSB
+This register holds the most significant byte for the reading of thetemperature for
+sensor 1. The reading is always stored in the Celsius unit and the read value should
+be divided by100to get the real temperature in Celsius.The value is stored as a twos
+complement number as temperature * 100.</description>
+</register>
+<register offset='11' page='0'>
+<value>0x88</value>
+<description>Temperature sensor 1 LSB
+This register holds the least significant byte for the reading of thetemperature
+for sensor 1. The reading is always stored in the Celsius unit and the read value
+should be divided by100to get the real temperature in Celsius.The value is stored
+as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='12' page='0'>
+<value>0x0F</value>
+<description>Temperature sensor 2 MSB
+This register holds the most significant byte for the reading of thetemperature for
+sensor 2. The reading is always stored in the Celsius unit and the read value should
+be divided by100to get the real temperature in Celsius.The value is stored as a twos
+complement number as temperature * 100.</description>
+</register>
+<register offset='13' page='0'>
+<value>0xE8</value>
+<description>Temperature sensor 2 LSB
+This register holds the least significant byte for the reading of thetemperature
+for sensor 2. The reading is always stored in the Celsius unit and the read value
+should be divided by100to get the real temperature in Celsius.The value is stored
+as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='14' page='0'>
+<value>0xD9</value>
+<description>Temperature sensor 3 MSB
+This register holds the most significant byte for the reading of thetemperature for
+sensor 3. The reading is always stored in the Celsius unit and the read value should
+be divided by100to get the real temperature in Celsius.The value is stored as a twos
+complement number as temperature * 100.</description>
+</register>
+<register offset='15' page='0'>
+<value>0xD3</value>
+<description>Temperature sensor 3 LSB
+This register holds the least significant byte for the reading of thetemperature
+for sensor 3. The reading is always stored in the Celsius unit and the read value
+should be divided by100to get the real temperature in Celsius.The value is stored
+as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='16' page='0'>
+<value>0x07</value>
+<description>Temperature sensor 4 MSB
+This register holds the most significant byte for the reading of thetemperature for
+sensor 1. The reading is always stored in the Celsius unit and the read value should
+be divided by100to get the real temperature in Celsius.The value is stored as a twos
+complement number as temperature * 100.</description>
+</register>
+<register offset='17' page='0'>
+<value>0x80</value>
+<description>Temperature sensor 4 LSB
+This register holds the least significant byte for the reading of thetemperature
+for sensor 1. The reading is always stored in the Celsius unit and the read value
+should be divided by100to get the real temperature in Celsius.The value is stored
+as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='18' page='0'>
+<value>0xD9</value>
+<description>Temperature sensor 5 MSB
+This register holds the most significant byte for the reading of thetemperature for
+sensor 5. The reading is always stored in the Celsius unit and the read value should
+be divided by100to get the real temperature in Celsius.The value is stored as a twos
+complement number as temperature * 100.</description>
+</register>
+<register offset='19' page='0'>
+<value>0xD1</value>
+<description>Temperature sensor 5 LSB
+This register holds the least significant byte for the reading of thetemperature
+for sensor 5. The reading is always stored in the Celsius unit and the read value
+should be divided by100to get the real temperature in Celsius.The value is stored
+as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='20' page='0'>
+<value>0x02</value>
+<description>Report interval for sensor 0 
+This register holds the report interval expressed inseconds for sensor 0. Writing
+zero to this register turn of report events for the sensor.</description>
+</register>
+<register offset='21' page='0'>
+<value>0x0A</value>
+<description>Report interval for sensor 1
+This register holds the report interval expressed inseconds for sensor 1. Writing
+zero to this register turn of report events for the sensor.</description>
+</register>
+<register offset='22' page='0'>
+<value>0x0A</value>
+<description>Report interval for sensor 2
+This register holds the report interval expressed inseconds for sensor 2. Writing
+zero to this register turn of report events for the sensor.</description>
+</register>
+<register offset='23' page='0'>
+<value>0x00</value>
+<description>Report interval for sensor 3
+This register holds the report interval expressed inseconds for sensor 3. Writing
+zero to this register turn of report events for the sensor.</description>
+</register>
+<register offset='24' page='0'>
+<value>0x0A</value>
+<description>Report interval for sensor 4
+This register holds the report interval expressed inseconds for sensor 4. Writing
+zero to this register turn of report events for the sensor.</description>
+</register>
+<register offset='25' page='0'>
+<value>0x00</value>
+<description>Report interval for sensor 5
+This register holds the report interval expressed inseconds for sensor 5. Writing
+zero to this register turnsof report events for the sensor.</description>
+</register>
+<register offset='38' page='0'>
+<value>0x0F</value>
+<description>B constant for sensor 0 MSB
+This register holds the most significant byte of the NTCB constant for sensor 0.</description>
+</register>
+<register offset='39' page='0'>
+<value>0x68</value>
+<description>B constant for 0 LSB
+This register holds the least significant byte of the NTCB constant for sensor 0.</description>
+</register>
+<register offset='40' page='0'>
+<value>0x0c</value>
+<description>B constant for sensor 1 MSB
+This register holds the most significant byte of the NTCB constant for sensor 1.</description>
+</register>
+<register offset='41' page='0'>
+<value>0xa8</value>
+<description>B constant for 1 LSB
+This register holds the least significant byte of the NTCB constant for sensor 1.</description>
+</register>
+<register offset='42' page='0'>
+<value>0x0D</value>
+<description>B constant for sensor 2 MSB
+This register holds the most significant byte of the NTCB constant for sensor 2.</description>
+</register>
+<register offset='43' page='0'>
+<value>0x7F</value>
+<description>B constant for 2 LSB
+This register holds the least significant byte of the NTCB constant for sensor 2.</description>
+</register>
+<register offset='44' page='0'>
+<value>0x0D</value>
+<description>B constant for sensor 3 MSB
+This register holds the most significant byte of the NTCB constant for sensor 3.</description>
+</register>
+<register offset='45' page='0'>
+<value>0x7F</value>
+<description>B constant for 3 LSB
+This register holds the least significant byte of the NTCB constant for sensor 3.</description>
+</register>
+<register offset='46' page='0'>
+<value>0x0D</value>
+<description>B constant for sensor 4 MSB
+This register holds the most significant byte of the NTCB constant for sensor 4.</description>
+</register>
+<register offset='47' page='0'>
+<value>0x7F</value>
+<description>B constant for 4 LSB
+This register holds the least significant byte of the NTCB constant for sensor 4.</description>
+</register>
+<register offset='48' page='0'>
+<value>0x0D</value>
+<description>B constant for sensor 5 MSB
+This register holds the most significant byte of the NTCB constant for sensor 5.</description>
+</register>
+<register offset='49' page='0'>
+<value>0x7F</value>
+<description>B constant for 5 LSB
+This register holds the least significant byte of the NTCB constant for sensor 5.</description>
+</register>
+<register offset='50' page='0'>
+<value>0x80</value>
+<description>Low alarm set point for sensor 0 MSB
+This register holds the most significant byte of the lowalarm set point for sensor
+0.The value is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='51' page='0'>
+<value>0xFF</value>
+<description>Low alarm set point for sensor 0 LSB
+This register holds the least significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='52' page='0'>
+<value>0xFF</value>
+<description>Low alarm set point for sensor 1 MSB
+This register holds the most significant byte of the lowalarm setpoint for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='53' page='0'>
+<value>0xEB</value>
+<description>Low alarm set point for sensor 1 LSB
+This register holds the least significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='54' page='0'>
+<value>0xFB</value>
+<description>Low alarm set point for sensor 2 MSB
+This register holds the most significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='55' page='0'>
+<value>0xFF</value>
+<description>Low alarm set point for sensor 2 LSB
+This register holds the least significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='56' page='0'>
+<value>0x80</value>
+<description>Low alarm set point for sensor 3 MSB
+This register holds the most significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='57' page='0'>
+<value>0xFF</value>
+<description>Low alarm set point for sensor 3 LSB
+This register holds the least significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='58' page='0'>
+<value>0x80</value>
+<description>Low alarm set point for sensor 4 MSB
+This register holds the most significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='59' page='0'>
+<value>0xFF</value>
+<description>Low alarm set point for sensor 4 LSB
+This register holds the least significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='60' page='0'>
+<value>0x80</value>
+<description>Low alarm set point for sensor 5 MSB
+This register holds the most significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='61' page='0'>
+<value>0xFF</value>
+<description>Low alarm set point for sensor 5 LSB
+This register holds the least significant byte of the lowalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='62' page='0'>
+<value>0x7F</value>
+<description>High alarm set point for sensor 0 MSB
+This register holds the most significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='63' page='0'>
+<value>0xFF</value>
+<description>High alarm set point for sensor 0 LSB
+This register holds the least significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='64' page='0'>
+<value>0xFF</value>
+<description>High alarm set point for sensor 1 MSB
+This register holds the most significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='65' page='0'>
+<value>0xED</value>
+<description>High alarm set point for sensor 1 LSB
+This register holds the least significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='66' page='0'>
+<value>0x7F</value>
+<description>High alarm set point for sensor 2 MSB
+This register holds the most significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='67' page='0'>
+<value>0xFF</value>
+<description>High alarm set point for sensor 2 LSB
+This register holds the least significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='68' page='0'>
+<value>0x7F</value>
+<description>High alarm set point for sensor 3 MSB
+This register holds the most significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='69' page='0'>
+<value>0xFF</value>
+<description>High alarm set point for sensor 3 LSB
+This register holds the least significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='70' page='0'>
+<value>0x7F</value>
+<description>High alarm set point for sensor 4 MSB
+This register holds the most significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='71' page='0'>
+<value>0xFF</value>
+<description>High alarm set point for sensor 4 LSB
+This register holds the least significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='72' page='0'>
+<value>0x7F</value>
+<description>High alarm set point for sensor 5 MSB
+This register holds the most significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='73' page='0'>
+<value>0xFF</value>
+<description>High alarm set point for sensor 5 LSB
+This register holds the least significant byte of the highalarm set point for sensor
+0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='74' page='0'>
+<value>0x22</value>
+<description>Zone for sensor 0
+This register holds the zone for sensor 0. The sensorzone is used for alarm events
+from the sensor.</description>
+</register>
+<register offset='75' page='0'>
+<value>0x01</value>
+<description>Subzone for sensor 0
+This register holds the subzone for sensor 0. The sensorsubzone is used for alarm
+events from the sensor.</description>
+</register>
+<register offset='76' page='0'>
+<value>0x22</value>
+<description>Zone for sensor 1
+This register holds the zone for sensor 1. The sensorzone is used for alarm events
+from the sensor.</description>
+</register>
+<register offset='77' page='0'>
+<value>0x01</value>
+<description>Subzone for sensor 1
+This register holds the subzone for sensor 1. The sensorsubzone is used for alarm
+events from the sensor.</description>
+</register>
+<register offset='78' page='0'>
+<value>0x22</value>
+<description>Zone for sensor 2
+This register holds the zone for sensor 2. The sensorzone is used for alarm events
+from the sensor.</description>
+</register>
+<register offset='79' page='0'>
+<value>0x01</value>
+<description>Subzone for sensor 2
+This register holds the subzone for sensor 2. The sensorsubzone is used for alarm
+events from the sensor.</description>
+</register>
+<register offset='80' page='0'>
+<value>0x22</value>
+<description>Zone for sensor 3
+This register holds the zone for sensor 3. The sensorzone is used for alarm events
+from the sensor.</description>
+</register>
+<register offset='81' page='0'>
+<value>0x01</value>
+<description>Subzone for sensor 3
+This register holds the subzone for sensor 3. The sensorsubzone is used for alarm
+events from the sensor.</description>
+</register>
+<register offset='82' page='0'>
+<value>0x22</value>
+<description>Zone for sensor 4
+This register holds the zone for sensor 4. The sensorzone is used for alarm events
+from the sensor.</description>
+</register>
+<register offset='83' page='0'>
+<value>0x01</value>
+<description>Subzone for sensor 4
+This register holds the subzone for sensor 4. The sensorsubzone is used for alarm
+events from the sensor.</description>
+</register>
+<register offset='84' page='0'>
+<value>0x22</value>
+<description>Zone for sensor 5
+This register holds the zone for sensor 5. The sensorzone is used for alarm events
+from the sensor.</description>
+</register>
+<register offset='85' page='0'>
+<value>0x00</value>
+<description>Subzone for sensor 5
+This register holds the subzone for sensor 5. The sensorsubzone is used for alarm
+events from the sensor.</description>
+</register>
+<register offset='86' page='0'>
+<value>0x00</value>
+<description>Sensor absolute low temperature for sensor 0 MSB
+Sensor absolute low temperature for sensor 0. Write any value to reset.A write will
+set the value of the msb/lsb pair to the highest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='87' page='0'>
+<value>0x00</value>
+<description>Sensor absolute low temperature for sensor 0 LSB
+Sensor absolute low temperature for sensor 0. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='88' page='0'>
+<value>0xF7</value>
+<description>Sensor absolute low temperature for sensor 1 MSB
+Sensor absolute low temperature for sensor 1. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='89' page='0'>
+<value>0xB1</value>
+<description>Sensor absolute low temperature for sensor 1 LSB
+Sensor absolute low temperature for sensor 1. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='90' page='0'>
+<value>0x00</value>
+<description>Sensor absolute low temperature for sensor 2 MSB
+Sensor absolute low temperature for sensor 2. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='91' page='0'>
+<value>0x00</value>
+<description>Sensor absolute low temperature for sensor 2 LSB
+Sensor absolute low temperature for sensor 2. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='92' page='0'>
+<value>0xB6</value>
+<description>Sensor absolute low temperature for sensor 3 MSB
+Sensor absolute low temperature for sensor 3. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='93' page='0'>
+<value>0x38</value>
+<description>Sensor absolute low temperature for sensor 3 LSB
+Sensor absolute low temperature for for sensor 3. Write Write any value to reset.A
+write will set the value of the msb/lsb pair to the highest possible temperature.The
+value is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='94' page='0'>
+<value>0x00</value>
+<description>Sensor absolute low temperature for sensor 4 MSB
+Sensor absolute low temperature for sensor 4. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='95' page='0'>
+<value>0x00</value>
+<description>Sensor absolute low temperature for sensor 4 LSB
+Sensor absolute low temperature for sensor 4. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='96' page='0'>
+<value>0xB7</value>
+<description>Sensor absolute low temperature for sensor 5 MSB
+Sensor absolute low temperature for sensor 5. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='97' page='0'>
+<value>0x61</value>
+<description>Sensor absolute low temperature for sensor 5 LSB
+Sensor absolute low temperature for sensor 5. Write Write any value to reset.A write
+will set the value of the msb/lsb pair to the highest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='98' page='0'>
+<value>0x0C</value>
+<description>Sensor absolute high temperature for sensor 0 MSB
+Sensor absolute high temperature for sensor 0. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='99' page='0'>
+<value>0xB0</value>
+<description>Sensor absolute high temperature for sensor 0 LSB
+Sensor absolute high temperature for sensor 0. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='100' page='0'>
+<value>0x08</value>
+<description>Sensor absolute high temperature for sensor 1 MSB
+Sensor absolute high temperature for sensor 1. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='101' page='0'>
+<value>0x48</value>
+<description>Sensor absolute high temperature for sensor 1 LSB
+Sensor absolute high temperature for sensor 1. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='102' page='0'>
+<value>0x13</value>
+<description>Sensor absolute high temperature for sensor 2 MSB
+Sensor absolute high temperature for sensor 2. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='103' page='0'>
+<value>0x3A</value>
+<description>Sensor absolute high temperature for sensor 2 LSB
+Sensor absolute high temperature for sensor 2. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='104' page='0'>
+<value>0x00</value>
+<description>Sensor absolute high temperature for sensor 3 MSB
+Sensor absolute high temperature for sensor 3. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='105' page='0'>
+<value>0x00</value>
+<description>Sensor absolute high temperature for sensor 3 LSB
+Sensor absolute high temperature for for sensor 3. Write any value to reset.A write
+will set the value of the msb/lsb pair to the lowest possible temperature.The value
+is stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='106' page='0'>
+<value>0x09</value>
+<description>Sensor absolute high temperature for sensor 4 MSB
+Sensor absolute high temperature for sensor 4. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='107' page='0'>
+<value>0x4E</value>
+<description>Sensor absolute high temperature for sensor 4 LSB
+Sensor absolute high temperature for sensor 4. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='108' page='0'>
+<value>0x00</value>
+<description>Sensor absolute high temperature for sensor 5 MSB
+Sensor absolute high temperature for sensor 5. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='109' page='0'>
+<value>0x00</value>
+<description>Sensor absolute high temperature for sensor 5 LSB
+Sensor absolute high temperature for sensor 5. Write any value to reset.A write will
+set the value of the msb/lsb pair to the lowest possible temperature.The value is
+stored as a twos complement number as temperature * 100.</description>
+</register>
+<register offset='110' page='0'>
+<value>0x02</value>
+<description>Hysteresis in degrees Celsius for sensor 0.
+Hysteresis for sensor 0. The value is stored as a twos complement number.</description>
+</register>
+<register offset='111' page='0'>
+<value>0x02</value>
+<description>Hysteresis for sensor 1.
+Hysteresis for sensor 1. The value is stored as a twos complement number.</description>
+</register>
+<register offset='112' page='0'>
+<value>0x02</value>
+<description>Hysteresis for sensor 2.
+Hysteresis for sensor 2. The value is stored as a twos complement number.</description>
+</register>
+<register offset='113' page='0'>
+<value>0x02</value>
+<description>Hysteresis sensor 3.
+Hysteresis for sensor 3. The value is stored as a twos complement number.</description>
+</register>
+<register offset='114' page='0'>
+<value>0x02</value>
+<description>Hysteresis for sensor 4.
+Hysteresis for sensor 4. The value is stored as a twos complement number.</description>
+</register>
+<register offset='115' page='0'>
+<value>0x02</value>
+<description>Hysteresis for sensor 5.
+Hysteresis for sensor 5. The value is stored as a twos complement number.</description>
+</register>
+<register offset='118' page='0'>
+<value>0xC3</value>
+<description>Voltage calibration value MSB.
+For precise measurements the actual voltage level in the NTC circuit may need to
+bemeasured and set. This is the MSB of the calibrated voltage level * 10000 </description>
+</register>
+<register offset='119' page='0'>
+<value>0x50</value>
+<description>Voltage calibration value LSB.
+For precise measurements the actual voltage level in the NTC circuit may need to
+bemeasured and set. This is the LSB of the calibrated voltage level * 10000 </description>
+</register>
+<register offset='72' page='1'>
+<value>0x0F</value>
+<description>Raw A/D value for Sensor 0 (MSB)
+Raw A/D value for Sensor 0.</description>
+</register>
+<register offset='73' page='1'>
+<value>0x02</value>
+<description>Raw A/D value for Sensor 0 (LSB)
+Raw A/D value for Sensor 0.</description>
+</register>
+<register offset='74' page='1'>
+<value>0x77</value>
+<description>Raw A/D value for Sensor 1 (MSB)
+Raw A/D value for Sensor 1.</description>
+</register>
+<register offset='75' page='1'>
+<value>0x00</value>
+<description>Raw A/D value for Sensor 1 (LSB)
+Raw A/D value for Sensor 1.</description>
+</register>
+<register offset='76' page='1'>
+<value>0x93</value>
+<description>Raw A/D value for Sensor 2 (MSB)
+Raw A/D value for Sensor 2.</description>
+</register>
+<register offset='77' page='1'>
+<value>0x02</value>
+<description>Raw A/D value for Sensor 2 (LSB)
+Raw A/D value for Sensor 2.</description>
+</register>
+<register offset='78' page='1'>
+<value>0x00</value>
+<description>Raw A/D value for Sensor 3 (MSB)
+Raw A/D value for Sensor 3.</description>
+</register>
+<register offset='79' page='1'>
+<value>0x00</value>
+<description>Raw A/D value for Sensor 3 (LSB)
+Raw A/D value for Sensor 3.</description>
+</register>
+<register offset='80' page='1'>
+<value>0xC7</value>
+<description>Raw A/D value for Sensor 4 (MSB)
+Raw A/D value for Sensor 4.</description>
+</register>
+<register offset='81' page='1'>
+<value>0x01</value>
+<description>Raw A/D value for Sensor 4 (LSB)
+Raw A/D value for Sensor 4.</description>
+</register>
+<register offset='82' page='1'>
+<value>0x00</value>
+<description>Raw A/D value for Sensor 5 (MSB)
+Raw A/D value for Sensor 5.</description>
+</register>
+<register offset='83' page='1'>
+<value>0x00</value>
+<description>Raw A/D value for Sensor 5 (LSB)
+Raw A/D value for Sensor 5.</description>
+</register>
+<register offset='84' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 0 (MSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='85' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 0 (LSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='86' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 1 (MSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='87' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 1 (LSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='88' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 2 (MSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='89' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 2 (LSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='90' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 3 (MSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='91' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 3 (LSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='92' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 4 (MSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='93' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 4 (LSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='94' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 5 (MSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='95' page='1'>
+<value>0x00</value>
+<description>Sensor calibration value for Sensor 5 (LSB)
+Set a 16-bit signed value here to adjust the temperature readings up or down. The
+value should be the temperature adjustment expressed as temperature * 100.</description>
+</register>
+<register offset='128' page='0'>
+<value>0x03</value>
+<description>Alarm Status Register</description>
+</register>
+<register offset='129' page='0'>
+<value>0x01</value>
+<description>VSCP Major version number</description>
+</register>
+<register offset='130' page='0'>
+<value>0x05</value>
+<description>VSCP Minor version number</description>
+</register>
+<register offset='131' page='0'>
+<value>0x00</value>
+<description>Node Control Flags test</description>
+</register>
+<register offset='132' page='0'>
+<value>0x38</value>
+<description>User ID 0</description>
+</register>
+<register offset='133' page='0'>
+<value>0x0B</value>
+<description>User ID 1</description>
+</register>
+<register offset='134' page='0'>
+<value>0x02</value>
+<description>User ID 2</description>
+</register>
+<register offset='135' page='0'>
+<value>0xFF</value>
+<description>User ID 3</description>
+</register>
+<register offset='136' page='0'>
+<value>0xFF</value>
+<description>User ID 4</description>
+</register>
+<register offset='137' page='0'>
+<value>0xFF</value>
+<description>Manufacturer device id 0</description>
+</register>
+<register offset='138' page='0'>
+<value>0xFF</value>
+<description>Manufacturer device id 1</description>
+</register>
+<register offset='139' page='0'>
+<value>0xFF</value>
+<description>Manufacturer device id 2</description>
+</register>
+<register offset='140' page='0'>
+<value>0xFF</value>
+<description>Manufacturer device id 3</description>
+</register>
+<register offset='141' page='0'>
+<value>0xFF</value>
+<description>Manufacturer sub device id 0</description>
+</register>
+<register offset='142' page='0'>
+<value>0xFF</value>
+<description>Manufacturer sub device id 1</description>
+</register>
+<register offset='143' page='0'>
+<value>0xFF</value>
+<description>Manufacturer sub device id 2</description>
+</register>
+<register offset='144' page='0'>
+<value>0xFF</value>
+<description>Manufacturer sub device id 3</description>
+</register>
+<register offset='145' page='0'>
+<value>0x01</value>
+<description>Nickname id</description>
+</register>
+<register offset='146' page='0'>
+<value>0x00</value>
+<description>Page select register MSB</description>
+</register>
+<register offset='147' page='0'>
+<value>0x00</value>
+<description>Page select register LSB</description>
+</register>
+<register offset='148' page='0'>
+<value>0x01</value>
+<description>Firmware major version number</description>
+</register>
+<register offset='149' page='0'>
+<value>0x02</value>
+<description>Firmware minor version number</description>
+</register>
+<register offset='150' page='0'>
+<value>0x02</value>
+<description>Firmware sub minor version number</description>
+</register>
+<register offset='151' page='0'>
+<value>0x01</value>
+<description>Boot loader algorithm</description>
+</register>
+<register offset='152' page='0'>
+<value>0x08</value>
+<description>Buffer Size</description>
+</register>
+<register offset='153' page='0'>
+<value>0x01</value>
+<description>Number of register pages used.</description>
+</register>
+<register offset='208' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 15, MSB
+GUID=FF:FF:FF:FF:FF:FF:FF:FF:FF:FF:FF:FF:FF:FF:FF:FF</description>
+</register>
+<register offset='209' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 14</description>
+</register>
+<register offset='210' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 13</description>
+</register>
+<register offset='211' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 12</description>
+</register>
+<register offset='212' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 11</description>
+</register>
+<register offset='213' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 10</description>
+</register>
+<register offset='214' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 9</description>
+</register>
+<register offset='215' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 8</description>
+</register>
+<register offset='216' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 7</description>
+</register>
+<register offset='217' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 6</description>
+</register>
+<register offset='218' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 5</description>
+</register>
+<register offset='219' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 4</description>
+</register>
+<register offset='220' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 3</description>
+</register>
+<register offset='221' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 2</description>
+</register>
+<register offset='222' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 1</description>
+</register>
+<register offset='223' page='0'>
+<value>0xFF</value>
+<description>GUID Byte 0, LSB</description>
+</register>
+<register offset='224' page='0'>
+<value>0x77</value>
+<description>Module Description File URL, MSB
+http://www.eurosource.se/ntc10KA_3.xml</description>
+</register>
+<register offset='225' page='0'>
+<value>0x77</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='226' page='0'>
+<value>0x77</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='227' page='0'>
+<value>0x2E</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='228' page='0'>
+<value>0x65</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='229' page='0'>
+<value>0x75</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='230' page='0'>
+<value>0x72</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='231' page='0'>
+<value>0x6F</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='232' page='0'>
+<value>0x73</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='233' page='0'>
+<value>0x6F</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='234' page='0'>
+<value>0x75</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='235' page='0'>
+<value>0x72</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='236' page='0'>
+<value>0x63</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='237' page='0'>
+<value>0x65</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='238' page='0'>
+<value>0x2E</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='239' page='0'>
+<value>0x73</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='240' page='0'>
+<value>0x65</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='241' page='0'>
+<value>0x2F</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='242' page='0'>
+<value>0x6E</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='243' page='0'>
+<value>0x74</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='244' page='0'>
+<value>0x63</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='245' page='0'>
+<value>0x31</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='246' page='0'>
+<value>0x30</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='247' page='0'>
+<value>0x4B</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='248' page='0'>
+<value>0x41</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='249' page='0'>
+<value>0x5F</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='250' page='0'>
+<value>0x33</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='251' page='0'>
+<value>0x2E</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='252' page='0'>
+<value>0x78</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='253' page='0'>
+<value>0x6D</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='254' page='0'>
+<value>0x6C</value>
+<description>Module Description File URL</description>
+</register>
+<register offset='255' page='0'>
+<value>0x00</value>
+<description>Module Description File URL, LSB</description>
+</register>
+</registerset>
