@@ -872,8 +872,10 @@ int16_t getCalibrationValue(uint8_t i)
 {
     int16_t cal;
 
-    cal = ((uint8_t)readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_MSB))<<8 +
-            readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_LSB);
+    cal = construct_signed16( readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_MSB),
+				readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_LSB) );
+    //cal = ((int16_t)readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_MSB))<<8 +
+    //        readEEPROM(2 * i + EEPROM_CALIBRATION_SENSOR0_LSB);
 
     return cal;
 }

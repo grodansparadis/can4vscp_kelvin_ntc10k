@@ -1,5 +1,7 @@
 Kelvin NTC
 ==========
+Kelvin NTC
+==========
 2016-03-06 - AKHE C14 should be 10u for 26K80
 2015-06-16 - AKHE Power lines to thin - fixed.
 2011-12-20 - AKHE Added termination resistor. Leave unpopulated.
