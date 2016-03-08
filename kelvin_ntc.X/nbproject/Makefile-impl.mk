@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=kelvin_ntc.X
 
 # Active Configuration
-DEFAULTCONF=Relocated
+DEFAULTCONF=Debug_26K80
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Relocated Debug 
+ALLCONFS=Relocated_2580 Debug_2580 Debug_26K80 Relocated_26K80 
 
 
 # build
@@ -45,15 +45,19 @@ ALLCONFS=Relocated Debug
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated clean
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_2580 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_2580 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_26K80 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_26K80 clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated build
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_2580 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_2580 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Debug_26K80 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Relocated_26K80 build
 
 
 

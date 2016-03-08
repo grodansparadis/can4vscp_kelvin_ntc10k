@@ -4,7 +4,7 @@
  *
  *  Kelvin NTC10KA Module
  *
- * Copyright (C) 1995-2015 Ake Hedman, Grodans Paradis AB
+ * Copyright (C) 1995-2016 Ake Hedman, Grodans Paradis AB
  *                          <akhe@grodansparadis.com>
  *
  * This software is provided 'as-is', without any express or implied
@@ -2803,9 +2803,10 @@ void vscp_setSegmentCRC(uint8_t crc)
 //  setVSCPControlByte
 //
 
-void vscp_setControlByte(uint8_t ctrl)
+void vscp_setControlByte( uint8_t ctrl, uint8_t idx )
 {
-    writeEEPROM(VSCP_EEPROM_CONTROL, ctrl);
+    if ( idx > 1 ) return;
+    writeEEPROM( VSCP_EEPROM_CONTROL1 + idx, ctrl );
 }
 
 
@@ -2813,9 +2814,19 @@ void vscp_setControlByte(uint8_t ctrl)
 //  getVSCPControlByte
 //
 
-uint8_t vscp_getControlByte(void)
+uint8_t vscp_getControlByte( uint8_t idx )
 {
-    return readEEPROM(VSCP_EEPROM_CONTROL);
+    if ( idx > 1 ) return 0;
+    return readEEPROM( VSCP_EEPROM_CONTROL1 + idx );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//  vscp_init_pstorage(
+//
+
+void vscp_init_pstorage( void )
+{
+    init_app_eeprom();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
