@@ -1,6 +1,7 @@
 Kelvin NTC
 ==========
 
+2016-03-23 AKHE -Version 1.2.4 -------------------------------------------------
 2016-03-08 AKHE - Adopted to 1.6 firmware. Adopted for PIC18F26K80.
 2016-02-04 AKHE - Temperature calibration value calculated wrongly.
 2015-11-26 AKHE - Fixed problem with low/high limits with negative values. Also

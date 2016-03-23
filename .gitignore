@@ -26,7 +26,6 @@
 *.app
 *.i*86
 *.x86_64
-*.hex
 /kelvin_ntc.X/debug
 /kelvin_ntc.X/build
 /kelvin_ntc.X/html
