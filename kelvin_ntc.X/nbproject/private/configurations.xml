@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="62">
   <projectmakefile>Makefile</projectmakefile>
+<<<<<<< HEAD
+  <defaultConf>2</defaultConf>
+=======
   <defaultConf>0</defaultConf>
+>>>>>>> 13e88f7760576942ba7516e8d1d36ec5925eb9f6
   <confs>
     <conf name="Relocated_2580" type="2">
       <platformToolSN></platformToolSN>

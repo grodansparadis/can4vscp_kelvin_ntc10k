@@ -27,7 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=kelvin_ntc.X
 
 # Active Configuration
+<<<<<<< HEAD
+DEFAULTCONF=Debug_26K80
+=======
 DEFAULTCONF=Relocated_2580
+>>>>>>> 13e88f7760576942ba7516e8d1d36ec5925eb9f6
 CONF=${DEFAULTCONF}
 
 # All Configurations
