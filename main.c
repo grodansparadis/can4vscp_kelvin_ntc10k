@@ -87,10 +87,10 @@
 
 
 // CONFIG1L
-#pragma config SOSCSEL = DIG    // RC0/RC is I/O.
+#pragma config SOSCSEL = DIG    // RC0/RC is I/O
 #pragma config RETEN = OFF      // Ultra low-power regulator is Disabled (Controlled by REGSLP bit).
 #pragma config INTOSCSEL = HIGH // LF-INTOSC in High-power mode during Sleep.
-#pragma config XINST = OFF      // No extended instruction set.
+#pragma config XINST = OFF      // No extended instruction set
 
 // CONFIG1H
 #pragma config FOSC = HS2       // Crystal 10 MHz
@@ -309,7 +309,7 @@ void interrupt low_priority interrupt_at_low_vector( void )
         }
 
         // Start conversion
-        //ConvertADC();
+        ConvertADC();
 
         PIR1bits.ADIF = 0; // Reset interrupt flag
 
@@ -496,11 +496,7 @@ void doWork(void)
                 
                 Rinf = 10000.0 * exp(B / -298.15);
                 //itemp = Rinf * 10000;
-#if defined(_18F2580)                 
                 v = 5.0 * (double) avarage / 1025;
-#else
-                v = 5.0 * (double) avarage / 4097;
-#endif                
                 //itemp = v * 100;
                 resistance = (calVoltage - 10000.0 * v) / v;
                 //itemp = r;
@@ -530,14 +526,10 @@ void doWork(void)
                 // ================
 
                 // Assuming a 10k Thermistor.  Calculation is actually: Resistance = (1024/ADC)
-#if defined(_18F2580) 
                 resistance = ((10240000 / adc[2 * i + 1]) - 10000);
-#else
-                resistance = ((40960000 / adc[2 * i + 1]) - 10000);
-#endif                
 
                 /********************************************************************/
-                /* Utilises the Steinhart-Hart Thermistor Equation:					*/
+                /* Utilizes the Steinhart-Hart Thermistor Equation:					*/
                 /*    Temperature in Kelvin = 1 / {A + B[ln(R)] + C[ln(R)]^3}		*/
                 /********************************************************************/
                 temp = log(resistance);
