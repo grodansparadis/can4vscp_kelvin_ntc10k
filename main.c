@@ -5,7 +5,7 @@
  *  Kelvin NTC10KA Module
  *  =====================
  *
- *  Copyright (C) 2015-2016 Ake Hedman, Grodans Paradis AB
+ *  Copyright (C) 2000-2016 Ake Hedman, Grodans Paradis AB
  *                          http://www.grodansparadis.com
  *                          <akhe@grodansparadis.com>
  *
@@ -131,13 +131,13 @@ const uint8_t vscp_deviceURL[] = "www.eurosource.se/ntc10KA_3.xml";
 // Global Variable Declarations
 int16_t current_temp[6]; // Current temperature
 
-uint8_t adc[NUMBER_OF_TEMP_SERIES * 12];// Current ADC values
-uint8_t adc_conversion_flags;           // Bits to flag new adc values
-uint8_t adc_series_counter;             // Series counter
+uint8_t adc[NUMBER_OF_TEMP_SERIES * 12];    // Current ADC values
+uint8_t adc_conversion_flags;               // Bits to flag new ADC values
+uint8_t adc_series_counter;                 // Series counter
 
-volatile uint16_t sendTimer;             // Timer for CAN send
-volatile uint32_t measurement_clock;    // Clock for measurements
-volatile uint32_t timeout_clock;        // Clock used for timeouts
+volatile uint16_t sendTimer;                // Timer for CAN send
+volatile uint32_t measurement_clock;        // Clock for measurements
+volatile uint32_t timeout_clock;            // Clock used for timeouts
 
 uint8_t seconds;                // counter for seconds
 
@@ -210,9 +210,11 @@ void interrupt low_priority interrupt_at_low_vector( void )
         switch (0x3C & ADCON0) {
 
             case SELECT_ADC_TEMP0:
+                
                 // Read conversion
                 adc[(12 * adc_series_counter) + 0] = ADRESH;
                 adc[(12 * adc_series_counter) + 1] = ADRESL;
+                
                 // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP1 + 1;
 
@@ -224,6 +226,7 @@ void interrupt low_priority interrupt_at_low_vector( void )
                 break;
 
             case SELECT_ADC_TEMP1:
+                
                 // Read conversion
                 adc[(12 * adc_series_counter) + 2] = ADRESH;
                 adc[(12 * adc_series_counter) + 3] = ADRESL;
@@ -239,6 +242,7 @@ void interrupt low_priority interrupt_at_low_vector( void )
                 break;
 
             case SELECT_ADC_TEMP2:
+                
                 // Read conversion
                 adc[(12 * adc_series_counter) + 4] = ADRESH;
                 adc[(12 * adc_series_counter) + 5] = ADRESL;
@@ -254,9 +258,11 @@ void interrupt low_priority interrupt_at_low_vector( void )
                 break;
 
             case SELECT_ADC_TEMP3:
+                
                 // Read conversion
                 adc[(12 * adc_series_counter) + 6] = ADRESH;
                 adc[(12 * adc_series_counter) + 7] = ADRESL;
+                
                 // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP4 + 1;
 
@@ -268,9 +274,11 @@ void interrupt low_priority interrupt_at_low_vector( void )
                 break;
 
             case SELECT_ADC_TEMP4:
+                
                 // Read conversion
                 adc[(12 * adc_series_counter) + 8] = ADRESH;
                 adc[(12 * adc_series_counter) + 9] = ADRESL;
+                
                 // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP5 + 1;
 
@@ -282,9 +290,11 @@ void interrupt low_priority interrupt_at_low_vector( void )
                 break;
 
             case SELECT_ADC_TEMP5:
+                
                 // Read conversion
                 adc[(12 * adc_series_counter) + 10] = ADRESH;
                 adc[(12 * adc_series_counter) + 11] = ADRESL;
+                
                 // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP0 + 1;
 
@@ -302,10 +312,12 @@ void interrupt low_priority interrupt_at_low_vector( void )
                 break;
 
             default:
+                
                 // Start new conversion
                 ADCON0 = SELECT_ADC_TEMP0 + 1;
                 adc_series_counter = 0;
                 break;
+                
         }
 
         // Start conversion
@@ -478,7 +490,7 @@ void doWork(void)
             // Calculate mean value for this adc
             avarage = 0;
             for (j = 0; j < NUMBER_OF_TEMP_SERIES; j++) {
-                avarage += ((uint16_t)adc[12 * j + 2 * i])*256 + adc[12 * j + 2 * i + 1];
+                avarage += ( (uint16_t)adc[12 * j + 2 * i]<<8 ) + adc[12 * j + 2 * i + 1];
             }
             avarage = avarage / NUMBER_OF_TEMP_SERIES;
 
@@ -490,13 +502,17 @@ void doWork(void)
                 // R1 = (R2V - R2V2) / V2  R2= 10K, V = 5V,  V2 = adc * voltage/1024
                 // T = B / ln(r/Rinf)
                 // Rinf = R0 e (-B/T0), R0=10K, T0 = 273.15 + 25 = 298.15
-                B = (uint16_t)eeprom_read(2 * i + EEPROM_B_CONSTANT0_MSB)*256 +
+                B = (uint16_t)eeprom_read(2 * i + ( EEPROM_B_CONSTANT0_MSB)<<8 ) +
                         eeprom_read(2 * i + EEPROM_B_CONSTANT0_LSB);
 
                 
                 Rinf = 10000.0 * exp(B / -298.15);
                 //itemp = Rinf * 10000;
+#if defined(_18F2580)                
                 v = 5.0 * (double) avarage / 1025;
+#else  
+                v = 5.0 * (double) avarage / 4097;
+#endif                
                 //itemp = v * 100;
                 resistance = (calVoltage - 10000.0 * v) / v;
                 //itemp = r;
@@ -526,7 +542,12 @@ void doWork(void)
                 // ================
 
                 // Assuming a 10k Thermistor.  Calculation is actually: Resistance = (1024/ADC)
+#if defined(_18F2580)                 
                 resistance = ((10240000 / adc[2 * i + 1]) - 10000);
+#else 
+                // Assuming a 10k Thermistor.  Calculation is actually: Resistance = (4096/ADC)
+                resistance = ((40960000 / adc[2 * i + 1]) - 10000);     
+#endif                
 
                 /********************************************************************/
                 /* Utilizes the Steinhart-Hart Thermistor Equation:					*/
@@ -918,8 +939,6 @@ int16_t getCalibrationValue(uint8_t i)
 
 void init()
 {
-    //uint8_t msgdata[ 8 ];
-
     // Initialize data
     init_app_ram();
 
@@ -971,26 +990,24 @@ void init()
     // Initialize CAN
     ECANInitialize();
 
+/* 
+    {
+    uint8_t msgdata[ 8 ];
+    
     // Must be in Config. mode to change many of settings.
     //ECANSetOperationMode(ECAN_OP_MODE_CONFIG);
 
     // Return to Normal mode to communicate.
     //ECANSetOperationMode(ECAN_OP_MODE_NORMAL);
 
-    /*
-            msgdata[ 0 ] = 1;
-            msgdata[ 1 ] = 2;
-            msgdata[ 2 ] = 3;
-            msgdata[ 3 ] = 4;
+    msgdata[ 0 ] = 1;
+    msgdata[ 1 ] = 2;
+    msgdata[ 2 ] = 3;
+    msgdata[ 3 ] = 4;
 
-            if ( vscp18f_sendMsg( 0x123,
-     *                              msgdata,
-     *                              4,
-     *        CAN_TX_PRIORITY_0 & CAN_TX_XTD_FRAME & CAN_TX_NO_RTR_FRAME ) ) {
-                    ;
-            }
-
-     */
+    sendCANFrame( 12345, 4, msgdata );
+    }
+*/
 
     // Enable global interrupt
     INTCONbits.GIE = 1;
@@ -1909,14 +1926,7 @@ uint8_t vscp_readAppReg(unsigned char reg)
         }
         // Raw A/D values
         else if (reg < 84) {
-            // The byte order is different in registers
             uint8_t pos = reg - 72;
-            if ( pos % 2 ) {
-                pos--;
-            }
-            else {
-                pos++;
-            }
             rv = adc[ pos ];
         }
         // Sensor calibration values
@@ -2570,16 +2580,9 @@ uint8_t vscp_writeAppReg(unsigned char reg, unsigned char val)
             rv = eeprom_read(EEPROM_COEFFICIENT_A_SENSOR0_0 + reg );
             writeCoeffs2Ram();
         }
-        // Raw A/D values is not writable
+        // Raw A/D values is NOT writable
         else if (reg < 84) {
-            // The byte order is different in registers
             uint8_t pos = reg - 72;
-            if ( pos % 2 ) {
-                pos--;
-            }
-            else {
-                pos++;
-            }
             rv = adc[ pos ];
         }
         // Sensor calibration values
