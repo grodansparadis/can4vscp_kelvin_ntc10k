@@ -207,7 +207,11 @@ void interrupt low_priority interrupt_at_low_vector( void )
     // Check ADC
     if ( PIR1bits.ADIF ) {
 
+#if defined(_18F2580)        
         switch (0x3C & ADCON0) {
+#else
+        switch (0x7C & ADCON0) {   
+#endif            
 
             case SELECT_ADC_TEMP0:
                 
@@ -310,6 +314,12 @@ void interrupt low_priority interrupt_at_low_vector( void )
                     adc_series_counter = 0;
                 }
                 break;
+                
+#if defined(_18F2580)        
+        
+#else
+        
+#endif                 
 
             default:
                 
@@ -477,8 +487,8 @@ void doWork(void)
     double v;
     double calVoltage;
 
-    calVoltage = ((uint16_t) eeprom_read(EEPROM_CALIBRATED_VOLTAGE_MSB)*256 +
-                    eeprom_read(EEPROM_CALIBRATED_VOLTAGE_LSB));
+    calVoltage = (double)construct_unsigned16( eeprom_read(EEPROM_CALIBRATED_VOLTAGE_MSB),
+                                        eeprom_read(EEPROM_CALIBRATED_VOLTAGE_LSB) ) / 10000.0;
 
     // Check if there are new adc values to
     // convert to temperatures
@@ -490,7 +500,8 @@ void doWork(void)
             // Calculate mean value for this adc
             avarage = 0;
             for (j = 0; j < NUMBER_OF_TEMP_SERIES; j++) {
-                avarage += ( (uint16_t)adc[12 * j + 2 * i]<<8 ) + adc[12 * j + 2 * i + 1];
+                avarage +=  construct_unsigned16( adc[12 * j + 2 * i], 
+                                                    adc[12 * j + 2 * i + 1] );
             }
             avarage = avarage / NUMBER_OF_TEMP_SERIES;
 
@@ -502,25 +513,28 @@ void doWork(void)
                 // R1 = (R2V - R2V2) / V2  R2= 10K, V = 5V,  V2 = adc * voltage/1024
                 // T = B / ln(r/Rinf)
                 // Rinf = R0 e (-B/T0), R0=10K, T0 = 273.15 + 25 = 298.15
-                B = (uint16_t)eeprom_read(2 * i + ( EEPROM_B_CONSTANT0_MSB)<<8 ) +
-                        eeprom_read(2 * i + EEPROM_B_CONSTANT0_LSB);
+
+                B = construct_unsigned16( eeprom_read(2 * i + EEPROM_B_CONSTANT0_MSB ),
+                                        eeprom_read(2 * i + EEPROM_B_CONSTANT0_LSB) );
 
                 
-                Rinf = 10000.0 * exp(B / -298.15);
-                //itemp = Rinf * 10000;
-#if defined(_18F2580)                
-                v = 5.0 * (double) avarage / 1025;
+                Rinf = 10000.0 * exp(B/-298.15);
+                
+#if defined(_18F2580)   
+                // V2 = adc * voltage/1024
+                v = calVoltage * (double)avarage/1024;
 #else  
-                v = 5.0 * (double) avarage / 4097;
+                // V2 = adc * voltage/4096
+                v = calVoltage * (double)avarage/4096;
 #endif                
-                //itemp = v * 100;
-                resistance = (calVoltage - 10000.0 * v) / v;
+                // R1 = (R2V - R2V2) / V2  R2= 10K, V = 5V,  V2 = adc * voltage/1024
+                resistance = ( 10000.0*(calVoltage - v) ) / v;
+                
                 //itemp = r;
                 temp = ((double) B) / log(resistance / Rinf);
                 //itemp = log(r/Rinf);
-                temp -= 273.15; // Convert Kelvin to Celcius
+                temp -= 273.15; // Convert Kelvin to Celsius
                 
-
                 //avarage = testadc;
                 /*  https://learn.adafruit.com/thermistor/using-a-thermistor
                 avarage = (1023/avarage) - 1;
@@ -533,7 +547,7 @@ void doWork(void)
                 temp = 1.0 / temp;              // Invert
                 temp -= 273.15;
                 */
-                current_temp[ i ] = (current_temp[ i ] + ((long) (temp * 100) + getCalibrationValue(i))) / 2;
+                current_temp[ i ] = ( current_temp[ i ] + ( (long)(temp * 100) + getCalibrationValue( i ) ) ) / 2;
 
             }
             else {
@@ -550,7 +564,7 @@ void doWork(void)
 #endif                
 
                 /********************************************************************/
-                /* Utilizes the Steinhart-Hart Thermistor Equation:					*/
+                /* Utilises the Steinhart-Hart Thermistor Equation:					*/
                 /*    Temperature in Kelvin = 1 / {A + B[ln(R)] + C[ln(R)]^3}		*/
                 /********************************************************************/
                 temp = log(resistance);
@@ -927,8 +941,6 @@ int16_t getCalibrationValue(uint8_t i)
 
     cal = construct_signed16( eeprom_read(2 * i + EEPROM_CALIBRATION_SENSOR0_MSB),
 				eeprom_read(2 * i + EEPROM_CALIBRATION_SENSOR0_LSB) );
-    //cal = ((int16_t)eeprom_read(2 * i + EEPROM_CALIBRATION_SENSOR0_MSB))<<8 +
-    //        eeprom_read(2 * i + EEPROM_CALIBRATION_SENSOR0_LSB);
 
     return cal;
 }
@@ -948,7 +960,7 @@ void init()
     // RA0/AN0 - input
     // RA1/AN1 - input
     // RA2/AN2 - input
-    TRISA = 0x07;
+    TRISA = 0b00000111;
 
     // PortB
     // RB7 - Not used.
@@ -959,7 +971,7 @@ void init()
     // RB2 CAN TX - output
     // RB1/AN8 - input
     // RB0/AN10 -input
-    TRISB = 0x1B;
+    TRISB = 0b00011011; // 0x1B;
 
     // RC7 - Output - Not used.
     // RC6 - Output - Not used.
@@ -969,21 +981,35 @@ void init()
     // RC1 - Output - Status LED - Default off
     // RC0 - Input  - Init. button
 
-    TRISC = 0x01;
+    TRISC = 0b00000001;
     PORTC = 0x00;
-
+    
     OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_8);
     WriteTimer0(TIMER0_RELOAD_VALUE);
 
 #if defined(_18F2580)     
-    OpenADC(ADC_FOSC_64 & ADC_RIGHT_JUST & ADC_20_TAD,
+    OpenADC(ADC_FOSC_32 & ADC_RIGHT_JUST & ADC_20_TAD,
                 ADC_CH0 & ADC_INT_ON & ADC_11ANA &
                     ADC_VREFPLUS_VDD & ADC_VREFMINUS_VSS,
-                15);
+                15 );
 #else if defined(_18F25K80) || defined(_18F26K80) || defined(_18F45K80) || defined(_18F46K80) || defined(_18F65K80) || defined(_18F66K80)
-    OpenADC(ADC_FOSC_64 & ADC_RIGHT_JUST & ADC_20_TAD,
+        
+    // Disable comparators
+    CM1CON = 0x00;
+    CM2CON = 0x00;
+    CVRCON = 0; 
+    
+    ANCON0bits.ANSEL0=1;
+    ANCON0bits.ANSEL1=1;
+    ANCON0bits.ANSEL2=1;
+    ANCON1bits.ANSEL8=1;
+    ANCON1bits.ANSEL9=1;
+    ANCON1bits.ANSEL10=1;
+
+    // OpenADC_Page16
+    OpenADC( ADC_FOSC_32 & ADC_RIGHT_JUST & ADC_20_TAD,
                 ADC_CH0 & ADC_INT_ON,
-                15);
+                ADC_NEG_CH0 & ADC_REF_VDD_VDD & ADC_REF_VDD_VSS );
 #endif    
    
 

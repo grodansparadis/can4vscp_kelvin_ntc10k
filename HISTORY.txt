@@ -1,16 +1,25 @@
 Kelvin NTC
 ==========
 
-2016-03-23 AKHE - Version 1.2.4 -------------------------------------------------
+2016-03-30 AKHE - Made code work for PIC18F26K80
+2016-03-29 AKHE - Raw A/D register values was displayed in wrong order. Fixed.
+--------------------------------------------------------------------------------
+
+2016-03-23 AKHE - Version 1.2.5 -------------------------------------------------
 2016-03-23 AKHE - Adopted for VSCP firmware 1.6.1
+--------------------------------------------------------------------------------
+
 2016-03-23 AKHE - Version 1.2.4 -------------------------------------------------
-2016-03-08 AKHE - Adopted to 1.6 firmware. Adopted for PIC18F26K80.
+2016-03-08 AKHE - Adopted to 1.6.0 firmware. Adopted for PIC18F26K80.
 2016-02-04 AKHE - Temperature calibration value calculated wrongly.
 2015-11-26 AKHE - Fixed problem with low/high limits with negative values. Also
                     limits now are in degrees as is hysteresis as well.
 2015-11-25 AKHE - Fixed problem with overwritten calibration value on bootload
 2015-11-24 AKHE - Moved limit and alarm tests to one second work where they belong.
-2015-09-28 AKHE - Temperature register 5 was not read correctly. Temperature register 4 was returned erronius instead.
+2015-09-28 AKHE - Temperature register 5 was not read correctly. Temperature 
+                    register 4 was returned erronius instead.
+--------------------------------------------------------------------------------
+
 ----- Version 1.2.2
 2015-09-13 AKHE - Sensor zones/subzones was written correctly but not read correctly
 2015-09-13 AKHE - Fixed sync command.

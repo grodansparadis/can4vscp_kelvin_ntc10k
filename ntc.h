@@ -417,7 +417,11 @@
 #define SELECT_ADC_TEMP4                    (9<<2)   // ADC9
 #define SELECT_ADC_TEMP5                    (8<<2)   // ADC8
 
-// Temeparture conversions
+#define SELECT_ADC_DIOD_TEMP                0b1110100
+#define SELECT_ADC_VDC_CORE                 0x1111000
+#define SELECT_ADC_BANDGAP                  0x1111100
+
+// Temperature conversions
 double Celsius2Fahrenheit(double tc);
 double Fahrenheit2Celsius(double tf);
 double Celsius2Kelvin(double tc);
