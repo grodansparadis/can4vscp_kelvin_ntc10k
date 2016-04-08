@@ -119,11 +119,6 @@
 
 #endif
 
-// Startup code from c018.c
-//void _startup(void);
-
-// ISR Routines
-//void isr_low(void);
 
 // The device URL (max 32 characters including null termination)
 const uint8_t vscp_deviceURL[] = "www.eurosource.se/ntc10KA_3.xml";
@@ -314,12 +309,6 @@ void interrupt low_priority interrupt_at_low_vector( void )
                     adc_series_counter = 0;
                 }
                 break;
-                
-#if defined(_18F2580)        
-        
-#else
-        
-#endif                 
 
             default:
                 
@@ -355,12 +344,12 @@ void main()
     // restore if needed
     if ( !vscp_check_pstorage() ) {
 
-        // Spoiled or not initialized - reinitialize
+        // Spoiled or not initialised - reinitialise
         init_app_eeprom();
 
     }
 
-    vscp_init(); // Initialize the VSCP functionality
+    vscp_init(); // Initialise the VSCP functionality
 
     while (TRUE) { // Loop Forever
 
@@ -1038,6 +1027,7 @@ void init()
     // Enable global interrupt
     INTCONbits.GIE = 1;
 
+    // Start ADC conversions
     ConvertADC();
 
     return;

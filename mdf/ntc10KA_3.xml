@@ -110,7 +110,7 @@
 			Bit 7: Continuous alarm events.\n 
 			</description>
 			<access>rw</access>
-			<bit pos="0" width="2" default="false" >
+			<bit pos="0" width="2" default="0" >
 				<name lang="en">Temperature unit</name>
 				<description lang="en">
 				The module can present the temperatures in different units. Default
@@ -198,7 +198,7 @@
 			Bit 7: Continuous alarm events.\n 
 			</description>
 			<access>rw</access>
-			<bit pos="0" width="2" default="false" >
+			<bit pos="0" width="2" default="0" >
 				<name lang="en">Temperature unit</name>
 				<description lang="en">
 				The module can present the temperatures in different units. Default
@@ -285,7 +285,7 @@
 			Bit 7: Continuous alarm events.\n 
 			</description>
 			<access>rw</access>
-			<bit pos="0" width="2" default="false" >
+			<bit pos="0" width="2" default="0" >
 				<name lang="en">Temperature unit</name>
 				<description lang="en">
 				The module can present the temperatures in different units. Default
@@ -375,7 +375,7 @@
 			Bit 7: Continuous alarm events.\n 
 			</description>
 			<access>rw</access>
-			<bit pos="0" width="2" default="false" >
+			<bit pos="0" width="2" default="0" >
 				<name lang="en">Temperature unit</name>
 				<description lang="en">
 				The module can present the temperatures in different units. Default
@@ -465,7 +465,7 @@
 			Bit 7: Continuous alarm events.\n 
 			</description>
 			<access>rw</access>
-			<bit pos="0" width="2" default="false" >
+			<bit pos="0" width="2" default="0" >
 				<name lang="en">Temperature unit</name>
 				<description lang="en">
 				The module can present the temperatures in different units. Default
@@ -555,7 +555,7 @@
 			Bit 7: Continuous alarm events.\n 
 			</description>
 			<access>rw</access>
-			<bit pos="0" width="2" default="false" >
+			<bit pos="0" width="2" default="0" >
 				<name lang="en">Temperature unit</name>
 				<description lang="en">
 				The module can present the temperatures in different units. Default
