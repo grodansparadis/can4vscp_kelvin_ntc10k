@@ -963,7 +963,7 @@
 			<name lang="en">Low alarm set point for sensor 1 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the low
-				alarm setpoint for sensor 0. The value is stored as a twos complement number.
+				alarm setpoint for sensor 1. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -972,7 +972,7 @@
 			<name lang="en">Low alarm set point for sensor 1 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 1. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -981,7 +981,7 @@
 			<name lang="en">Low alarm set point for sensor 2 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 2. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -990,7 +990,7 @@
 			<name lang="en">Low alarm set point for sensor 2 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 2. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -999,7 +999,7 @@
 			<name lang="en">Low alarm set point for sensor 3 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 3. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1008,7 +1008,7 @@
 			<name lang="en">Low alarm set point for sensor 3 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 3. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -1017,7 +1017,7 @@
 			<name lang="en">Low alarm set point for sensor 4 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 4. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1026,7 +1026,7 @@
 			<name lang="en">Low alarm set point for sensor 4 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 4. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -1035,7 +1035,7 @@
 			<name lang="en">Low alarm set point for sensor 5 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 5. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1044,7 +1044,7 @@
 			<name lang="en">Low alarm set point for sensor 5 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the low
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 5. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1071,7 +1071,7 @@
 			<name lang="en">High alarm set point for sensor 1 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 1. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1080,7 +1080,7 @@
 			<name lang="en">High alarm set point for sensor 1 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 1. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -1089,7 +1089,7 @@
 			<name lang="en">High alarm set point for sensor 2 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 2. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1098,7 +1098,7 @@
 			<name lang="en">High alarm set point for sensor 2 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 2. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -1107,7 +1107,7 @@
 			<name lang="en">High alarm set point for sensor 3 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 3. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1116,7 +1116,7 @@
 			<name lang="en">High alarm set point for sensor 3 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 3. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -1125,7 +1125,7 @@
 			<name lang="en">High alarm set point for sensor 4 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 4. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1134,7 +1134,7 @@
 			<name lang="en">High alarm set point for sensor 4 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number as temperature * 100.
+				alarm set point for sensor 4. The value is stored as a twos complement number as temperature * 100.
 			</description>
 			<access>rw</access>
 		</reg>
@@ -1143,7 +1143,7 @@
 			<name lang="en">High alarm set point for sensor 5 MSB</name>
 			<description lang="en">
 				This register holds the most significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 5. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>		
@@ -1152,7 +1152,7 @@
 			<name lang="en">High alarm set point for sensor 5 LSB</name>
 			<description lang="en">
 				This register holds the least significant byte of the high
-				alarm set point for sensor 0. The value is stored as a twos complement number.
+				alarm set point for sensor 5. The value is stored as a twos complement number.
 			</description>
 			<access>rw</access>
 		</reg>	
