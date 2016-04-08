@@ -1,12 +1,12 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<!-- Copyright C) 2011-2014 Ake Hedman, Grodans Paradis AB -->
+<!-- Copyright C) 2011-2016 Ake Hedman, Grodans Paradis AB -->
 <!-- <akhe@grodansparadis.com> -->
 <vscp>
 <module>
 	<name>Kelvin temperature sensor module</name>
  	<model>10KA</model>
 	<version>45</version>
-	<changed>2015-12-01</changed>
+	<changed>2016-04-08</changed>
 	<description lang="en">
 		This module can report temperature from up to six temperature sensors. One sensor
 		is located on board and five are external to the module.
@@ -187,7 +187,7 @@
 			<name lang="en">Control register for sensor 1</name>
 			<description lang="en">
 			In the sensor control register you can set functionality for the
-			measurements of temperature 0.\n 
+			measurements of temperature 1.\n 
 			Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 2: Reserved.\n 
@@ -274,7 +274,7 @@
 			<name lang="en">Control register for sensor 2</name>
 			<description lang="en">
 			In the sensor control register you can set functionality for the
-			measurements of temperature 0.\n 
+			measurements of temperature 2.\n 
 			Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 2: Reserved.\n 
@@ -364,7 +364,7 @@
 			<name lang="en">Control register for sensor 3</name>
 			<description lang="en">
 			In the sensor control register you can set functionality for the
-			measurements of temperature 0.\n 
+			measurements of temperature 3.\n 
 			Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 2: Reserved.\n 
@@ -454,7 +454,7 @@
 			<name lang="en">Control register for sensor 4</name>
 			<description lang="en">
 			In the sensor control register you can set functionality for the
-			measurements of temperature 0.\n 
+			measurements of temperature 4.\n 
 			Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 2: Reserved.\n 
@@ -544,7 +544,7 @@
 			<name lang="en">Control register for sensor 5</name>
 			<description lang="en">
 			In the sensor control register you can set functionality for the
-			measurements of temperature 0.\n 
+			measurements of temperature 5.\n 
 			Bit 0: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 1: Unit for temperature presentation (0=Kelvin, 1=Celsius, 2=Fahrenheit).\n
 			Bit 2: Reserved.\n 
