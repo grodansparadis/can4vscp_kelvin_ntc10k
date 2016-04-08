@@ -5,7 +5,7 @@
 <module>
 	<name>Kelvin temperature sensor module</name>
  	<model>10KA</model>
-	<version>45</version>
+	<version>46</version>
 	<changed>2016-04-08</changed>
 	<description lang="en">
 		This module can report temperature from up to six temperature sensors. One sensor
@@ -2606,7 +2606,7 @@
 			<access>rw</access>
 		</abstraction>	
 
-		<abstraction id="Abslow0" type="int16_t"  default="0"
+		<abstraction id="abslow0" type="int16_t"  default="0"
 							page = "0" offset = "86" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute low temperature for sensor 0</name>
 			<description lang="en">
@@ -2617,7 +2617,7 @@
 			<access>rw</access>
 		</abstraction>	
 		
-		<abstraction id="Abslow1" type="int16_t"  default="0"
+		<abstraction id="abslow1" type="int16_t"  default="0"
 							page = "0" offset = "88" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute low temperature for sensor 1</name>
 			<description lang="en">
@@ -2628,7 +2628,7 @@
 			<access>rw</access>
 		</abstraction>		
 
-		<abstraction id="Abslow2" type="int16_t"  default="0"
+		<abstraction id="abslow2" type="int16_t"  default="0"
 							page = "0" offset = "90" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute low temperature for sensor 2</name>
 			<description lang="en">
@@ -2639,7 +2639,7 @@
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="Abslow3" type="int16_t"  default="0"
+		<abstraction id="abslow3" type="int16_t"  default="0"
 							page = "0" offset = "92" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute low temperature for sensor 3</name>
 			<description lang="en">
@@ -2650,7 +2650,7 @@
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="Abslow4" type="int16_t"  default="0"
+		<abstraction id="abslow4" type="int16_t"  default="0"
 							page = "0" offset = "94" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute low temperature for sensor 4</name>
 			<description lang="en">
@@ -2661,7 +2661,7 @@
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="Abslow5" type="int16_t"  default="0"
+		<abstraction id="abslow5" type="int16_t"  default="0"
 							page = "0" offset = "96" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute low temperature for sensor 5</name>
 			<description lang="en">
@@ -2672,7 +2672,7 @@
 			<access>rw</access>
 		</abstraction>
 		
-		<abstraction id="Abshigh0" type="int16_t" default="0" 
+		<abstraction id="abshigh0" type="int16_t" default="0" 
 							page = "0" offset = "98" bgcolor="0xFFCCCC" >
 			<name lang="en">Absolute high temperature for sensor 0</name>
 			<description lang="en">
@@ -2683,7 +2683,7 @@
 			<access>rw</access>
 		</abstraction>			
 
-		<abstraction id="Abshigh1" type="int16_t" default="0" 
+		<abstraction id="abshigh1" type="int16_t" default="0" 
 							page = "0" offset = "100" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute high temperature for sensor 1</name>
 			<description lang="en">
@@ -2694,7 +2694,7 @@
 			<access>rw</access>
 		</abstraction>	
 
-		<abstraction id="Abshigh2" type="int16_t"  default="0"
+		<abstraction id="abshigh2" type="int16_t"  default="0"
 							page = "0" offset = "102" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute high temperature for sensor 2</name>
 			<description lang="en">
@@ -2705,7 +2705,7 @@
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="Abshigh3" type="int16_t"  default="0"
+		<abstraction id="abshigh3" type="int16_t"  default="0"
 							page = "0" offset = "104" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute high temperature for sensor 3</name>
 			<description lang="en">
@@ -2716,7 +2716,7 @@
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="Abshigh4" type="int16_t"  default="0"
+		<abstraction id="abshigh4" type="int16_t"  default="0"
 							page = "0" offset = "106" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute high temperature for sensor 4</name>
 			<description lang="en">
@@ -2727,7 +2727,7 @@
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="Abshigh5" type="int16_t"  default="0"
+		<abstraction id="abshigh5" type="int16_t"  default="0"
 							page = "0" offset = "108" bgcolor="0xFFCCCC">
 			<name lang="en">Absolute high temperature for sensor 5</name>
 			<description lang="en">
@@ -2738,7 +2738,7 @@
 			<access>rw</access>
 		</abstraction>	
 		
-		<abstraction id="Calibration0" type="int16_t"  default="0"
+		<abstraction id="calibration0" type="int16_t"  default="0"
 							page = "1" offset = "84" bgcolor="0xCCE5FF">
 			<name lang="en">Calibration value for sensors 0</name>
 			<description lang="en">
@@ -2749,7 +2749,7 @@
 			<access>rw</access>
 		</abstraction>
 
-		<abstraction id="Calibration1" type="int16_t"  default="0"
+		<abstraction id="calibration1" type="int16_t"  default="0"
 							page = "1" offset = "84" bgcolor="0xCCE5FF">
 			<name lang="en">Calibration value for sensors 1</name>
 			<description lang="en">
@@ -2760,7 +2760,7 @@
 			<access>rw</access>
 		</abstraction>
 		
-		<abstraction id="Calibration2" type="int16_t"  default="0"
+		<abstraction id="calibration2" type="int16_t"  default="0"
 							page = "1" offset = "84" bgcolor="0xCCE5FF">
 			<name lang="en">Calibration value for sensors 2</name>
 			<description lang="en">
@@ -2771,7 +2771,7 @@
 			<access>rw</access>
 		</abstraction>
 		
-		<abstraction id="Calibration3" type="int16_t"  default="0"
+		<abstraction id="calibration3" type="int16_t"  default="0"
 							page = "1" offset = "84" bgcolor="0xCCE5FF">
 			<name lang="en">Calibration value for sensors 3</name>
 			<description lang="en">
@@ -2782,7 +2782,7 @@
 			<access>rw</access>
 		</abstraction>
 		
-		<abstraction id="Calibration4" type="int16_t"  default="0"
+		<abstraction id="calibration4" type="int16_t"  default="0"
 							page = "1" offset = "84" bgcolor="0xCCE5FF">
 			<name lang="en">Calibration value for sensors 4</name>
 			<description lang="en">
@@ -2793,7 +2793,7 @@
 			<access>rw</access>
 		</abstraction>
 		
-		<abstraction id="Calibration5" type="int16_t"  default="0"
+		<abstraction id="calibration5" type="int16_t"  default="0"
 							page = "1" offset = "84" bgcolor="0xCCE5FF">
 			<name lang="en">Calibration value for sensors 5</name>
 			<description lang="en">
