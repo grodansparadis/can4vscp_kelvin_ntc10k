@@ -4,6 +4,8 @@ Kelvin NTC
 
 --------------------------------------------------------------------------------
 
+2016-04-19 AKHE - RA4 set to input to prevent collision with VCAP circuits in
+                  PIC18F2580. Brown out raised to maximum (3V & 4.6V). Valuable                    input from Anders Forsgren, AJE Electronics AB.
 2016-03-23 AKHE - Version 1.2.6 -------------------------------------------------
 2016-03-30 AKHE - Made code work for PIC18F26K80
 2016-03-29 AKHE - Raw A/D register values was displayed in wrong order. Fixed.

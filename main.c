@@ -49,7 +49,7 @@
 #pragma config OSC = HSPLL
 #pragma config BOREN = BOACTIVE
 #pragma config STVREN = ON
-#pragma config BORV = 3
+#pragma config BORV = 0			// 4.6V
 #pragma config LVP = ON
 #pragma config CPB = ON
 #pragma config BBSIZ = 2048
@@ -69,7 +69,7 @@
 #pragma config PWRT = ON
 #pragma config BOREN = BOACTIVE
 #pragma config STVREN = ON
-#pragma config BORV = 3
+#pragma config BORV = 0			// 4.6V
 #pragma config LVP = OFF
 #pragma config CPB = OFF
 #pragma config WRTD  = OFF
@@ -99,7 +99,7 @@
 // CONFIG2H
 #pragma config WDTPS = 1048576  // Watchdog prescaler
 #pragma config BOREN = SBORDIS  // Brown out enabled
-#pragma config BORV  = 1        // 2.7V
+#pragma config BORV  = 0        // 3V
 
 // CONFIG3H
 #pragma config CANMX = PORTB    // ECAN TX and RX pins are located on RB2 and RB3, respectively.
@@ -949,7 +949,8 @@ void init()
     // RA0/AN0 - input
     // RA1/AN1 - input
     // RA2/AN2 - input
-    TRISA = 0b00000111;
+    // RA4 input (VCAP for PIC18F26K80))
+    TRISA = 0b00010111;
 
     // PortB
     // RB7 - Not used.
