@@ -5,7 +5,7 @@
  *  Kelvin NTC10KA Module
  *  =====================
  *
- *  Copyright (C) 2000-2016 Ake Hedman, Grodans Paradis AB
+ *  Copyright (C) 2000-2018 Ake Hedman, Grodans Paradis AB
  *                          http://www.grodansparadis.com
  *                          <akhe@grodansparadis.com>
  *
@@ -30,7 +30,7 @@
 #include <timers.h>
 #include <adc.h>
 #include <math.h>
-#include <inttypes.h>
+#include <vscp_inttypes.h>
 #include <ECAN.h>
 #include <vscp_firmware.h>
 #include <vscp_class.h>

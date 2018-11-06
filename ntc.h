@@ -5,7 +5,7 @@
  *  Kelvin NTC10KA Module
  *  =====================
  *
- *  Copyright (C) 2015-2016 Ake Hedman, Grodans Paradis AB
+ *  Copyright (C) 2015-2018 Ake Hedman, Grodans Paradis AB
  *                          http://www.grodansparadis.com
  *                          <akhe@grodansparadis.com>
  *
@@ -25,7 +25,7 @@
 #ifndef NTC_H
 #define NTC_H
 
-#include <inttypes.h>
+#include <vscp_inttypes.h>
 #include "main.h"
 
 // Defines the number of samples that is taken for each sensor
