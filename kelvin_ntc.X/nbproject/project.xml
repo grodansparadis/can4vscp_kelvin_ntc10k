@@ -14,9 +14,8 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../</sourceRootElem>
-                <sourceRootElem>../../vscp_firmware/common</sourceRootElem>
-                <sourceRootElem>../../vscp_firmware/pic/common</sourceRootElem>
                 <sourceRootElem>../../vscp-firmware/common</sourceRootElem>
+                <sourceRootElem>../../vscp-firmware/pic/common</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

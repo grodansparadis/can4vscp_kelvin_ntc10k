@@ -5,7 +5,7 @@
  *  Kelvin NTC10KA Module
  *  =====================
  *
- *  Copyright (C) 2000-2018 Ake Hedman, Grodans Paradis AB
+ *  Copyright (C) 2000-2020 Ake Hedman, Grodans Paradis AB
  *                          http://www.grodansparadis.com
  *                          <akhe@grodansparadis.com>
  *
@@ -32,7 +32,7 @@
 #include <math.h>
 #include <vscp_inttypes.h>
 #include <ECAN.h>
-#include <vscp_firmware.h>
+#include <vscp-firmware.h>
 #include <vscp_class.h>
 #include <vscp_type.h>
 #include "main.h" 
@@ -355,8 +355,8 @@ void main()
 
         ClrWdt(); // Feed the dog
 
-        if ( ( vscp_initbtncnt > 250 ) &&
-                ( VSCP_STATE_INIT != vscp_node_state ) ) {
+        if ( ( vscp_initbtncnt > 2500 ) &&
+             ( VSCP_STATE_INIT != vscp_node_state ) ) {
 
             // Init. button pressed
             vscp_nickname = VSCP_ADDRESS_FREE;
@@ -440,7 +440,7 @@ void main()
                 }
             }
 
-            if (seconds > 60) {
+            if (seconds > 59) {
                 seconds = 0;
             }
 
