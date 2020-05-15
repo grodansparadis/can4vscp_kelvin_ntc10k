@@ -1,12 +1,12 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<!-- Copyright C) 2011-2016 Ake Hedman, Grodans Paradis AB -->
+<!-- Copyright C) 2011-2020 Ake Hedman, Grodans Paradis AB -->
 <!-- <akhe@grodansparadis.com> -->
 <vscp>
 <module>
 	<name>Kelvin temperature sensor module</name>
  	<model>10KA</model>
 	<version>46</version>
-	<changed>2016-04-08</changed>
+	<changed>2020-05-15</changed>
 	<description lang="en">
 		This module can report temperature from up to six temperature sensors. One sensor
 		is located on board and five are external to the module.
@@ -18,7 +18,7 @@
 		<address>
 			<street>Brattbergavägen 17</street>
 			<city>Los</city>
-			<postcode>82050</postcode>
+			<postcode>82770</postcode>
 			<country>Sweden</country>
      	</address>
 		<telephone>
@@ -53,7 +53,36 @@
 	</picture>
 	
 	<!-- Firmware for the device -->
-	<firmware path="http://www.grodansparadis.com/kelvin/firmware_kelvin_ntc10ka_1_2_0.hex" 
+	<files>
+	
+	<firmware target="pic18f2580" 
+	        path="https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/releases/download/v1.2.7/Kelvin_ntc_pic18f2580_1_2_7_relocated.hex" 
+		format="intelhex8"
+		size="32000"
+		date="2020-02-18"
+		version_major="1"
+		version_minor="2"
+		version_subminor="7">
+		<description lang="en" >
+			Firmware version 1.2.7 for the Kelvin NTC10K module with a PIC18F2580.
+		</description> 
+	</firmware>
+	
+	<firmware target="pic18f26k80" 
+	        path="https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/releases/download/v1.2.7/Kelvin_ntc_pic18f26k80_1_2_7_relocated.hexx" 
+		format="intelhex8"
+		size="32000"
+		date="2020-02-18"
+		version_major="1"
+		version_minor="2"
+		version_subminor="7">
+		<description lang="en" >
+			Firmware version 1.2.7 for the Kelvin NTC10K module with a PIC18F26K80.
+		</description> 
+	</firmware>
+	
+	<firmware target="pic18f2580" 
+	        path="http://www.grodansparadis.com/kelvin/firmware_kelvin_ntc10ka_1_2_0.hex" 
 		format="intelhex8"
 		size="32000"
 		date="2015-02-18"
@@ -64,6 +93,8 @@
 			Firmware version 1.2.0 for the Kelvin NTC10K module.
 		</description> 
 	</firmware>
+	
+	</files>
 
 	<!-- Full documentation for the device -->
 	<manual path="http://www.grodansparadis.com/kelvin/kelvin_ntc10ka_manual_11.pdf" 	
