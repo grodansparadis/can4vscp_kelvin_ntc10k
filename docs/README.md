@@ -7,24 +7,27 @@
 
 ![Paris](/images/kelvin10.png)
 
-Paris is a module that have four counter channels that each can count
-pulses and measure frequency. Each channel can have alarms set for going
-over a counter level or when counting down to zero and for a frequency
-that goes outside of a specified frequency window.
+Place An Alternate Description Here!
 
-It has a built-in linear calculation algorithm that can translate pulse
-to real world measurement units. This can for example be used for
-utility meter measurements and gives the correct measurement value sent
-out on the VSCP bus.
+The Kelvin NTC10KA module measures temperature. It measures temperatures in a wide range (depending on what sensors are used) and can achieve 0.1C accuracy with calibration. It does so by allowing connection of up to five external NTC temperature sensors and by measuring the temperature on the surface of the module itself. The measured temperature can be reported to other CAN4VSCP modules or to one or several servers so it can be collected in a database or visualized and analyzed in a diagram. The accuracy of the sensors can be increase further by calibration.
 
-The module comes with a GUID and is programmed with a bootloader and
-VSCP module functionality that works right out of the box.
+Temperature data can be presented by the module in Kelvin, Celsius or Fahrenheit.
 
-  * [Repository for the module](https://github.com/grodansparadis/can4vscp_paris)
-  * This manual is available [here](https://grodansparadis.github.io/can4vscp_paris/)
-  * Latest schema for the module is available [here](https://github.com/grodansparadis/can4vscp_paris/tree/master/eagle)
-  * Latest firmware for the module is available [here](https://github.com/grodansparadis/can4vscp_paris/tree/master/firmware)
-  * [MDF for the module](https://github.com/grodansparadis/can4vscp_paris/tree/master/mdf)
+Temperatures is reported automatically and it is possible to set alarms for high/low levels. Absolute low and high temperatures are collected and it is easy to construct autonomous and reliable temperature regulation systems.
+
+NTC sensors has the advantage of being low cost, possible to get high accuracy from and ease of use with long cable runs. No calibration is usually needed if +-1 degree accuracy is OK.
+
+The module fully adopts to the CAN4VSCP specification and can be powered directly over the bus with a 9-28V DC power source. It has a rich register set for configuration and any information events defined. It also have a decision matrix for easy dynamic event handling.
+
+VSCP CAN modules are designed to work on a CAN4CAN bus which use ordinary RJ-45 connectors and is powered with 9-28V DC over the same cable. This means there is no need for a separate power cable. All that is needed is a CAT5 or better twisted pair cable. Buss length can be a maximum of 500 meters with drops of maximum 24 meters length (up to a total of 120 meters). As for all CAN4VSCP modules the communication speed is fixed at 125 kbps.
+
+All VSCP modules contains information of there own setup, manual, hardware version, manufacturer etc. You just ask the module for the information you need and you will get it. When they are started up they have a default functionality that often is all that is needed to get a working setup. If the module have something to report it will send you an event and if it is setup to react on a certain type of event it will do it's work when you send event(s) to it. 
+
+  * [Repository for the module](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k)
+  * This manual is available [here](https://grodansparadis.github.io/can4vscp_kelvin_ntc10k/)
+  * Latest schema for the module is available [here](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master/eagle)
+  * Latest firmware for the module is available [here](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master/firmware)
+  * [MDF for the module](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master/mdf)
 
 ## VSCP
 
