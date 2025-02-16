@@ -2,7 +2,7 @@
 
 ![VSCP logo](./images/logo_400.png)
 
-# Manual for the Paris module
+# Manual for the Kelvin NTC10K module
 
 Scroll down to view docs.
 
