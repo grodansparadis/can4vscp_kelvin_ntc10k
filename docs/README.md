@@ -43,7 +43,7 @@ If you use VSCP please consider contributing resources or time to the project ([
 
 ## Buy a module
 
-<img src="./images/grodan_logo.png" alt="Grodans PAradis AB" width="200"/>
+<img src="./images/grodan_logo.png" alt="Grodans Paradis AB" width="200"/>
 
 Ready made modules can be bought from [Grodans Paradis AB](https://www.grodansparadis.com).
 
