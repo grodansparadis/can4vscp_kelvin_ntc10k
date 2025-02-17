@@ -7,8 +7,6 @@
 
 ![Paris](/images/kelvin10.png)
 
-Place An Alternate Description Here!
-
 The Kelvin NTC10KA module measures temperature. It measures temperatures in a wide range (depending on what sensors are used) and can achieve 0.1C accuracy with calibration. It does so by allowing connection of up to five external NTC temperature sensors and by measuring the temperature on the surface of the module itself. The measured temperature can be reported to other CAN4VSCP modules or to one or several servers so it can be collected in a database or visualized and analyzed in a diagram. The accuracy of the sensors can be increase further by calibration.
 
 Temperature data can be presented by the module in Kelvin, Celsius or Fahrenheit.

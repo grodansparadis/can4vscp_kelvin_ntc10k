@@ -2,90 +2,108 @@
 
 ## Most current information
 
-You can find the most current information about the Paris module [here](https://www.grodansparadis.com/paris/paris.html). On the site you can also find links to the latest firmware, drivers and schematics etc for its use.
+You can find the most current information about the Kelvin NTC10K module [here](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k). On the site you can also find links to the latest firmware, drivers and schematics etc for its use.
 
 ## Installing the module
 
 Connect the module to the CAN4VSCP bus. The red LED on the module should light up indicating that the device is powered. If this is the first time you start up the module the green lamp next to the initializing button will start to blink. This means that the module is trying to negotiate a nickname address with the rest of the modules on the bus. When it found a free nickname the green LED will light steady. If the green led does not start to blink press the initialization button until it does.
 
-Now your module is ready to use. You have to decide what power source you should use for your relays. On position 12 of the terminal block connectors you can find +5V which can be used for this purpose. If you want to use +5V install the jumper JP1. Often however however +5V is a to low voltage to control relays. You need +12V or even +24V. This is OK. With the Paris module it is possible to use up to +50V DC. Before you connect this external voltage make sure that jumper JP1 is not installed. On position 10/11 you have the supply voltage for the module available. This is +9VDC - 28VDC and can also be used as your relay voltage.
+Remember that you need at least two devices (a CAN interface count as one) on the bus for it to work. If you only have one device on the bus it will not work. A single device can't talk to itself on a bus. It's an error.
+
+Now your module is ready to use. 
 
 ## The raw facts
 
 | Parameter | Value |
 | --------- | ----- |
-| Current hardware reversion      | B |
-| Current firmware version        | 1.1.2 |
-| Supply voltage                  | +9-+28 VDC |
-| PCB Size                        | 42mm x 72mm |
-| Power requirements              | 0.1W + relay driver power if used. |
-| Communication: CAN4VSCP (CAN)   | 125 kbps |
+| Current hardware reversion | B |
+| Current firmware version | 1.2.7 |
+| Supply voltage | +9-+28 VDC |
+| PCB Size | 42mm x 72mm |
+| Mounting options | DIN or wall |
+| Power requirements | 0.1W |
+| Communication: CAN4VSCP (CAN) | 125 kbps |
+| Number of sensors supported | 6 (one internal) |
 
 ## Schematics
 
-![](./images/paris_revb_sch.png)
+![](./images/schema_kelvin_ntc_rev_b.png)
 
-Schematics: Rev B 
+Schematics: Rev B  (right click and select view image to see it in full size)
 
 ## Components
 
-![](./images/3_home_akhe_vscp_hardware_can4vscp_paris_relaydriver_manual_images_board.jpg)
+![](./images/kelvin_parts_a.png)
 
-The **power LED** (red) will light when the board is powered.
-
-The **green LED** show operational status. It blinks during
-initialization process and lights steady under normal operation.
+The green **Init LED** show operational status. It blinks during initialization process and lights steady under normal operation.
 
 Press the **init. button** to initiate the node id discovery process. The green led will start to blink and do so until a new nickname id is found. If the LED never stops blinking that is an indication of some bus fault of some kind. Typically the module does not get an answer from another module on the bus.
 
 The **daisy chain** connector is described below.
 
-The Termination jumper activates a 120 ohm termination resistor between CANH and CANL if present. This is convenient if the module is the first or last module on a bus.
-
 The firmware of a circuit equipped with a Microchip microprocessor usually can be programmed in circuit. That is when it is mounted on a printed circuit board. This is also true for the Paris relay module which have the programming connector on-board (J3). The **programming
-connector** is used to reprogram the module. This is more convenient to do using the bootloader software but in debugging or if the bootloader has gotten corrupt connecting a standard Microchip PIC programmer to this connector is the only way to reprogram the module. If you have a programmer for Microchip processors (Real ICE, ICD-2, ICD-3, PICKIT-2, PICKIT3 or other) you can program your own firmware or the latest official firmware into the module using MPLABX or similar tools. You can always find a link to the latest firmware on the [Paris relay module
-home page](http://www.grodansparadis.com/paris/paris.html).
+connector** is used to reprogram the module. This is more convenient to do using the bootloader software but in debugging or if the bootloader has gotten corrupt connecting a standard Microchip PIC programmer to this connector is the only way to reprogram the module. If you have a programmer for Microchip processors (Real ICE, ICD-2, ICD-3, PICKIT-2, PICKIT3 or other) you can program your own firmware or the latest official firmware into the module using MPLABX or similar tools. You can always find a link to the latest firmware on the [Kelvin NTC10K module
+home page](https://www.grodansparadis.com/kelvinntc10k/kelvin_ntc10ka.html).
 
-**JP1 connector** This connector can be **dangerous** (the module can be damaged) so before you put it in make sure that you know what you do. It connects the module VCC to the relay driver voltage. So if it is shorted you must make sure that there is no other voltage applied to the relay voltage input.If it is the board will probably burn. It is however very convenient if you want to drive something with VCC (= +5V).
+![](./images/kelvin_parts_b.png)
+
+The **power LED** (red) will light when the board is powered.
+
+The **termination jumper** is used to activate the 120 ohm termination resistor between CANH and CANL if present. This is convenient if the module is the first or last module on a bus.
 
 ## Connectors
 
-![](./images/paris_connectors_800.png)
+![](./images/kelvin_connectors.png)
 
 To activate the **termination** solder a cable between holes. This will activate the 120 ohm resistor between CANH and CANL.
 
 ### Terminal block
 
-The individual positions for the twelve position termination block is numbered from the left (looking into it) as in the figure below. Ground, +5V and the power for the module is available from the board and the seven relay control positions. If you plan to use relays that can be
-controlled with +5V just install jumper JP1 and connect +5V to the relays. Normally however you need to have a higher voltage such as +12V or +24V to control the the relays. In this case the JP1 jumper should be uninstalled. Connect the relay voltage (which can be taken from position
-10/11 if a suitable voltage is used to power the module) to your relay and to position 2 of the termination block. By doing this you activate the fly-back protection diodes which protects the circuits from inductive loads. If you just have an resistive load you don\'t have to do this connection but there is no harm if you use it anyway.
+![](./images/terminationblock.png)  
 
-The power used to power the Paris module is a perfect candidate for the relay voltage. It is available on the terminal block position 10/11.
+The individual positions for the twelve position termination block is numbered from the right (looking into it) as in the figure below.
 
-![](./images/8_home_akhe_vscp_hardware_can4vscp_paris_relaydriver_manual_images_connector.jpg)
+![](kelvin_termination_block.png)
 
 | Pin | Description |
 | --- | ----------- |
-| 1   |  Ground (GND) |
-| 2   |  Relay Power. Connect relay driver voltage here if NOT using VCC. |
-| 3   |  Relay 1 |
-| 4   |  Relay 2 |
-| 5   |  Relay 3 |
-| 6   |  Relay 4 |
-| 7   |  Relay 5 |
-| 8   |  Relay 6 |
-| 9   |  Relay 7 |
-| 10  |  Module input voltage +9V-28V |
-| 11  |  Module input voltage +9V-28V |
-| 12  |  +5V (Module VCC) |
+| 1 | Ground (GND) |
+| 2 | +5V |
+| 3 | Temperature sensor 1 |
+| 4 | +5V|
+| 5 | Temperature sensor 2|
+| 6 | +5V|
+| 7 | Temperature sensor 3 |
+| 8 | +5V |
+| 9 | Temperature sensor 4 |
+| 10 | +5V |
+| 11 | Temperature sensor 5 |
+| 12 | +5V |
 
-**Important!**
+where all temperature sensor inputs looks like this
 
-**Never connect a voltage source to position2 if jumper JP1 is installed on the board.**
+![](./images/kelvin_sensor_input.png)
 
-### Connecting relays
 
-![](./images/9_home_akhe_vscp_hardware_can4vscp_paris_relaydriver_manual_images_relay.jpg)
+
+## Internal temperature sensor
+
+The internal temperature sensor used on the Kelvin NTC10KA is the [Murata NCP21XV103J03RA](https://www.google.se/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwiu-ujjlrnJAhWDjiwKHY9aCQQQFggiMAA&url=http%3A%2F%2Fwww.murata.com%2F~%2Fmedia%2Fwebrenewal%2Fsupport%2Flibrary%2Fcatalog%2Fproducts%2Fthermistor%2Fntc%2Fr44e.ashx&usg=AFQjCNE0U3R9tCH8Mm3JbRtiqhAN5yqOaQ&sig2=3Ga5yx9Fc6e15Gvr6YVbPg). Data for this sensor is as follows
+
+| Description | Value |
+| ----------- | ----- |
+| Time constant | 10 s |
+| B[25/100]- value | 3944K |
+| Temperature range |-40...+125ºC |
+| Resistance tolerance | 5% |
+| Resistance @ 25ºC | 10 Kohm |
+| Max effect | 210 @ 25ºC mW |
+| B[25/50]- value | 3900 |
+| B[25/85]- value | 3934 |
+| B[25/100]- value | 3944K 3% |
+| Max error (B[25/100])	| 2.8 (%/C) |
+
+As stated elsewhere this sensor will show a temperature value that is to high due to the fact that it is heated by the processor and other components on the board. You can calibrate this away if you want. The sensor is used to show the temperature of the board and is not intended to be used for high precision measurements.
 
 ### RJ-XX pin-out
 
@@ -113,7 +131,7 @@ Always use a pair of twisted wires for CANH/CANL for best noise immunity. If the
 
 The inter module connector can be used to connect modules that are physically close to each other together in an easy way. Remember that the minimum length of a connection cable is 30 cm.
 
-The **daisy chain connector** is an alternative to the RJ-45 connector and can be a very convenient way to connect boards together that are mounter close to each other, in the same cabinet for example. Our [power injector board](http://www.grodansparadis.com/pwrinjectcan/pwrinjectcan.html) is a perfect companion for this use.
+The **daisy chain connector** is an alternative to the RJ-45 connector and can be a very convenient way to connect boards together that are mounter close to each other, in the same cabinet for example. The [power injector board](http://www.grodansparadis.com/pwrinjectcan/pwrinjectcan.html) is a perfect companion for this use.
 
 | Pin | Description |
 | :---: | ----------- |
