@@ -9,7 +9,7 @@ The Kelvin module is powered from the CAN4VSCP bus. [This
 article](https://github.com/grodansparadis/vscp/wiki/Connecting-CAN4VSCP-devices-together)
 have information on how the bus is powered and set up. Follow it for a
 reliable setup. Don't forget the 120 ohm terminators at each end of the
-bus. <span class="underline">They are important\!</span> You can
+bus. `They are important` You can
 activate the on board terminator on the Paris module if it is located at
 one end of your bus.
 
@@ -19,12 +19,7 @@ power indicator LED. When you power the board for the first time the
 green led starts to blink to indicate that the module search for a
 nickname. During normal operation this LED should light steady.
 
-Remember that there need to be <span class="underline">at least
-two</span> CAN4VSCP (or other CAN device set to 125kbps) devices (one
-additional) if you have the [Frankfurt
-RS-232](https://grodansparadis.github.io/can4vscp-frankfurt-rs232)
-or some other bus interface. A single device can't talk by
-itself on a bus. It's an error.
+Remember that there should be `at least two` CAN4VSCP (or other CAN device set to 125kbps) devices (one additional). If you use the [Frankfurt RS-232](https://grodansparadis.github.io/can4vscp-frankfurt-rs232) or some other bus interface one additional module is needed. A single device can't talk by itself on a bus. It's an error.
 
 # Connecting temperature sensor(s)
 
@@ -32,9 +27,9 @@ itself on a bus. It's an error.
 
 To just test that communication works you don't need to install any external temperature sensors. You can work with the internal sensor. By default it will send the board temperature in degrees Celsius every 30 seconds. You can view VSCP traffic on the CAN4VSCP bus with all CAN tools set to 125kbit/s but (VSCP Works+)(https://grodansparadis.github.io/vscp-works-qt/#/) makes handling, configuring, diagnosing VSCP stuff a lot more easy. So this may be the time to get to know this piece of software that works on both Linux and Window.
 
-The internal temperature sensor is heated by the processor and other things on the PCB so it will always give a bit of a high value. You can calibrate away this error if you want. See the [configuration section](./configure.md).
+The internal temperature sensor does not show the room temperature, it is heated by the processor and other things on the PCB so it will always give a bit of a high value. You can calibrate away this error if you want. See the [configuration section](./configure.md).
 
-Eventually you probably want to connect external temperature sensors to the module. You can connect any 10 Kohm NTC temperature sensor to the Kelvin NTC10K module. It helps if you know the B value of it for the temperature range you want to work in. You can get sensors and sensors on cables of different length from any electroics supplier or from the [FrogShop](http://www.frogshop.se).
+Eventually you probably want to connect external temperature sensors to the module. You can connect any 10 Kohm NTC temperature sensor (thermistor) to the Kelvin NTC10K module. It helps if you know the β value of it for the temperature range you want to work in. You can get sensors and sensors on cables of different length from most electronics suppliers.
 
 A maximum of five external NTC sensor can be connected to the Kelvin NTC10KA module. It is recommended to use NTC thermistors with 10K @ 25 °C types for best result. There are sensors available for all kinds of temperature measurement needs. As noted above you need the β constant value from the sensors datasheet or to be able to use it with the Kelvin NTC10KA module.You set this value in the [β-register for the sensor](./registers?id=%ce%b2-constant-registers).
 
