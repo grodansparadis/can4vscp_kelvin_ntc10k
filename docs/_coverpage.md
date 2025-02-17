@@ -1,5 +1,3 @@
-
-
 ![VSCP logo](./images/logo_100.png)
 
 # Manual for the Kelvin NTC10K module
