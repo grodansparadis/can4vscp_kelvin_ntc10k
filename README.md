@@ -10,7 +10,7 @@ The full documentation for the module can be found [here](http://grodansparadis.
 
 ![](./images/kelvin11.png)
 
-In the repository you find the development files for the Kelvin NTC10K module. The project is also the base for a VSCP implemention on a Microchip 18F PIC device together with the [Paris Relay Module](https://github.com/grodansparadis/can4vscp_paris).
+In this repository you find all development files for the Kelvin NTC10K module. The project together with the [Paris Relay Module](https://github.com/grodansparadis/can4vscp_paris) is the main examples for a VSCP implemention on a Microchip 18F PIC device.
 
 ## Abstract
 
@@ -32,6 +32,43 @@ All VSCP modules contains information of there own setup, manual, hardware versi
 
 ---
 
+
+
+## Project files
+
+### User manual
+  * [User Manual](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master)
+
+### Schematic, PCB, 3D files etc
+  * [Schematics reversion B (current)](http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc_B.pdf)
+  * [Schematics reversion A](http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc_A.pdf)
+ * Harware design files is made in [KiCad](https://kicad.org) and can be found in the `kicad` directory. Valid from reversion B of the hardware.
+   * Gerber files for PCB production can be found in the `gerber` directory (in the `kicad` folder).
+ * Eagle schema and board files for reversion A and B can be found in the `eagle` directory. They are no longer activly updated.
+
+ ### Firmware
+
+ The firmware is developed in [MPLAB X IDE](https://www.microchip.com/mplab/mplab-x-ide) using the [XC8 compiler](https://www.microchip.com/mplab/compilers).
+
+  * Binary release files is available [here](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/releases)
+
+### MDF - Module Description File(s)
+  * [MDF file version: 1.2.0 Release date: 2015-02-18](http://www.eurosource.se/ntc10KA_3.xml)
+  * [MDF file version: 1.1.0 Release date: 2014-12-24](http://www.eurosource.se/ntc10KA_2.xml)
+  * [MDF file version: 1.0.0 Release date: 2012-02-24](http://www.eurosource.se/ntc10KA_1.xml)
+
+### Support
+If you need support, please open an issue in the [GitHub repository](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/issues).
+
+### Buy a ready made modules
+You can buy a ready made module from [Grodans Paradis](http://www.grodansparadis.com).
+
+### Project related links
+  * [VSCP project](https://www.vscp.org)
+  * [VSCP Documentation site](https://docs.vscp.org/)
+  * [VSCP Wiki](https://github.com/grodansparadis/vscp/wiki)
+
+
 ## Steps you should go through to adopt this file for your own VSCP project.
 
   * The frequency for your system may be different. This will affect the CAN bit rate settings which are defined in the biginning of the can18f.c file. Here you also find the filter/mask  defines if you need to change these. Timer0 is used as a 1 ms timer for the VSCP functionality. You should adopt the timer reload value in the main.h file to your system.
@@ -43,8 +80,3 @@ All VSCP modules contains information of there own setup, manual, hardware versi
   * The manufacturer id is also defined in the beginning of the vscp.c file. You can use this id in any way you like.
 
 In addition to this you may use different pins for the INIT button (RC0 today) and the status LED (RC1) today. Changes affect the main interrupt vector.
-
-
-
-
-

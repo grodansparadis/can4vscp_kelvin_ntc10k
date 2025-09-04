@@ -21,9 +21,9 @@ VSCP CAN modules are designed to work on a CAN4CAN bus which use ordinary RJ-45 
 
 All VSCP modules contains information of there own setup, manual, hardware version, manufacturer etc. You just ask the module for the information you need and you will get it. When they are started up they have a default functionality that often is all that is needed to get a working setup. If the module have something to report it will send you an event and if it is setup to react on a certain type of event it will do it's work when you send event(s) to it. 
 
-  * [Repository for the module](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k)
+  * [GitHub repository for the module](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k)
   * This manual is available [here](https://grodansparadis.github.io/can4vscp_kelvin_ntc10k/)
-  * Latest schema for the module is available [here](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master/eagle)
+  * Latest KiCad schema for the module is available [here](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master/kicad)
   * Latest firmware for the module is available [here](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master/firmware)
   * [MDF for the module](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master/mdf)
 
@@ -40,12 +40,6 @@ The specification for the VSCP protocol is [here](https://docs.vscp.org)
 VSCP documentation for various parts can be found [here](https://docs.vscp.org/).
 
 If you use VSCP please consider contributing resources or time to the project ([https://vscp.org/support.php](https://vscp.org/support.php)).
-
-## Buy a module
-
-<img src="./images/grodan_logo.png" alt="Grodans Paradis AB" width="200"/>
-
-Ready made modules can be bought from [Grodans Paradis AB](https://www.grodansparadis.com).
 
 ## Document license
 
