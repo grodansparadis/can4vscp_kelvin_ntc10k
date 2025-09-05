@@ -41,7 +41,7 @@ All VSCP modules contains information of there own setup, manual, hardware versi
 ## Project files
 
 ### User manual
-  * [User Manual](https://github.com/grodansparadis/can4vscp_kelvin_ntc10k/tree/master)
+  * [User Manual](https://grodansparadis.github.io/can4vscp_kelvin_ntc10k/#)
 
 ### Schematic, PCB, 3D files etc
   * [Schematics reversion B (current)](http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc_B.pdf)
