@@ -2,6 +2,10 @@
 
 -----
 
+This project is part of the <a href="http://www.vscp.org">VSCP (Very Simple Control Protocol) project</a>. 
+
+<hr>
+
 # Kelvin NTC10K
 
 This module is part of the [VSCP project](https://www.vscp.org).  It is free to use, modify and sell. The only thing we kindly ask is that improvements and extensions are contributed back to the project (at your will). This to make the project better for everyone. All design files is licensed under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
@@ -42,9 +46,9 @@ All VSCP modules contains information of there own setup, manual, hardware versi
 ### Schematic, PCB, 3D files etc
   * [Schematics reversion B (current)](http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc_B.pdf)
   * [Schematics reversion A](http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc_A.pdf)
- * Harware design files is made in [KiCad](https://kicad.org) and can be found in the `kicad` directory. Valid from reversion B of the hardware.
+ * Harsware design files is made in [KiCad](https://kicad.org) and can be found in the `kicad` directory. Valid from reversion B of the hardware.
    * Gerber files for PCB production can be found in the `gerber` directory (in the `kicad` folder).
- * Eagle schema and board files for reversion A and B can be found in the `eagle` directory. They are no longer activly updated.
+ * Eagle schema and board files for reversion A and B can be found in the `eagle` directory. They are no longer actively updated.
 
  ### Firmware
 
