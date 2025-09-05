@@ -44,9 +44,8 @@ All VSCP modules contains information of there own setup, manual, hardware versi
   * [User Manual](https://grodansparadis.github.io/can4vscp_kelvin_ntc10k/#)
 
 ### Schematic, PCB, 3D files etc
-  * [Schematics reversion B (current)](http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc_B.pdf)
-  * [Schematics reversion A](http://www.grodansparadis.com/kelvinntc10k/kelvin_ntc_A.pdf)
- * Harsware design files is made in [KiCad](https://kicad.org) and can be found in the `kicad` directory. Valid from reversion B of the hardware.
+  * [Schematics reversion A](https://raw.githubusercontent.com/grodansparadis/can4vscp_accra/refs/heads/master/eagle/accra_sch_rev_A.png)
+ * Hardware design files is made in [KiCad](https://kicad.org) and can be found in the `kicad` directory. Valid from reversion B of the hardware.
    * Gerber files for PCB production can be found in the `gerber` directory (in the `kicad` folder).
  * Eagle schema and board files for reversion A and B can be found in the `eagle` directory. They are no longer actively updated.
 
